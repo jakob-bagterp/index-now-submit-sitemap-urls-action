@@ -20,7 +20,7 @@ def create_api_key_file(api_key: str) -> None:
         print(f"API key file created: {file.name}")
     subprocess.run(["git", "add", api_key_file_name])
     subprocess.run(["git", "commit", "-m", "Added API key file"])
-    subprocess.run(["git", "push", "--set-upstream", "origin", GH_PAGES_BRANCH_NAME, "--force"])
+    subprocess.run(["git", "push", "origin", GH_PAGES_BRANCH_NAME])
 
 
 if __name__ == "__main__":

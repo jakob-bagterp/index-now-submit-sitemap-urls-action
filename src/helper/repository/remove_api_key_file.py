@@ -20,7 +20,7 @@ def remove_api_key_file(api_key: str) -> None:
         os.remove(api_key_file_name)
         subprocess.run(["git", "rm", "-f", api_key_file_name])
         subprocess.run(["git", "commit", "-m", "Removed API key file"])
-        subprocess.run(["git", "push", "--set-upstream", "origin", GH_PAGES_BRANCH_NAME, "--force"])
+        subprocess.run(["git", "push", "origin", GH_PAGES_BRANCH_NAME])
     else:
         print(f"API key file not found: {api_key_file_name}")
 
