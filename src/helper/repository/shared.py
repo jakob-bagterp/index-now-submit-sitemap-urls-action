@@ -18,7 +18,7 @@ def go_to_branch(branch_name: str) -> None:
     """Attempt to switches to a branch and pull the latest changes."""
 
     if get_name_of_current_git_branch() == branch_name:
-        subprocess.run(["git", "switch", "--create", "--track", branch_name])
+        subprocess.run(["git", "checkout", branch_name])
     subprocess.run(["git", "pull", "origin", branch_name])
 
 
