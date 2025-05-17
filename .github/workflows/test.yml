@@ -35,6 +35,5 @@ jobs:
         git config pull.rebase true
         git config --global user.name "Test User"
         git config --global user.email "test@example.com"
-        cd gh-pages
     - name: Run tests with pytest
       run: pytest
