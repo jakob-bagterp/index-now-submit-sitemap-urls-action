@@ -10,7 +10,7 @@ GH_PAGES_BRANCH_NAME = "gh-pages"
 def get_name_of_current_git_branch() -> str:
     """Get the name of the current git branch."""
 
-    result = subprocess.run(["git", "branch", "--show-current"], capture_output=True, text=True)
+    result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True)
     return result.stdout.strip()
 
 
