@@ -9,7 +9,7 @@ GH_PAGES_BRANCH_NAME = "gh-pages"
 def go_to_branch(branch_name: str) -> None:
     """Switches to a branch and pulls the latest changes."""
 
-    subprocess.run(["git", "checkout", branch_name])
+    subprocess.run(["git", "checkout", "origin", branch_name])
     subprocess.run(["git", "pull", "origin", branch_name, "--rebase"])
 
 
