@@ -32,17 +32,18 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="""Submit a sitemap to IndexNow. How to run the script:
+    parser = argparse.ArgumentParser(
+        description="""Submit a sitemap to IndexNow. How to run the script:
 
             python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt https://example.com/sitemap.xml yandex
 
         The parameters are:
 
-            `example.com`: The host name of the website.
-            `a1b2c3d4`: The API key for IndexNow.
-            `https://example.com/a1b2c3d4.txt`: The location of the API key.
-            `https://example.com/sitemap.xml`: The URL of the sitemap to be submitted.
-            `yandex`: The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
+            \"example.com\": The host name of the website.
+            \"a1b2c3d4\": The API key for IndexNow.
+            \"https://example.com/a1b2c3d4.txt\": The location of the API key.
+            \"https://example.com/sitemap.xml\": The URL of the sitemap to be submitted.
+            \"yandex\": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
         """)
     parser.add_argument("host", type=str, required=True, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, required=True, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
