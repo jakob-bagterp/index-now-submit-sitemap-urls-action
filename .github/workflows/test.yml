@@ -22,7 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r ./requirements.txt
         pip install -r ./requirements_dev.txt
-        pip install .
     - name: Run linting tests with flake8
       run: flake8 src test --max-line-length=120 --extend-ignore=E501
     - name: Run tests with pytest
