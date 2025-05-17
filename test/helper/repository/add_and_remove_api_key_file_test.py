@@ -24,4 +24,4 @@ def test_add_and_remove_api_key_file() -> None:
     remove_api_key_file(api_key)
     assert not os.path.exists(api_key_file_name)
 
-    clean_up_and_remove_latest_commits(commit_count=1, return_to_branch=origin_branch)
+    clean_up_and_remove_latest_commits(commit_count=2, return_to_branch=origin_branch)
