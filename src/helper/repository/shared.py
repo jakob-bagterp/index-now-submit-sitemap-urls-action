@@ -15,10 +15,16 @@ def get_name_of_current_git_branch() -> str:
 
 
 def go_to_branch(branch_name: str) -> None:
-    """Attempt to switches to a branch and pull the latest changes."""
+    """Attempt to switch to a branch and pull the latest changes."""
 
     if get_name_of_current_git_branch() == branch_name:
         subprocess.run(["git", "checkout", branch_name])
+    else:
+        branch_exists_locally = subprocess.run(["git", "rev-parse", "--verify", branch_name], capture_output=True, stderr=subprocess.DEVNULL).returncode == 0
+        if branch_exists_locally:
+            subprocess.run(["git", "checkout", branch_name])
+        else:
+            subprocess.run(["git", "checkout", "-b", branch_name, f"origin/{branch_name}"])
     subprocess.run(["git", "pull", "origin", branch_name])
 
 
