@@ -12,6 +12,8 @@ from helper.index_now.submit_sitemap import get_endpoint_from_input
     ("yandex", SearchEngineEndpoint.YANDEX),
     ("yep", SearchEngineEndpoint.YEP),
     ("invalid", SearchEngineEndpoint.MICROSOFT_BING),
+    (None, SearchEngineEndpoint.MICROSOFT_BING),
+    (1, SearchEngineEndpoint.MICROSOFT_BING),
 ])
 def test_get_endpoint_from_input(input: str, expected_endpoint: SearchEngineEndpoint) -> None:
     assert get_endpoint_from_input(input) is expected_endpoint
