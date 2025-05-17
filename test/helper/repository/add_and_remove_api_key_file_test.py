@@ -11,7 +11,8 @@ from helper.repository.shared import get_name_of_current_git_branch
 
 
 def test_add_and_remove_api_key_file() -> None:
-    def set_git_test_user_config() -> None:
+    def set_git_config_and_test_user() -> None:
+        subprocess.run(["git", "config", "pull.rebase", "true"])
         subprocess.run(["git", "config", "--global", "user.name", "Test User"])
         subprocess.run(["git", "config", "--global", "user.email", "test@example.com"])
 
@@ -36,7 +37,7 @@ def test_add_and_remove_api_key_file() -> None:
     api_key = "a1b2c3d4"
     api_key_file_name = get_api_key_file_name(api_key)
     origin_branch = get_name_of_current_git_branch()
-    set_git_test_user_config()
+    set_git_config_and_test_user()
 
     create_api_key_file(api_key)
     assert os.path.exists(api_key_file_name)
