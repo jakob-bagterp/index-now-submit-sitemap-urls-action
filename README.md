@@ -1,5 +1,5 @@
 [![MIT license](https://img.shields.io/static/v1?label=license&message=MIT&color=blue)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/blob/master/LICENSE.md)
-[![Codecov](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/branch/master/graph/badge.svg?token=PEGUV7IL8T)](https://codecov.io/gh/jakob-bagterp/colorist-for-python)
+[![Codecov](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/branch/master/graph/badge.svg?token=PEGUV7IL8T)](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-gh-pages-action)
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml)
 [![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml)
 
