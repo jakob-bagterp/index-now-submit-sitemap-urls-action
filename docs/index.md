@@ -1,3 +1,10 @@
+---
+title: Action to Automatically Submit Sitemap from GitHub Pages to IndexNow 🔎
+description: If you're using GitHub Pages, this action will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines
+hide:
+  - navigation
+---
+
 # 🔍 Automatically Submit Sitemap from GitHub Pages to IndexNow 🔎
 If you're using GitHub Pages, are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
 
