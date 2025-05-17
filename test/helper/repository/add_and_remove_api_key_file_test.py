@@ -7,12 +7,10 @@ import requests
 from helper.index_now.api_key import get_api_key_file_name
 from helper.repository.add_api_key_file import create_api_key_file
 from helper.repository.remove_api_key_file import remove_api_key_file
+from helper.repository.shared import get_name_of_current_git_branch
 
 
 def test_add_and_remove_api_key_file() -> None:
-    def get_name_of_current_git_branch() -> str:
-        return subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], text=True).strip()
-
     def set_git_test_user_config() -> None:
         subprocess.run(["git", "config", "--global", "user.name", "Test User"])
         subprocess.run(["git", "config", "--global", "user.email", "test@example.com"])
