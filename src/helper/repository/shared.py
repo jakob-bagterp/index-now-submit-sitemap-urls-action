@@ -6,10 +6,18 @@ GITHUB_WORKSPACE_TOKEN = "GITHUB_WORKSPACE"
 GH_PAGES_BRANCH_NAME = "gh-pages"
 
 
-def go_to_branch(branch_name: str) -> None:
-    """Switches to a branch and pulls the latest changes."""
+def get_name_of_current_git_branch() -> str:
+    """Get the name of the current git branch."""
 
-    subprocess.run(["git", "switch", "--create", "--track", branch_name])
+    result = subprocess.run(["git", "branch", "--show-current"], capture_output=True, text=True)
+    return result.stdout.strip()
+
+
+def go_to_branch(branch_name: str) -> None:
+    """Attempt to switches to a branch and pull the latest changes."""
+
+    if get_name_of_current_git_branch() == branch_name:
+        subprocess.run(["git", "switch", "--create", "--track", branch_name])
     subprocess.run(["git", "pull", "origin", branch_name, "--rebase"])
 
 
