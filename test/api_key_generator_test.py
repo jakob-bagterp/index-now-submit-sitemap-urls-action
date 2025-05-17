@@ -1,6 +1,6 @@
 import re
 
-from helper.api_key_generator import generate_random_api_key
+from helper.index_now.generate_api_key import generate_random_api_key
 
 
 def test_generate_random_api_key():
