@@ -1,0 +1,85 @@
+site_name: Automatically Submit Sitemap from GitHub Pages to IndexNow 🔎
+site_url: https://jakob-bagterp.github.io/index-now-submit-sitemap-gh-pages-action/
+site_description: If you're using GitHub Pages, this action will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines
+site_author: Jakob Bagterp
+copyright: Copyright © 2025 - , Jakob Bagterp. All Rights Reserved.
+nav:
+  - Home:
+    - index.md
+
+theme:
+  name: material
+  custom_dir: docs/assets/overrides
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: purple
+      accent: purple
+      toggle:
+        icon: material/eye
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: purple
+      accent: purple
+      toggle:
+        icon: material/eye-outline
+        name: Switch to light mode
+
+markdown_extensions:
+  - toc:
+      permalink: "#"
+  - admonition
+  - attr_list
+  - footnotes
+  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      name: GitHub
+      link: https://github.com/jakob-bagterp/
+    - icon: fontawesome/brands/linkedin
+      name: Jakob Bagterp on LinkedIn
+      link: https://www.linkedin.com/in/jakobbagterp/
+    - icon: fontawesome/brands/instagram
+      name: Jakob Bagterp on Instagram
+      link: https://www.instagram.com/bagterp_photography/
+  analytics:
+    provider: google
+    property: G-5R2186TFM5
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+plugins:
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+          remove_comments: true
+
+exclude_docs: |
+  /requirements.txt
+
+dev_addr: 127.0.0.1:8006
