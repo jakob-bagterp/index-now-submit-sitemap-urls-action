@@ -20,20 +20,22 @@ theme:
     - navigation.tracking
     - navigation.top
     - navigation.indexes
+    - content.code.copy
+    - content.code.select
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: purple
-      accent: purple
+      primary: amber
+      accent: amber
       toggle:
         icon: material/eye
         name: Switch to dark mode
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: purple
-      accent: purple
+      primary: amber
+      accent: amber
       toggle:
         icon: material/eye-outline
         name: Switch to light mode
