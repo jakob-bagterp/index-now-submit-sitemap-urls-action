@@ -7,6 +7,8 @@ from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
 
 @dataclass(slots=True, frozen=True)
 class InputForSubmitSitemap:
+    """Input parameters for the submit_sitemap.py script."""
+
     host: str
     api_key: str
     api_key_location: str
