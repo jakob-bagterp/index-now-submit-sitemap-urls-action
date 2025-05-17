@@ -14,7 +14,7 @@ class InputForSubmitSitemap:
     endpoint: str
 
 
-def get_cli_input_parameters(parameters: list[str]) -> InputForSubmitSitemap:
+def get_submit_sitempa_cli_input_parameters(parameters: list[str]) -> InputForSubmitSitemap:
     """Extract input parameters from command line arguments.
 
     Example:
@@ -74,7 +74,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
 
 
 if __name__ == "__main__":
-    input = get_cli_input_parameters(sys.argv)
+    input = get_submit_sitempa_cli_input_parameters(sys.argv)
     authentication = IndexNowAuthentication(
         host=input.host,
         api_key=input.api_key,
