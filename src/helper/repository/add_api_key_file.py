@@ -2,7 +2,7 @@ import argparse
 import subprocess
 
 from ..index_now.api_key import get_api_key_file_name
-from .shared import GH_PAGES_BRANCH_NAME, go_to_branch
+from .shared import GH_PAGES_BRANCH_NAME, go_to_branch, go_to_repository_root
 
 
 def create_api_key_file(api_key: str) -> None:
@@ -13,7 +13,7 @@ def create_api_key_file(api_key: str) -> None:
     """
 
     go_to_branch(GH_PAGES_BRANCH_NAME)
-    # go_to_repository_root()
+    go_to_repository_root()
     api_key_file_name = get_api_key_file_name(api_key)
     with open(api_key_file_name, "w") as file:
         file.write(api_key)
