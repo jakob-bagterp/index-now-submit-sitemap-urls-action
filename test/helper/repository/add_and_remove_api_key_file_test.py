@@ -40,6 +40,7 @@ def test_add_and_remove_api_key_file() -> None:
     # TODO: Temporary prints to check if the script is working:
     print(f"{api_key_file_name=}")
     print("Current directory:", os.getcwd())
+    print("Available files:", os.listdir())
     print("Current branch:", get_name_of_current_git_branch())
 
     with open(api_key_file_name) as file:
