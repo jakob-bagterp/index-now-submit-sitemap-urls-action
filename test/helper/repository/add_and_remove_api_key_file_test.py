@@ -15,7 +15,9 @@ def test_add_and_remove_api_key_file() -> None:
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "checkout", return_to_branch])
 
-    def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, max_attempts: int = 5, wait_seconds: int = 2) -> requests.Response:
+    def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, max_attempts: int = 50, wait_seconds: int = 5) -> requests.Response:
+        """It takes a while for the GitHub Pages deployment to be ready. This function will attempt to get the file from the GitHub Pages URL, and if it fails, it will wait and try again until a timeout is reached."""
+
         api_key_file_url = f"https://jakob-bagterp.github.io/index-now-submit-sitemap-gh-pages-action/{api_key_file_name}"
         attempt = 1
         while attempt <= max_attempts:
@@ -38,15 +40,9 @@ def test_add_and_remove_api_key_file() -> None:
     create_api_key_file(api_key)  # This commit will trigger a deployment to GitHub Pages.
     assert os.path.exists(api_key_file_name)
     assert os.path.isfile(api_key_file_name)
-
-    # TODO: Temporary prints to check if the script is working:
-    print(f"{api_key_file_name=}")
-    print("Current directory:", os.getcwd())
-    print("Available files:", os.listdir())
-    print("Current branch:", get_name_of_current_git_branch())
-
     with open(api_key_file_name) as file:
         assert file.read().strip() == api_key
+
     response = attempt_to_get_api_key_file_from_gh_pages(api_key_file_name)
     assert response.status_code == 200
     assert response.text.strip() == api_key
