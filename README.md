@@ -3,12 +3,16 @@
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml)
 [![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml)
 
-# 🔍 Automatically Submit Your Sitemap from GitHub Pages to IndexNow 🔎
+# 🔍 Automatically Submit Sitemap from GitHub Pages to IndexNow 🔎
 If you're using GitHub Pages, are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
 
 This workflow for GitHub Actions will automatically submit your sitemap from GitHub Pages to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 
 Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-gh-pages-action).
+
+> [!NOTE]
+> IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
+> For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed. However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
 
 ## Become a Sponsor 🏅
 If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
