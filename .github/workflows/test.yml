@@ -35,4 +35,4 @@ jobs:
     - name: Run tests with mypy
       run: mypy src --ignore-missing-imports --follow-imports=skip --strict
     - name: Run tests with pytest
-      run: pytest
+      run: pytest -rP --verbose
