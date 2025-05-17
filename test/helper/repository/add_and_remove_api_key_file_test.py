@@ -15,10 +15,17 @@ def test_add_and_remove_api_key_file() -> None:
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "checkout", return_to_branch])
 
-    def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, max_attempts: int = 50, wait_seconds: int = 5) -> requests.Response:
-        """It takes a while for the GitHub Pages deployment to be ready. This function will attempt to get the file from the GitHub Pages URL, and if it fails, it will wait and try again until a timeout is reached."""
+    def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, timeout_seconds: int = 440, retry_seconds: int = 5) -> requests.Response:
+        """It takes a while for the GitHub Pages deployment to be ready. This function will attempt to get the file from the GitHub Pages URL, and if it fails, it will wait and try again until a timeout is reached.
+
+        Args:
+            api_key_file_name (str): The name of the API key file to retrieve.
+            timeout_seconds (int): The maximum time to wait for the file to be available.
+            retry_seconds (int): The time to wait between retries.
+        """
 
         api_key_file_url = f"https://jakob-bagterp.github.io/index-now-submit-sitemap-gh-pages-action/{api_key_file_name}"
+        max_attempts = timeout_seconds // retry_seconds
         attempt = 1
         while attempt <= max_attempts:
             try:
@@ -27,7 +34,7 @@ def test_add_and_remove_api_key_file() -> None:
                     return response
             except Exception:
                 pass
-            time.sleep(wait_seconds)
+            time.sleep(retry_seconds)
             attempt += 1
         return requests.get(api_key_file_url)
 
