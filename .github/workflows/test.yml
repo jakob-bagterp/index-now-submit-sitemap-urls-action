@@ -13,15 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-      with:
-        path: gh-pages
-        lfs: true
-        fetch-depth: 0
-    - run: |
-        cd gh-pages
-        git config pull.rebase true
-        git config --global user.name "Test User"
-        git config --global user.email "test@example.com"
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -35,5 +26,15 @@ jobs:
       run: flake8 src test --max-line-length=120 --extend-ignore=E501
     - name: Run tests with mypy
       run: mypy src --ignore-missing-imports --follow-imports=skip --strict
+    - uses: actions/checkout@v4
+      with:
+        path: gh-pages
+        lfs: true
+        fetch-depth: 0
+    - run: |
+        git config pull.rebase true
+        git config --global user.name "Test User"
+        git config --global user.email "test@example.com"
+        cd gh-pages
     - name: Run tests with pytest
       run: pytest
