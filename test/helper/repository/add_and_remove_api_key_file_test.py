@@ -36,6 +36,12 @@ def test_add_and_remove_api_key_file() -> None:
     create_api_key_file(api_key)
     assert os.path.exists(api_key_file_name)
     assert os.path.isfile(api_key_file_name)
+
+    # TODO: Temporary prints to check if the script is working:
+    print(f"{api_key_file_name=}")
+    print("Current directory:", os.getcwd())
+    print("Current branch:", get_name_of_current_git_branch())
+
     with open(api_key_file_name) as file:
         assert file.read().strip() == api_key
     response = attempt_to_get_api_key_file_from_gh_pages(api_key_file_name)
