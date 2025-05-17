@@ -33,7 +33,9 @@ def test_add_and_remove_api_key_file() -> None:
     api_key_file_name = get_api_key_file_name(api_key)
     origin_branch = get_name_of_current_git_branch()
 
-    create_api_key_file(api_key)
+    assert "sitemap.xml" in os.listdir()  # Ensure that working directory is in the root that contains a known, almost static sitemap file.
+
+    create_api_key_file(api_key)  # This commit will trigger a deployment to GitHub Pages.
     assert os.path.exists(api_key_file_name)
     assert os.path.isfile(api_key_file_name)
 
