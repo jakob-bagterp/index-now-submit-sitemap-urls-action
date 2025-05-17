@@ -3,6 +3,7 @@ import subprocess
 from pathlib import Path
 
 GITHUB_WORKSPACE_TOKEN = "GITHUB_WORKSPACE"
+
 GH_PAGES_BRANCH_NAME = "gh-pages"
 
 
