@@ -13,6 +13,10 @@ def test_add_and_remove_api_key_file() -> None:
     def get_name_of_current_git_branch() -> str:
         return subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], text=True).strip()
 
+    def set_git_test_user_config() -> None:
+        subprocess.run(["git", "config", "--global", "user.name", "Test User"])
+        subprocess.run(["git", "config", "--global", "user.email", "test@example.com"])
+
     def clean_up_and_remove_latest_commits(commit_count: int, return_to_branch: str) -> None:
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "checkout", return_to_branch])
@@ -34,6 +38,7 @@ def test_add_and_remove_api_key_file() -> None:
     api_key = "a1b2c3d4"
     api_key_file_name = get_api_key_file_name(api_key)
     origin_branch = get_name_of_current_git_branch()
+    set_git_test_user_config()
 
     create_api_key_file(api_key)
     assert os.path.exists(api_key_file_name)
