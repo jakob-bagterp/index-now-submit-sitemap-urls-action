@@ -19,7 +19,7 @@ def go_to_branch(branch_name: str) -> None:
 
     if get_name_of_current_git_branch() == branch_name:
         subprocess.run(["git", "switch", "--create", "--track", branch_name])
-    subprocess.run(["git", "pull", "origin", branch_name, "--rebase"])
+    subprocess.run(["git", "pull", "origin", branch_name])
 
 
 def go_to_repository_root() -> None:
