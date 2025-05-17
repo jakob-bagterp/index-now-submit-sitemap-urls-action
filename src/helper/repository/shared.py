@@ -20,7 +20,7 @@ def go_to_branch(branch_name: str) -> None:
     if get_name_of_current_git_branch() == branch_name:
         subprocess.run(["git", "checkout", branch_name])
     else:
-        branch_exists_locally = subprocess.run(["git", "rev-parse", "--verify", branch_name], capture_output=True, stderr=subprocess.DEVNULL).returncode == 0
+        branch_exists_locally = subprocess.run(["git", "rev-parse", "--verify", branch_name], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL).returncode == 0
         if branch_exists_locally:
             subprocess.run(["git", "checkout", branch_name])
         else:
