@@ -3,7 +3,7 @@ import os
 import subprocess
 
 from ..index_now.api_key import get_api_key_file_name
-from .shared import GH_PAGES_BRANCH_NAME, go_to_branch, go_to_repository_root
+from .shared import GH_PAGES_BRANCH_NAME, go_to_branch
 
 
 def remove_api_key_file(api_key: str) -> None:
@@ -14,7 +14,7 @@ def remove_api_key_file(api_key: str) -> None:
     """
 
     go_to_branch(GH_PAGES_BRANCH_NAME)
-    go_to_repository_root()
+    # go_to_repository_root()
     api_key_file_name = get_api_key_file_name(api_key)
     if os.path.exists(api_key_file_name):
         os.remove(api_key_file_name)
