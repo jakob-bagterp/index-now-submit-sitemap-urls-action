@@ -22,7 +22,7 @@ def test_add_and_remove_api_key_file() -> None:
         origin_branch = get_name_of_current_git_branch()
         go_to_branch(GH_PAGES_BRANCH_NAME)
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
-        subprocess.run(["git", "push", "origin", GH_PAGES_BRANCH_NAME])
+        subprocess.run(["git", "push", "--force", "origin", GH_PAGES_BRANCH_NAME])
         subprocess.run(["git", "checkout", return_to_branch])
         go_to_branch(origin_branch)
 
