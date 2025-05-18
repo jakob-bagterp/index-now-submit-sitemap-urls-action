@@ -12,7 +12,10 @@ Ready to try? Find more information on [GitHub's Marketplace](https://github.com
 
 > [!NOTE]
 > IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
-> For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed. However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
+>
+> For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.
+>
+> However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
 
 ## Become a Sponsor 🏅
 If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
