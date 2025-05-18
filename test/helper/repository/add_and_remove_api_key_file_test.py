@@ -90,4 +90,4 @@ def test_add_and_remove_api_key_file() -> None:
     remove_api_key_file(api_key, commit_message=removed_api_key_commit_message)  # This commit will trigger a deployment to GitHub Pages.
     assert not os.path.exists(api_key_file_name)
 
-    clean_up_and_remove_latest_commits_from_gh_pages(commit_count=2, commit_messages=[added_api_key_commit_message, removed_api_key_commit_message])
+    clean_up_and_remove_latest_commits_from_gh_pages(commit_count=2, verify_commit_messages=[added_api_key_commit_message, removed_api_key_commit_message])
