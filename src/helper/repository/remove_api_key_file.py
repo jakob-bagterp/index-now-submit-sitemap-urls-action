@@ -6,11 +6,12 @@ from ..index_now.api_key import get_api_key_file_name
 from .shared import GH_PAGES_BRANCH_NAME, go_to_branch, go_to_repository_root
 
 
-def remove_api_key_file(api_key: str) -> None:
+def remove_api_key_file(api_key: str, commit_message: str = "Removed API key file") -> None:
     """Removes file with the API key from the root directory of the GitHub Pages repository. Assumes that the branch is `gh-pages`, and the file will be placed in the root directory, e.g. `/a1b2c3d4.txt`.
 
     Args:
         api_key (str): The API key for IndexNow, e.g `a1b2c3d4`.
+        commit_message (str): The commit message when removing the API key file.
     """
 
     go_to_branch(GH_PAGES_BRANCH_NAME)
@@ -19,7 +20,7 @@ def remove_api_key_file(api_key: str) -> None:
     if os.path.exists(api_key_file_name):
         os.remove(api_key_file_name)
         subprocess.run(["git", "rm", "-f", api_key_file_name])
-        subprocess.run(["git", "commit", "-m", "Removed API key file"])
+        subprocess.run(["git", "commit", "-m", commit_message])
         subprocess.run(["git", "push", "origin", GH_PAGES_BRANCH_NAME])
     else:
         print(f"API key file not found: {api_key_file_name}")
