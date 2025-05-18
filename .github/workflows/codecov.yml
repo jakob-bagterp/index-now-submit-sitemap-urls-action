@@ -7,9 +7,19 @@ on:
 
 jobs:
   codecov:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        lfs: true
+        fetch-depth: 0
+    - name: Set up Git
+      run: |
+        git config pull.rebase true
+        git config --global user.name "Test User"
+        git config --global user.email "test@example.com"
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
