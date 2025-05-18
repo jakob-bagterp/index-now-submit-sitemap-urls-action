@@ -2,15 +2,20 @@ import os
 import subprocess
 import time
 
+import pytest
 import requests
 
 from helper.index_now.api_key import get_api_key_file_name
 from helper.repository.add_api_key_file import create_api_key_file
 from helper.repository.remove_api_key_file import remove_api_key_file
-from helper.repository.shared import get_name_of_current_git_branch
+from helper.repository.shared import (GITHUB_WORKSPACE_TOKEN,
+                                      get_name_of_current_git_branch)
 
 
 def test_add_and_remove_api_key_file() -> None:
+    if not os.environ.get(GITHUB_WORKSPACE_TOKEN):
+        pytest.skip("Skipping test because not running in GitHub Actions environment.")
+
     def clean_up_and_remove_latest_commits(commit_count: int, return_to_branch: str) -> None:
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "checkout", return_to_branch])
