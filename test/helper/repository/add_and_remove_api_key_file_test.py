@@ -8,17 +8,22 @@ import requests
 from helper.index_now.api_key import get_api_key_file_name
 from helper.repository.add_api_key_file import create_api_key_file
 from helper.repository.remove_api_key_file import remove_api_key_file
-from helper.repository.shared import (GITHUB_WORKSPACE_TOKEN,
-                                      get_name_of_current_git_branch)
+from helper.repository.shared import (GH_PAGES_BRANCH_NAME,
+                                      GITHUB_WORKSPACE_TOKEN,
+                                      get_name_of_current_git_branch,
+                                      go_to_branch)
 
 
 def test_add_and_remove_api_key_file() -> None:
     if not os.environ.get(GITHUB_WORKSPACE_TOKEN):
         pytest.skip("Skipping test because not running in GitHub Actions environment.")
 
-    def clean_up_and_remove_latest_commits(commit_count: int, return_to_branch: str) -> None:
+    def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, return_to_branch: str) -> None:
+        origin_branch = get_name_of_current_git_branch()
+        go_to_branch(GH_PAGES_BRANCH_NAME)
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "checkout", return_to_branch])
+        go_to_branch(origin_branch)
 
     def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, timeout_seconds: int = 440, retry_seconds: int = 5) -> requests.Response:
         """It takes a while for the GitHub Pages deployment to be ready. This function will attempt to get the file from the GitHub Pages URL, and if it fails, it will wait and try again until a timeout is reached.
@@ -64,4 +69,4 @@ def test_add_and_remove_api_key_file() -> None:
     remove_api_key_file(api_key)
     assert not os.path.exists(api_key_file_name)
 
-    clean_up_and_remove_latest_commits(commit_count=2, return_to_branch=origin_branch)
+    clean_up_and_remove_latest_commits_from_gh_pages(commit_count=2, return_to_branch=origin_branch)
