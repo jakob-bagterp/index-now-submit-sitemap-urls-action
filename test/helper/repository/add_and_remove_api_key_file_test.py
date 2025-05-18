@@ -31,8 +31,8 @@ def test_add_and_remove_api_key_file() -> None:
 
         Args:
             api_key_file_name (str): The name of the API key file to retrieve.
-            timeout_seconds (int): The maximum time to wait for the file to be available.
-            retry_seconds (int): The time to wait between retries.
+            timeout_seconds (int): The maximum time in seconds to wait for the file to be available.
+            retry_seconds (int): The time interval in seconds to wait between retries.
         """
 
         api_key_file_url = f"https://jakob-bagterp.github.io/index-now-submit-sitemap-gh-pages-action/{api_key_file_name}"
