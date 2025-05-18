@@ -18,12 +18,22 @@ def test_add_and_remove_api_key_file() -> None:
     if not os.environ.get(GITHUB_WORKSPACE_TOKEN):
         pytest.skip("Skipping test because not running in GitHub Actions environment.")
 
-    def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, return_to_branch: str) -> None:
+    def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, commit_messages: list[str]) -> None:
+        def get_latest_commit_messages(commit_count: int) -> list[str]:
+            result = subprocess.run(["git", "log", "-n", str(commit_count), "--pretty=format:%s"], capture_output=True, text=True)
+            commit_messages = result.stdout.strip().split("\n")
+            return commit_messages
+
+        def ensure_latest_commits_are_test_commits(commit_count: int, commit_messages: list[str]) -> bool:
+            latest_commit_messages = get_latest_commit_messages(commit_count)
+            return all(commit_message in latest_commit_messages for commit_message in commit_messages)
+
         origin_branch = get_name_of_current_git_branch()
         go_to_branch(GH_PAGES_BRANCH_NAME)
-        subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
-        subprocess.run(["git", "push", "--force", "origin", GH_PAGES_BRANCH_NAME])
-        subprocess.run(["git", "checkout", return_to_branch])
+        proceed_with_reset = ensure_latest_commits_are_test_commits(commit_count, commit_messages)
+        if proceed_with_reset:
+            subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
+            subprocess.run(["git", "push", "--force", "origin", GH_PAGES_BRANCH_NAME])
         go_to_branch(origin_branch)
 
     def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, timeout_seconds: int = 440, retry_seconds: int = 5) -> requests.Response:
@@ -51,11 +61,11 @@ def test_add_and_remove_api_key_file() -> None:
 
     api_key = "a1b2c3d4"
     api_key_file_name = get_api_key_file_name(api_key)
-    origin_branch = get_name_of_current_git_branch()
 
     assert "sitemap.xml" not in os.listdir()  # Ensure that we're not in the root of GitHub Pages where the sitemap file is.
 
-    create_api_key_file(api_key)  # This commit will trigger a deployment to GitHub Pages.
+    added_api_key_commit_message = "TEST: Added API key file"
+    create_api_key_file(api_key, commit_message=added_api_key_commit_message)  # This commit will trigger a deployment to GitHub Pages.
     assert os.path.exists(api_key_file_name)
     assert os.path.isfile(api_key_file_name)
     with open(api_key_file_name) as file:
@@ -67,7 +77,8 @@ def test_add_and_remove_api_key_file() -> None:
     assert response.status_code == 200
     assert response.text.strip() == api_key
 
-    remove_api_key_file(api_key)
+    removed_api_key_commit_message = "TEST: Removed API key file"
+    remove_api_key_file(api_key, commit_message=removed_api_key_commit_message)  # This commit will trigger a deployment to GitHub Pages.
     assert not os.path.exists(api_key_file_name)
 
-    clean_up_and_remove_latest_commits_from_gh_pages(commit_count=2, return_to_branch=origin_branch)
+    clean_up_and_remove_latest_commits_from_gh_pages(commit_count=2, commit_messages=[added_api_key_commit_message, removed_api_key_commit_message])
