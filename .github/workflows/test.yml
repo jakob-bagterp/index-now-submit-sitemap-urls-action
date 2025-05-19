@@ -53,4 +53,4 @@ jobs:
     - name: Run tests with pytest
       run: >
         pytest -rA --verbose
-        ignore=test/helper/repository/add_and_remove_api_key_file_without_online_check_test.py
+        --ignore=test/helper/repository/add_and_remove_api_key_file_without_online_check_test.py
