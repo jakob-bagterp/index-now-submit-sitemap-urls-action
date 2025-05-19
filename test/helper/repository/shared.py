@@ -7,6 +7,8 @@ from helper.repository.shared import (GH_PAGES_BRANCH_NAME,
                                       get_name_of_current_git_branch,
                                       go_to_branch)
 
+ORIGIN_BRANCH_NAME = get_name_of_current_git_branch()
+
 
 def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, verify_commit_messages: list[str]) -> None:
     """Removes the latest commits from the `gh-pages` branch. This is useful for cleaning up after tests that create and remove API key files.
