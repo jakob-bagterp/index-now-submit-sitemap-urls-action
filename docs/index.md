@@ -10,12 +10,25 @@ hide:
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml)
 [![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml)
 
-# Automatically Submit Sitemap from GitHub Pages to IndexNow 🔎
-If you're using GitHub Pages, are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
+# Automate Sitemap Submission to IndexNow 🔎
+## Why Use IndexNow?
+Are you concerned about search engine optimisation (SEO)? And do you want to make sure that your website is frequently indexed by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/) and other search engines that support [IndexNow](https://www.indexnow.org/)?
 
+Imagine submitting all your sitemap URLs to IndexNow when your website is updated, so that search engines know when to crawl your site again. This is what this action does.
+
+!!! note "What is IndexNow?"
+    [IndexNow](https://www.indexnow.org/) is an open source protocol that allows website owners to notify search engines when their content has changed, so that search engines can quickly crawl and index the new content. This is particularly useful for sites that update frequently or have dynamic content, and it is useful for search engines to know which pages to crawl and index since the last visit.
+
+    By using IndexNow, you can ensure that your website is indexed more frequently, which can improve your search engine rankings and drive more traffic to your site.
+
+    Search engines such as [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/) (via Bing's index) and others already support IndexNow, but not all search engines. For example, Google is not on board, but this may change in the future.
+
+## Action to Automatically Submit Sitemap from GitHub Pages
 This workflow for GitHub Actions will automatically submit your sitemap from GitHub Pages to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 
-!!! note "How to Keep Your API Key Secure"
+If you're already using GitHub Pages and GitHub Actions, simply add this action to your workflow. It can automatically submit your sitemap to IndexNow whenever you push changes to your GitHub Pages site.
+
+!!! abstract "How to Keep Your API Key Secure"
     IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
 
     For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.

@@ -10,7 +10,7 @@ This workflow for GitHub Actions will automatically submit your sitemap from Git
 
 Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-gh-pages-action).
 
-> [!NOTE]
+> [!TIP]
 > IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
 >
 > For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.
