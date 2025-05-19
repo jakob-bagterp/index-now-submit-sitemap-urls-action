@@ -1,12 +1,11 @@
 import os
 
-from shared import (ORIGIN_BRANCH_NAME,
-                    clean_up_and_remove_latest_commits_from_gh_pages)
+from shared import clean_up_and_remove_latest_commits_from_gh_pages
 
 from helper.index_now.api_key import get_api_key_file_name
 from helper.repository.add_api_key_file import create_api_key_file
 from helper.repository.remove_api_key_file import remove_api_key_file
-from helper.repository.shared import go_to_branch
+from helper.repository.shared import ORIGIN_BRANCH_NAME, go_to_branch
 
 
 def test_add_and_remove_api_key_file_without_online_check() -> None:
