@@ -14,6 +14,9 @@ def get_name_of_current_git_branch() -> str:
     return result.stdout.strip()
 
 
+ORIGIN_BRANCH_NAME = get_name_of_current_git_branch()
+
+
 def go_to_branch(branch_name: str) -> None:
     """Attempt to switch to a branch and pull the latest changes."""
 

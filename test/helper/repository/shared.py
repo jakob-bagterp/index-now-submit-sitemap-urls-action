@@ -3,16 +3,8 @@ import time
 
 import requests
 
-from helper.repository.shared import (GH_PAGES_BRANCH_NAME,
-                                      get_name_of_current_git_branch,
+from helper.repository.shared import (GH_PAGES_BRANCH_NAME, ORIGIN_BRANCH_NAME,
                                       go_to_branch)
-
-
-def go_to_origin_branch() -> None:
-    """Ensure that we aren't on the GitHub Pages branch and switch back to the origin branch."""
-
-    if get_name_of_current_git_branch() == GH_PAGES_BRANCH_NAME:
-        subprocess.run(["git", "switch", "-"])
 
 
 def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, verify_commit_messages: list[str]) -> None:
@@ -37,6 +29,7 @@ def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, verify_c
     if proceed_with_reset:
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "push", "--force", "origin", GH_PAGES_BRANCH_NAME])
+    go_to_branch(ORIGIN_BRANCH_NAME)
 
 
 def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, timeout_seconds: int = 440, retry_seconds: int = 5) -> requests.Response:

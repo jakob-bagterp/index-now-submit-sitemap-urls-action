@@ -1,18 +1,18 @@
 import os
 
-from shared import (clean_up_and_remove_latest_commits_from_gh_pages,
-                    go_to_origin_branch)
+from shared import clean_up_and_remove_latest_commits_from_gh_pages
 
 from helper.index_now.api_key import get_api_key_file_name
 from helper.repository.add_api_key_file import create_api_key_file
 from helper.repository.remove_api_key_file import remove_api_key_file
+from helper.repository.shared import ORIGIN_BRANCH_NAME, go_to_branch
 
 
 def test_add_and_remove_api_key_file_without_online_check() -> None:
     api_key = "a1b2c3d4"
     api_key_file_name = get_api_key_file_name(api_key)
 
-    go_to_origin_branch()  # Reset to the origin branch before running the test.
+    go_to_branch(ORIGIN_BRANCH_NAME)  # Reset to the origin branch before running the test.
     assert "sitemap.xml" not in os.listdir()  # Ensure that we're not in the root of GitHub Pages where the sitemap file is.
 
     added_api_key_commit_message = "TEST: Added API key file"
@@ -27,4 +27,4 @@ def test_add_and_remove_api_key_file_without_online_check() -> None:
     assert not os.path.exists(api_key_file_name)
 
     clean_up_and_remove_latest_commits_from_gh_pages(commit_count=2, verify_commit_messages=[added_api_key_commit_message, removed_api_key_commit_message])
-    go_to_origin_branch()
+    go_to_branch(ORIGIN_BRANCH_NAME)
