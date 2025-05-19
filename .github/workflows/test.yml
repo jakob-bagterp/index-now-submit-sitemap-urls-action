@@ -41,7 +41,11 @@ jobs:
         git config pull.rebase true
         git config --global user.name "Test User"
         git config --global user.email "test@example.com"
-        git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) $(git rev-parse --abbrev-ref HEAD)
+        git fetch --all
+        BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$BRANCH" != "HEAD" ]; then
+          git branch --set-upstream-to=origin/$BRANCH $BRANCH || echo "Unable to set upstream, yet continuing anyway"
+        fi
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
