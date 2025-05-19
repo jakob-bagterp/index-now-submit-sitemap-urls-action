@@ -1,9 +1,11 @@
+import os
 import subprocess
 import time
 
 import requests
 
 from helper.repository.shared import (GH_PAGES_BRANCH_NAME,
+                                      GITHUB_WORKSPACE_TOKEN,
                                       get_name_of_current_git_branch,
                                       go_to_branch)
 
@@ -33,6 +35,8 @@ def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, verify_c
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "push", "--force", "origin", GH_PAGES_BRANCH_NAME])
     go_to_branch(ORIGIN_BRANCH_NAME)
+    if os.environ.get(GITHUB_WORKSPACE_TOKEN):  # Only clean up if running in GitHub Actions environment. Otherwise, untracked files and directories on local machine will be destructively removed.
+        subprocess.run(["git", "clean", "-d", "--force"])
 
 
 def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, timeout_seconds: int = 440, retry_seconds: int = 5) -> requests.Response:
