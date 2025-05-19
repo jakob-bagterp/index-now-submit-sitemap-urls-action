@@ -27,13 +27,12 @@ def clean_up_and_remove_latest_commits_from_gh_pages(commit_count: int, verify_c
         latest_commit_messages = get_latest_commit_messages(commit_count)
         return all(commit_message in latest_commit_messages for commit_message in verify_commit_messages)
 
-    origin_branch = get_name_of_current_git_branch()
     go_to_branch(GH_PAGES_BRANCH_NAME)
     proceed_with_reset = ensure_latest_commits_are_test_commits(commit_count, verify_commit_messages)
     if proceed_with_reset:
         subprocess.run(["git", "reset", "--hard", f"HEAD~{commit_count}"])
         subprocess.run(["git", "push", "--force", "origin", GH_PAGES_BRANCH_NAME])
-    go_to_branch(origin_branch)
+    go_to_branch(ORIGIN_BRANCH_NAME)
 
 
 def attempt_to_get_api_key_file_from_gh_pages(api_key_file_name: str, timeout_seconds: int = 440, retry_seconds: int = 5) -> requests.Response:
