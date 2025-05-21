@@ -1,0 +1,51 @@
+name: "IndexNow Submit Sitemap GitHub Pages Action"
+description: "Action to submit sitemaps URL to IndexNow for websites hosted on GitHub Pages."
+author: "Jakob Bagterp"
+
+branding:
+  icon: search
+  color: yellow
+
+inputs:
+  sitemap_url:
+    description: "Location of the sitemap to be submitted. If not specified, the default /sitemap.xml at the root of the repository will be used. For example: https://my-name.github.io/my-project/sitemap.xml"
+    required: false
+    default: "./sitemap.xml"
+  endpoint:
+    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
+    required: false
+    default: bing
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.13"
+
+    - name: Install dependencies
+      shell: python
+      run: |
+        pip install --upgrade pip
+        pip install index-now-for-python
+
+    - name: Submit sitemap to IndexNow
+      shell: python
+      run: |
+        from index_now import submit_sitemap_to_index_now, SearchEngineEndpoint, IndexNowAuthentication
+
+        authentication = IndexNowAuthentication(
+            host="${{ github.event.repository.html_url }}",
+            api_key="${{ secrets.INDEX_NOW_API_KEY }}",
+            api_key_location="https://${{ github.event.repository.html_url }}/${{ secrets.INDEX_NOW_API_KEY }}.txt",
+        )
+
+        submit_sitemap_to_index_now(
+            authentication,
+            sitemap_url="${{ inputs.sitemap_url }}",
+            endpoint=SearchEngineEndpoint.BING,
+        )
