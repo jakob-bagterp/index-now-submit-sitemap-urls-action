@@ -18,7 +18,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
         case "indexnow":
             return SearchEngineEndpoint.INDEXNOW
         case "bing":
-            return SearchEngineEndpoint.MICROSOFT_BING
+            return SearchEngineEndpoint.BING
         case "naver":
             return SearchEngineEndpoint.NAVER
         case "seznam":
@@ -28,7 +28,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
         case "yep":
             return SearchEngineEndpoint.YEP
         case _:
-            return SearchEngineEndpoint.MICROSOFT_BING
+            return SearchEngineEndpoint.BING
 
 
 if __name__ == "__main__":
