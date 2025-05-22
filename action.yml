@@ -8,9 +8,17 @@ branding:
 
 inputs:
   sitemap_url:
-    description: "Location of the sitemap to be submitted. If not specified, the default /sitemap.xml at the root of the repository will be used. For example: https://my-name.github.io/my-project/sitemap.xml"
-    required: false
-    default: "./sitemap.xml"
+    description: "Location of the sitemap to be submitted. If not specified, the default /sitemap.xml at the root of the repository will be used. For example: 'https://example.com/sitemap.xml'"
+    required: true
+  host:
+    description: "The host of the website. If not specified, the default is the GitHub Pages URL. For example: 'example.com'"
+    required: true
+  api_key:
+    description: "The API key for IndexNow. For example: 'a1b2c3d4'"
+    required: true
+  api_key_location:
+    description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
+    required: true
   endpoint:
     description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
     required: false
@@ -19,33 +27,31 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
     - name: Setup Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: "3.13"
-
     - name: Install dependencies
       shell: python
       run: |
         pip install --upgrade pip
-        pip install index-now-for-python
-
+        pip install -r ./requirements.txt
     - name: Submit sitemap to IndexNow
       shell: python
       run: |
         from index_now import submit_sitemap_to_index_now, SearchEngineEndpoint, IndexNowAuthentication
+        from helper.index_now.submit_sitemap import get_endpoint_from_input
 
         authentication = IndexNowAuthentication(
-            host="${{ github.event.repository.html_url }}",
-            api_key="${{ secrets.INDEX_NOW_API_KEY }}",
-            api_key_location="https://${{ github.event.repository.html_url }}/${{ secrets.INDEX_NOW_API_KEY }}.txt",
+            host="${{ inputs.host }}",
+            api_key="${{ inputs.api_key }}",
+            api_key_location="${{ inputs.api_key_location }}",
         )
+
+        endpoint = get_endpoint_from_input("${{ inputs.endpoint }}")
 
         submit_sitemap_to_index_now(
             authentication,
             sitemap_url="${{ inputs.sitemap_url }}",
-            endpoint=SearchEngineEndpoint.BING,
+            endpoint=endpoint,
         )
