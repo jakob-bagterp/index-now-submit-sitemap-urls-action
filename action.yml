@@ -1,5 +1,5 @@
-name: "IndexNow Submit Sitemap GitHub Pages Action"
-description: "Action to submit sitemaps URL to IndexNow for websites hosted on GitHub Pages."
+name: "Submit Sitemap to IndexNow"
+description: "Action to submit sitemap URLs to IndexNow for search engine optimisation (SEO) and faster indexing"
 author: "Jakob Bagterp"
 
 branding:
@@ -38,20 +38,10 @@ runs:
         pip install -r ./requirements.txt
     - name: Submit sitemap to IndexNow
       shell: python
-      run: |
-        from index_now import submit_sitemap_to_index_now, SearchEngineEndpoint, IndexNowAuthentication
-        from helper.index_now.submit_sitemap import get_endpoint_from_input
-
-        authentication = IndexNowAuthentication(
-            host="${{ inputs.host }}",
-            api_key="${{ inputs.api_key }}",
-            api_key_location="${{ inputs.api_key_location }}",
-        )
-
-        endpoint = get_endpoint_from_input("${{ inputs.endpoint }}")
-
-        submit_sitemap_to_index_now(
-            authentication,
-            sitemap_url="${{ inputs.sitemap_url }}",
-            endpoint=endpoint,
-        )
+      run: >
+        python -m src.helper.index_now.submit_sitemap
+        ${{ inputs.host }}
+        ${{ inputs.api_key }}
+        ${{ inputs.api_key_location }}
+        ${{ inputs.sitemap_url }}
+        ${{ inputs.endpoint }}

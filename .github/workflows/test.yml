@@ -27,31 +27,5 @@ jobs:
       run: flake8 src test --max-line-length=120 --extend-ignore=E501
     - name: Run tests with mypy
       run: mypy src --ignore-missing-imports --follow-imports=skip --strict
-
-  pytest:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        lfs: true
-        fetch-depth: 0
-    - name: Set up Git
-      run: |
-        git config pull.rebase true
-        git config --global user.name "Test User"
-        git config --global user.email "test@example.com"
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.13"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r ./requirements.txt
-        pip install -r ./requirements_dev.txt
     - name: Run tests with pytest
-      run: >
-        pytest -rA --verbose
-        --ignore=test/helper/repository/add_and_remove_api_key_file_without_online_check_test.py
+      run: pytest

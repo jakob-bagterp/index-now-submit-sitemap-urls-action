@@ -1,7 +1,7 @@
 import pytest
 from index_now import SearchEngineEndpoint
 
-from helper.index_now.submit_sitemap import get_endpoint_from_input
+from helper.submit_sitemap import get_endpoint_from_input
 
 
 @pytest.mark.parametrize("input, expected_endpoint", [
