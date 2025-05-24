@@ -1,6 +1,6 @@
-site_name: Automatically Submit Sitemap from GitHub Pages to IndexNow 🔎
-site_url: https://jakob-bagterp.github.io/index-now-submit-sitemap-gh-pages-action/
-site_description: If you're using GitHub Pages, this action will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines
+site_name: Automatically Submit Sitemap to IndexNow 🔎
+site_url: https://jakob-bagterp.github.io/index-now-submit-sitemap-action/
+site_description: Automatically submit your sitemap to IndexNow with this action for faster indexing by Bing, Yandex, DuckDuckGo and other search engines
 site_author: Jakob Bagterp
 copyright: Copyright © 2025 – present, Jakob Bagterp. All Rights Reserved.
 repo_url: https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action

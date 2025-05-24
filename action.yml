@@ -8,7 +8,7 @@ branding:
 
 inputs:
   host:
-    description: "The host of the website. If not specified, the default is the GitHub Pages URL. For example: 'example.com'"
+    description: "The host of the website. For example: 'example.com'"
     required: true
   api_key:
     description: "The API key for IndexNow. For example: 'a1b2c3d4'"
