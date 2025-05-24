@@ -1,0 +1,47 @@
+name: "Submit Sitemap to IndexNow Action"
+description: "Action to automatically submit sitemap URLs to IndexNow for better search engine optimisation (SEO) and faster indexing"
+author: "Jakob Bagterp"
+
+branding:
+  icon: search
+  color: yellow
+
+inputs:
+  host:
+    description: "The host of the website. For example: 'example.com'"
+    required: true
+  api_key:
+    description: "The API key for IndexNow. For example: 'a1b2c3d4'"
+    required: true
+  api_key_location:
+    description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
+    required: true
+  sitemap_location:
+    description: "Location of the sitemap to be submitted. For example: 'https://example.com/sitemap.xml'"
+    required: true
+  endpoint:
+    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
+    required: false
+    default: bing
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.13"
+    - name: Install dependencies
+      shell: python
+      run: |
+        pip install --upgrade pip
+        pip install -r ./requirements.txt
+    - name: Submit sitemap to IndexNow
+      shell: python
+      run: >
+        python -m src.helper.index_now.submit_sitemap
+        ${{ inputs.host }}
+        ${{ inputs.api_key }}
+        ${{ inputs.api_key_location }}
+        ${{ inputs.sitemap_location }}
+        ${{ inputs.endpoint }}
