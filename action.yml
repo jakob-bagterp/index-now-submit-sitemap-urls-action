@@ -37,11 +37,11 @@ runs:
       shell: bash
       run: |
         pip install --upgrade pip
-        pip install -r ./requirements.txt
+        pip install -r ${{ github.action_path }}/requirements.txt
     - name: Submit sitemap to IndexNow
       shell: bash
       run: >
-        python -m src.helper.index_now.submit_sitemap
+        python ${{ github.action_path }}/src/helper/submit_sitemap.py
         ${{ inputs.host }}
         ${{ inputs.api_key }}
         ${{ inputs.api_key_location }}
