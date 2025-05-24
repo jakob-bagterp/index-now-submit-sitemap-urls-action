@@ -45,11 +45,11 @@ if __name__ == "__main__":
             "https://example.com/sitemap.xml": The location of the sitemap to be submitted.
             "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
         """)
-    parser.add_argument("host", type=str, required=True, help="The host name of the website, e.g. \"example.com\".")
-    parser.add_argument("api_key", type=str, required=True, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
-    parser.add_argument("api_key_location", type=str, required=True, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
-    parser.add_argument("sitemap_location", type=str, required=True, help="The location of the sitemap to be submitted, e.g. \"https://example.com/sitemap.xml\".")
-    parser.add_argument("endpoint", type=str, required=False, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
+    parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
+    parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
+    parser.add_argument("api_key_location", type=str, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
+    parser.add_argument("sitemap_location", type=str, help="The location of the sitemap to be submitted, e.g. \"https://example.com/sitemap.xml\".")
+    parser.add_argument("endpoint", type=str, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
     input = parser.parse_args()
     authentication = IndexNowAuthentication(
         host=input.host,
