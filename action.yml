@@ -1,4 +1,4 @@
-name: "Submit Sitemap to IndexNow Action"
+name: "index-now-submit-sitemap-action"
 description: "Action to automatically submit sitemap URLs to IndexNow for better search engine optimisation (SEO) and faster indexing"
 author: "Jakob Bagterp"
 
