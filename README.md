@@ -17,6 +17,31 @@ Ready to try? Find more information on [GitHub's Marketplace](https://github.com
 >
 > However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
 
+## How to Use
+Example workflow:
+
+```yaml
+name: Submit Sitemap URLs to IndexNow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  submit-sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        uses: jakob-bagterp/index-now-submit-sitemap-action@v1
+        with:
+          host: "example.com"  # Replace with your website's host
+          api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key
+          api_key_location: "https://jakob-bagterp.github.io/${{ secrets.INDEX_NOW_API_KEY }}.txt"  # Replace with your IndexNow API key location
+          sitemap_location: "https://example.com/sitemap.xml"  # Replace with your sitemap location
+          endpoint: yandex
+```
+
 ## Become a Sponsor 🏅
 If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
 
