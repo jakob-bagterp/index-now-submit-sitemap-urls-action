@@ -34,12 +34,12 @@ runs:
       with:
         python-version: "3.13"
     - name: Install dependencies
-      shell: python
+      shell: bash
       run: |
         pip install --upgrade pip
         pip install -r ./requirements.txt
     - name: Submit sitemap to IndexNow
-      shell: python
+      shell: bash
       run: >
         python -m src.helper.index_now.submit_sitemap
         ${{ inputs.host }}
