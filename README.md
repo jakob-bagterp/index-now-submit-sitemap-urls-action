@@ -8,15 +8,6 @@ Are you concerned about search engine optimization (SEO)? Do you want to make su
 
 This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 
-Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-action).
-
-> [!TIP]
-> IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
->
-> For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.
->
-> However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
-
 ## How to Use
 Example workflow:
 
@@ -41,6 +32,16 @@ jobs:
           sitemap_location: "https://example.com/sitemap.xml"  # Replace with your sitemap location
           endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
 ```
+
+> [!TIP]
+> IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
+>
+> For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.
+>
+> However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
+
+
+Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-action).
 
 ## Become a Sponsor 🏅
 If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
