@@ -1,12 +1,12 @@
 name: Test Submit Sitemap Action
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - "**"
+  push:
+    branches:
+      - master
 
 jobs:
   test-sitemap-action:
