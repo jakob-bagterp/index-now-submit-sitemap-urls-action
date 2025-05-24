@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Submit sitemap URLs to IndexNow
-        uses: "jakob-bagterp/index-now-submit-sitemap-action@${{ github.head_ref || github.ref_name }}"
+        uses: "jakob-bagterp/index-now-submit-sitemap-action@${{ GITHUB_HEAD_REF || GITHUB_REF_NAME }}"
         with:
           host: "jakob-bagterp.github.io"
           api_key: "6d71a14ac15c4c41a0c19e641f659208"
