@@ -1,7 +1,7 @@
-[![MIT license](https://img.shields.io/static/v1?label=license&message=MIT&color=blue)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/blob/master/LICENSE.md)
-[![Codecov](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/branch/master/graph/badge.svg?token=PEGUV7IL8T)](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-gh-pages-action)
-[![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/codeql.yml)
-[![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/actions/workflows/test.yml)
+[![MIT license](https://img.shields.io/static/v1?label=license&message=MIT&color=blue)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/blob/master/LICENSE.md)
+[![Codecov](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-action/branch/master/graph/badge.svg?token=PEGUV7IL8T)](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-action)
+[![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/codeql.yml)
+[![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/test.yml)
 
 # 🔍 Automatically Submit Sitemap URLs to IndexNow 🔎
 Are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
@@ -25,7 +25,7 @@ If you find this project helpful, please consider supporting its development. Yo
 Thank you for your support! 🙌
 
 ## Contribute
-If you have suggestions or changes to the module, feel free to add to the code and create a [pull request](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/pulls).
+If you have suggestions or changes to the module, feel free to add to the code and create a [pull request](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/pulls).
 
 ## Report Bugs
-Report bugs and issues [here](https://github.com/jakob-bagterp/index-now-submit-sitemap-gh-pages-action/issues).
+Report bugs and issues [here](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/issues).
