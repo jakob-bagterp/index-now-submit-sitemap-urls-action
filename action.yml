@@ -16,8 +16,8 @@ inputs:
   api_key_location:
     description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
     required: true
-  sitemap_url:
-    description: "Location of the sitemap to be submitted. If not specified, the default /sitemap.xml at the root of the repository will be used. For example: 'https://example.com/sitemap.xml'"
+  sitemap_location:
+    description: "Location of the sitemap to be submitted. For example: 'https://example.com/sitemap.xml'"
     required: true
   endpoint:
     description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
@@ -43,5 +43,5 @@ runs:
         ${{ inputs.host }}
         ${{ inputs.api_key }}
         ${{ inputs.api_key_location }}
-        ${{ inputs.sitemap_url }}
+        ${{ inputs.sitemap_location }}
         ${{ inputs.endpoint }}
