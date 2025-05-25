@@ -53,16 +53,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt https://example.com/sitemap.xml https://example.com yandex
+            python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
 
         The parameters are:
 
             "example.com": The host name of the website.
             "a1b2c3d4": The API key for IndexNow.
             "https://example.com/a1b2c3d4.txt": The location of the API key.
+            "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
             "https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "https://example.com": The URL(s) to be submitted. Optional.
-            "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
         """)
     parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
