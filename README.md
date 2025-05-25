@@ -29,7 +29,7 @@ jobs:
           host: "example.com"  # Replace with your website's host
           api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key
           api_key_location: "https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt"  # Replace with your IndexNow API key location
-          sitemap_location: "https://example.com/sitemap.xml"  # Replace with your sitemap location
+          sitemap_locations: "https://example.com/sitemap.xml"  # Replace with your sitemap location
           endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
 ```
 

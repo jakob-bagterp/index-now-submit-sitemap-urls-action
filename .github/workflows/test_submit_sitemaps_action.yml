@@ -1,0 +1,35 @@
+name: Test Submit Sitemaps Action
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - master
+
+jobs:
+  test-sitemap-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Submit URLs from single sitemap to IndexNow
+        uses: jakob-bagterp/index-now-submit-sitemap-action@${{ github.ref_name }}
+        with:
+          host: jakob-bagterp.github.io
+          api_key: 6d71a14ac15c4c41a0c19e641f659208
+          api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
+          sitemap_locations: https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml
+          endpoint: yandex
+      - name: Submit URLs from multiple sitemaps to IndexNow
+        uses: jakob-bagterp/index-now-submit-sitemap-action@${{ github.ref_name }}
+        with:
+          host: jakob-bagterp.github.io
+          api_key: 6d71a14ac15c4c41a0c19e641f659208
+          api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
+          sitemap_locations: >
+            "https://jakob-bagterp.github.io/sitemap.xml,
+            https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml"
+          endpoint: yandex

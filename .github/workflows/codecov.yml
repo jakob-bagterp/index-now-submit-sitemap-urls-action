@@ -13,30 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        lfs: true
-        fetch-depth: 0
-    - name: Set up Git
-      run: |
-        git config pull.rebase true
-        git config --global user.name "Test User"
-        git config --global user.email "test@example.com"
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.13"
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install -r ./requirements.txt
-        pip install -r ./requirements_dev.txt
-    - name: Generate coverage report
-      run: >
-        pytest --cov=./ --cov-report=xml
-        --ignore=test/helper/repository/add_and_remove_api_key_file_with_online_check_test.py
-    - name: Upload coverage report to CodeCov
-      uses: codecov/codecov-action@v5
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - name: Set up Git
+        run: |
+          git config pull.rebase true
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r ./requirements.txt
+          pip install -r ./requirements_dev.txt
+      - name: Generate coverage report
+        run: >
+          pytest --cov=./ --cov-report=xml
+          --ignore=test/helper/repository/add_and_remove_api_key_file_with_online_check_test.py
+      - name: Upload coverage report to CodeCov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

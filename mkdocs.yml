@@ -8,6 +8,14 @@ repo_url: https://github.com/jakob-bagterp/index-now-submit-sitemap-action
 nav:
   - Home:
     - index.md
+    - Project:
+      - Donate: project/donate.md
+      - Support and Contribution: project/support-and-contribution.md
+      - License 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-action/blob/master/LICENSE.md
+      - Release Notes 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-action/releases
+      - Source Code 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-action
+    - Index:
+      - Tags: index/tags.md
 
 theme:
   name: material
@@ -20,7 +28,11 @@ theme:
     - navigation.instant.prefetch
     - navigation.instant.progress
     - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
     - navigation.top
+    - navigation.path
     - navigation.indexes
     - content.code.copy
     - content.code.select
@@ -78,6 +90,8 @@ extra:
       make our documentation better.
 
 plugins:
+  - search:
+      lang: en
   - minify:
       minify_html: true
       minify_js: true
@@ -87,5 +101,6 @@ plugins:
 
 exclude_docs: |
   /requirements.txt
+  /README.md
 
 dev_addr: 127.0.0.1:8006
