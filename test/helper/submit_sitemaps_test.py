@@ -1,14 +1,19 @@
 import subprocess
 
+import pytest
 from colorist import Color
 
 
-def test_submit_sitemap_from_terminal(capfd: object) -> None:
+@pytest.mark.parametrize("sitemap_locations", [
+    "https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml",
+    "https://jakob-bagterp.github.io/sitemap.xml, https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml"
+])
+def test_submit_sitemaps_from_terminal(sitemap_locations: str, capfd: object) -> None:
     subprocess.call(["python3", "./src/helper/submit_sitemap.py",
                      "jakob-bagterp.github.io",
                      "6d71a14ac15c4c41a0c19e641f659208",
                      "https://jakob-bagterp.github.io/index-now-api-key.txt",
-                     "https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml",
+                     sitemap_locations,
                      "yandex"
                      ])
     terminal_output, _ = capfd.readouterr()

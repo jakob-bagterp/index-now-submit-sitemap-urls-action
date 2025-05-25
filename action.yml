@@ -8,19 +8,19 @@ branding:
 
 inputs:
   host:
-    description: "The host of the website. For example: 'example.com'"
+    description: "The host of the website. For example: example.com"
     required: true
   api_key:
-    description: "The API key for IndexNow. For example: 'a1b2c3d4'"
+    description: "The API key for IndexNow. For example: a1b2c3d4"
     required: true
   api_key_location:
     description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
     required: true
-  sitemap_location:
-    description: "Location of the sitemap to be submitted. For example: 'https://example.com/sitemap.xml'"
+  sitemap_locations:
+    description: "Location of one or more sitemaps to be submitted. For example a single sitemap https://example.com/sitemap.xml or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\""
     required: true
   endpoint:
-    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
+    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep."
     required: false
     default: bing
 
@@ -45,5 +45,5 @@ runs:
         ${{ inputs.host }}
         ${{ inputs.api_key }}
         ${{ inputs.api_key_location }}
-        ${{ inputs.sitemap_location }}
+        ${{ inputs.sitemap_locations }}
         ${{ inputs.endpoint }}
