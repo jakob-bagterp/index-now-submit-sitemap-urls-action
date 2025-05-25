@@ -53,23 +53,23 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt https://example.com/sitemap.xml https://example.com yandex
+            python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
 
         The parameters are:
 
             "example.com": The host name of the website.
             "a1b2c3d4": The API key for IndexNow.
             "https://example.com/a1b2c3d4.txt": The location of the API key.
+            "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
             "https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "https://example.com": The URL(s) to be submitted. Optional.
-            "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
         """)
     parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
     parser.add_argument("api_key_location", type=str, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
-    parser.add_argument("string_or_list_input", type=str, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
-    parser.add_argument("urls", type=str, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     parser.add_argument("endpoint", type=str, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
+    parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
+    parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     input = parser.parse_args()
 
     authentication = IndexNowAuthentication(
@@ -79,9 +79,9 @@ if __name__ == "__main__":
     )
     endpoint = get_endpoint_from_input(input.endpoint)
 
-    string_or_list_input = parse_string_or_list_input(input.string_or_list_input)
-    if string_or_list_input:
-        submit_sitemaps_to_index_now(authentication, string_or_list_input, endpoint=endpoint)
+    sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
+    if sitemap_locations:
+        submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
     else:
         print("No sitemaps to submit. Skipping...")
 

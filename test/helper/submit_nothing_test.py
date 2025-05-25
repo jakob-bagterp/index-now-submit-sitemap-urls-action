@@ -6,9 +6,9 @@ def test_submit_nothing_from_terminal(capfd: object) -> None:
                      "jakob-bagterp.github.io",
                      "6d71a14ac15c4c41a0c19e641f659208",
                      "https://jakob-bagterp.github.io/index-now-api-key.txt",
-                     "",
-                     "",
-                     "yandex"
+                     "yandex",
+                     "--sitemap-locations", "",
+                     "--urls", "",
                      ])
     terminal_output, _ = capfd.readouterr()
     assert "No sitemaps to submit. Skipping..." in terminal_output
