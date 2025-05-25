@@ -15,7 +15,7 @@ def test_submit_sitemaps_from_terminal(sitemap_locations: str, capfd: object) ->
                      "https://jakob-bagterp.github.io/index-now-api-key.txt",
                      "yandex",
                      "--sitemap-locations", sitemap_locations,
-                     "",
+                     "--urls", "",
                      ])
     terminal_output, _ = capfd.readouterr()
     assert f"URL(s) submitted successfully to the IndexNow API:{Color.OFF}" in terminal_output
