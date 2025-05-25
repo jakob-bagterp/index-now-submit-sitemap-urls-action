@@ -56,7 +56,7 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     if is_list(string_or_list_input):
         string_or_list_input = string_or_list_input.replace("[", "").replace("]", "")
         return [normalize(item) for item in string_or_list_input.split(",") if item.strip()]
-    return [normalize(string_or_list_input)]  # If the input is a single sitemap location or a single URL.
+    return [normalize(string_or_list_input)]
 
 
 if __name__ == "__main__":
