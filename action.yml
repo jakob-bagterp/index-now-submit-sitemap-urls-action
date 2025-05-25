@@ -1,10 +1,10 @@
-name: "index-now-submit-sitemap-action"
-description: "Action to automatically submit sitemap URLs to IndexNow for better search engine optimisation (SEO) and faster indexing"
+name: "index-now-submit-sitemap-urls-action"
+description: "Action to automatically submit sitemap and URLs to IndexNow for better search engine optimisation (SEO) and faster indexing"
 author: "Jakob Bagterp"
 
 branding:
   icon: search
-  color: yellow
+  color: purple
 
 inputs:
   host:
