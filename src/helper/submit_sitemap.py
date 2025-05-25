@@ -46,6 +46,11 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
 
         return any([input.startswith("["), input.endswith("]"), "," in input])
 
+    def remove_list_brackets(input: str) -> str:
+        """Remove square brackets from the input string."""
+
+        return input.replace("[", "").replace("]", "")
+
     def normalize(input: str) -> str:
         """Normalize the input string by removing quotes and whitespace."""
 
@@ -54,7 +59,7 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     if not string_or_list_input:
         return []
     if is_list(string_or_list_input):
-        string_or_list_input = string_or_list_input.replace("[", "").replace("]", "")
+        string_or_list_input = remove_list_brackets(string_or_list_input)
         return [normalize(item) for item in string_or_list_input.split(",") if item.strip()]
     return [normalize(string_or_list_input)]
 
