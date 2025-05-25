@@ -41,12 +41,17 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
         list[str]: List of sitemap locations or URLs.
     """
 
+    def normalize(input: str) -> str:
+        """Normalize the input string by removing quotes and whitespace."""
+
+        return input.replace('"', "").replace("'", "").strip()
+
     if not string_or_list_input:
         return []
     if any([string_or_list_input.startswith("["), string_or_list_input.endswith("]"), "," in string_or_list_input]):  # If the input contains a list of sitemap locations or URLs.
         string_or_list_input = string_or_list_input.replace("[", "").replace("]", "")
-        return [item.replace('"', "").replace("'", "").strip() for item in string_or_list_input.split(",") if item.strip()]
-    return [string_or_list_input.replace('"', "").replace("'", "").strip()]  # If the input is a single sitemap location or a single URL.
+        return [normalize(item) for item in string_or_list_input.split(",") if item.strip()]
+    return [normalize(string_or_list_input)]  # If the input is a single sitemap location or a single URL.
 
 
 if __name__ == "__main__":
