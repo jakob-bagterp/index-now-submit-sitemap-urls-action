@@ -1,6 +1,6 @@
 ---
-title: Action to Automatically Submit Sitemap URLs to IndexNow 🔎
-description: If you're using GitHub Actions, this workflow will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
+title: Automatically Submit Sitemap and URLs to IndexNow 🔎
+description: This workflow with GitHub Actions will automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines.
 tags:
     - SEO
     - IndexNow
@@ -13,7 +13,7 @@ tags:
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/codeql.yml)
 [![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/test.yml)
 
-# Automate Sitemap Submission to IndexNow 🔎
+# Automate Sitemap and URL Submission to IndexNow 🔎
 ## Why Use IndexNow?
 Are you concerned about search engine optimisation (SEO)? And do you want to make sure that your website is frequently indexed by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/) and other search engines that support [IndexNow](https://www.indexnow.org/)?
 
@@ -26,7 +26,7 @@ Imagine submitting all your sitemap URLs to IndexNow when your website is update
 
     Search engines such as [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/) (via Bing's index) and others already support IndexNow, but not all search engines. For example, Google is not on board, but this may change in the future.
 
-## How to Automatically Submit Sitemap URLs to IndexNow
+## How to Automatically Submit Sitemap and URLs to IndexNow
 This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 
 If you're already using GitHub Actions, simply add this action to your workflow. It can automatically submit your sitemap to IndexNow whenever you deploy changes to your site.
