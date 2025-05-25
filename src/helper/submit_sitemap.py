@@ -72,6 +72,12 @@ if __name__ == "__main__":
     parser.add_argument("--urls", nargs=1, type=str, default="", help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     input = parser.parse_args()
 
+    # TODO: Remove this section when the script is fixed after debugging:
+    parser.print_help()
+    print("Parsed arguments:")
+    for arg in vars(input):
+        print(f"  {arg}: {getattr(input, arg)}")
+
     authentication = IndexNowAuthentication(
         host=input.host,
         api_key=input.api_key,
