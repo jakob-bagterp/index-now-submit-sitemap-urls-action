@@ -45,8 +45,8 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
         return []
     if any([string_or_list_input.startswith("["), string_or_list_input.endswith("]"), "," in string_or_list_input]):  # If the input contains a list of sitemap locations or URLs.
         string_or_list_input = string_or_list_input.replace("[", "").replace("]", "")
-        return [string_or_list_input.replace('"', "").replace("'", "").strip() for string_or_list_input in string_or_list_input.split(",")]
-    return [string_or_list_input.strip()]  # If the input is a single sitemap location or a single URL.
+        return [item.replace('"', "").replace("'", "").strip() for item in string_or_list_input.split(",") if item.strip()]
+    return [string_or_list_input.replace('"', "").replace("'", "").strip()]  # If the input is a single sitemap location or a single URL.
 
 
 if __name__ == "__main__":

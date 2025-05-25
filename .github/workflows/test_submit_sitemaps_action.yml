@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  test-sitemap-action:
+  test-submit-sitemaps-action:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +30,6 @@ jobs:
           api_key: 6d71a14ac15c4c41a0c19e641f659208
           api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
           sitemap_locations: >
-            "https://jakob-bagterp.github.io/sitemap.xml,
-            https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml"
+            https://jakob-bagterp.github.io/sitemap.xml,
+            https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml
           endpoint: yandex
