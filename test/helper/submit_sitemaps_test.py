@@ -6,7 +6,7 @@ from colorist import Color
 
 @pytest.mark.parametrize("sitemap_locations", [
     "https://jakob-bagterp.github.io/sitemap.xml",
-    "https://jakob-bagterp.github.io/sitemap.xml, https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml"
+    "https://jakob-bagterp.github.io/sitemap.xml, https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
 ])
 def test_submit_sitemaps_from_terminal(sitemap_locations: str, capfd: object) -> None:
     subprocess.call(["python3", "./src/helper/submit_sitemap.py",
