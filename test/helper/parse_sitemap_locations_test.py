@@ -1,6 +1,6 @@
 import pytest
 
-from helper.submit_sitemap import parse_sitemap_locations
+from helper.submit_sitemap import parse_string_or_list_input
 
 EXPECTED_SITEMAP_LOCATION = ["https://example.com/sitemap.xml"]
 EXPECTED_SITEMAP_LOCATIONS = ["https://example.com/sitemap1.xml", "https://example.com/sitemap2.xml"]
@@ -19,5 +19,5 @@ EXPECTED_SITEMAP_LOCATIONS = ["https://example.com/sitemap1.xml", "https://examp
     ('[ "https://example.com/sitemap1.xml", " https://example.com/sitemap2.xml "]', EXPECTED_SITEMAP_LOCATIONS),
     ("https://example.com/sitemap1.xml, https://example.com/sitemap2.xml", EXPECTED_SITEMAP_LOCATIONS),
 ])
-def test_parse_sitemap_locations(sitemap_locations: str, expected: list[str]) -> None:
-    assert parse_sitemap_locations(sitemap_locations) == expected
+def test_parse_sitemap_locations_input(sitemap_locations: str, expected: list[str]) -> None:
+    assert parse_string_or_list_input(sitemap_locations) == expected
