@@ -1,4 +1,4 @@
-name: Test Submit Sitemaps Action
+name: Test Submit URLs Action
 
 on:
   push:
