@@ -68,15 +68,14 @@ if __name__ == "__main__":
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
     parser.add_argument("api_key_location", type=str, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
     parser.add_argument("endpoint", type=str, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
-    parser.add_argument("--sitemap-locations", nargs=1, type=str, default="", help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
-    parser.add_argument("--urls", nargs=1, type=str, default="", help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
+    parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
+    parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     input = parser.parse_args()
 
     # TODO: Remove this section when the script is fixed after debugging:
-    parser.print_help()
     print("Parsed arguments:")
     for arg in vars(input):
-        print(f"  {arg}: {getattr(input, arg)}")
+        print(f"{arg}: {getattr(input, arg)}")
 
     authentication = IndexNowAuthentication(
         host=input.host,
