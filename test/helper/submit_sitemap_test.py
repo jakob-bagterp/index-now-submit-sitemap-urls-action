@@ -11,6 +11,6 @@ def test_submit_sitemap_from_terminal(capfd: object) -> None:
                      "https://jakob-bagterp.github.io/index-now-submit-sitemap-action/sitemap.xml",
                      "yandex"
                      ])
-    terminal_output = capfd.readouterr()
+    terminal_output, _ = capfd.readouterr()
     assert f"URL(s) submitted successfully to the IndexNow API:{Color.OFF}" in terminal_output
     assert f"Status code: {Color.GREEN}200{Color.OFF}" or f"Status code: {Color.GREEN}202{Color.OFF}" in terminal_output
