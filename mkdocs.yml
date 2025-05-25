@@ -87,5 +87,6 @@ plugins:
 
 exclude_docs: |
   /requirements.txt
+  /README.md
 
 dev_addr: 127.0.0.1:8006
