@@ -4,4 +4,16 @@
          <loc>https://jakob-bagterp.github.io/index-now-submit-sitemap-action/</loc>
          <lastmod>2025-05-25</lastmod>
     </url>
+    <url>
+         <loc>https://jakob-bagterp.github.io/index-now-submit-sitemap-action/index/tags/</loc>
+         <lastmod>2025-05-25</lastmod>
+    </url>
+    <url>
+         <loc>https://jakob-bagterp.github.io/index-now-submit-sitemap-action/project/donate/</loc>
+         <lastmod>2025-05-25</lastmod>
+    </url>
+    <url>
+         <loc>https://jakob-bagterp.github.io/index-now-submit-sitemap-action/project/support-and-contribution/</loc>
+         <lastmod>2025-05-25</lastmod>
+    </url>
 </urlset>
