@@ -3,7 +3,7 @@
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/codeql.yml)
 [![Test](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/test.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/actions/workflows/test.yml)
 
-# 🔍 Automatically Submit Sitemap and URLs to IndexNow 🔎
+# 🔍 Automatically Submit Sitemap URLs to IndexNow 🔎
 Are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
 
 This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
