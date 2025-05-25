@@ -31,6 +31,24 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
             return SearchEngineEndpoint.BING
 
 
+def parse_sitemap_locations(sitemap_locations: str) -> list[str]:
+    """Parse the sitemap locations into and array from a string input.
+
+    Args:
+        sitemap_locations (str): Input from CLI parameter, e.g. `"https://example.com/sitemap.xml"` or `"[\'https://example.com/sitemap1.xml\', \'https://example.com/sitemap2.xml\']"`.
+
+    Returns:
+        list[str]: List of sitemap locations.
+    """
+
+    if not sitemap_locations:
+        return []
+    if any([sitemap_locations.startswith("["), sitemap_locations.endswith("]"), "," in sitemap_locations]):  # If the input contains a list of sitemap locations.
+        sitemap_locations = sitemap_locations.replace("[", "").replace("]", "")
+        return [sitemap_location.replace('"', "").replace("'", "").strip() for sitemap_location in sitemap_locations.split(",")]
+    return [sitemap_locations.strip()]  # If the input is a single sitemap location.
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
