@@ -1,7 +1,7 @@
 import argparse
 
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
-                       submit_sitemap_to_index_now)
+                       submit_sitemaps_to_index_now)
 
 
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
@@ -45,7 +45,7 @@ def parse_sitemap_locations(sitemap_locations: str) -> list[str]:
         return []
     if any([sitemap_locations.startswith("["), sitemap_locations.endswith("]"), "," in sitemap_locations]):  # If the input contains a list of sitemap locations.
         sitemap_locations = sitemap_locations.replace("[", "").replace("]", "")
-        return [sitemap_location.replace('"', "").replace("'", "").strip() for sitemap_location in sitemap_locations.split(",")]
+        return [sitemap_locations.replace('"', "").replace("'", "").strip() for sitemap_locations in sitemap_locations.split(",")]
     return [sitemap_locations.strip()]  # If the input is a single sitemap location.
 
 
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
     parser.add_argument("api_key_location", type=str, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
-    parser.add_argument("sitemap_location", type=str, help="The location of the sitemap to be submitted, e.g. \"https://example.com/sitemap.xml\".")
+    parser.add_argument("sitemap_locations", type=str, help="The location of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
     parser.add_argument("endpoint", type=str, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
     input = parser.parse_args()
     authentication = IndexNowAuthentication(
@@ -74,5 +74,6 @@ if __name__ == "__main__":
         api_key=input.api_key,
         api_key_location=input.api_key_location
     )
+    sitemap_locations = parse_sitemap_locations(input.sitemap_locations)
     endpoint = get_endpoint_from_input(input.endpoint)
-    submit_sitemap_to_index_now(authentication, input.sitemap_location, endpoint=endpoint)
+    submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
