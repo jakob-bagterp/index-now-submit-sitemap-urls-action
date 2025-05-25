@@ -14,7 +14,7 @@ def test_submit_sitemaps_from_terminal(sitemap_locations: str, capfd: object) ->
                      "6d71a14ac15c4c41a0c19e641f659208",
                      "https://jakob-bagterp.github.io/index-now-api-key.txt",
                      "yandex",
-                     f"--sitemap-locations {sitemap_locations}",
+                     "--sitemap-locations", sitemap_locations,
                      "",
                      ])
     terminal_output, _ = capfd.readouterr()

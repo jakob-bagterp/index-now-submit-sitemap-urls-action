@@ -15,7 +15,7 @@ def test_submit_urls_from_terminal(urls: str, capfd: object) -> None:
                      "https://jakob-bagterp.github.io/index-now-api-key.txt",
                      "yandex",
                      "",
-                     f"--urls {urls}"
+                     "--urls", urls,
                      ])
     terminal_output, _ = capfd.readouterr()
     assert f"URL(s) submitted successfully to the IndexNow API:{Color.OFF}" in terminal_output
