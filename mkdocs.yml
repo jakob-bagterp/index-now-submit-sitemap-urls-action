@@ -1,9 +1,9 @@
 site_name: Automatically Submit Sitemap to IndexNow 🔎
-site_url: https://jakob-bagterp.github.io/index-now-submit-sitemap-action/
+site_url: https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/
 site_description: Automatically submit your sitemap to IndexNow with this action for faster indexing by Bing, Yandex, DuckDuckGo and other search engines
 site_author: Jakob Bagterp
 copyright: Copyright © 2025 – present, Jakob Bagterp. All Rights Reserved.
-repo_url: https://github.com/jakob-bagterp/index-now-submit-sitemap-action
+repo_url: https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action
 
 nav:
   - Home:
@@ -11,9 +11,9 @@ nav:
     - Project:
       - Donate: project/donate.md
       - Support and Contribution: project/support-and-contribution.md
-      - License 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-action/blob/master/LICENSE.md
-      - Release Notes 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-action/releases
-      - Source Code 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-action
+      - License 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/blob/master/LICENSE.md
+      - Release Notes 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases
+      - Source Code 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action
     - Index:
       - Tags: index/tags.md
 
