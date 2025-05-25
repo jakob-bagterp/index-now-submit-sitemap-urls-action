@@ -50,6 +50,6 @@ runs:
         ${{ inputs.host }}
         ${{ inputs.api_key }}
         ${{ inputs.api_key_location }}
+        ${{ inputs.endpoint }}
         ${{ inputs.sitemap_locations }}
         ${{ inputs.urls }}
-        ${{ inputs.endpoint }}
