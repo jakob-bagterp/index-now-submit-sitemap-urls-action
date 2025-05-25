@@ -1,8 +1,6 @@
 ---
 title: Action to Automatically Submit Sitemap URLs to IndexNow 🔎
 description: If you're using GitHub Actions, this workflow will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
-hide:
-  - navigation
 ---
 
 [![MIT license](https://img.shields.io/static/v1?label=license&message=MIT&color=blue)](https://github.com/jakob-bagterp/index-now-submit-sitemap-action/blob/master/LICENSE.md)
