@@ -78,6 +78,8 @@ extra:
       make our documentation better.
 
 plugins:
+  - search:
+      lang: en
   - minify:
       minify_html: true
       minify_js: true
