@@ -34,7 +34,7 @@ jobs:
           pip install -r ./requirements_dev.txt
       - name: Generate coverage report
         run: >
-          pytest --cov=./ --cov-report=xml
+          pytest --cov=./ --cov-report=xml -vv -rA
           --ignore=test/helper/repository/add_and_remove_api_key_file_with_online_check_test.py
       - name: Upload coverage report to CodeCov
         uses: codecov/codecov-action@v5
