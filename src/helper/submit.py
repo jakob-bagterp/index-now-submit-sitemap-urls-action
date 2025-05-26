@@ -1,7 +1,22 @@
 import argparse
+import sys
 
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
+
+SUCCESS_STATUS_CODES = [200, 202]
+
+
+def is_successful_response(status_code: int) -> bool:
+    return status_code in SUCCESS_STATUS_CODES
+
+
+def exit_with_success() -> None:
+    sys.exit(0)
+
+
+def exit_with_failure() -> None:
+    sys.exit(1)
 
 
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
@@ -14,7 +29,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
         SearchEngineEndpoint: Search engine endpoint. Fallback is Microsoft Bing.
     """
 
-    match endpoint:
+    match str(endpoint).lower():
         case "indexnow":
             return SearchEngineEndpoint.INDEXNOW
         case "bing":
@@ -68,7 +83,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
+            python submit.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
 
         The parameters are:
 
@@ -95,13 +110,26 @@ if __name__ == "__main__":
     endpoint = get_endpoint_from_input(input.endpoint)
 
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
+    urls = parse_string_or_list_input(input.urls)
+
+    if not sitemap_locations and not urls:
+        print("No sitemaps or URLs to submit. Aborting...")
+        exit_with_failure()
+
     if sitemap_locations:
-        submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
+        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
+        if not is_successful_response(status_code):
+            print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
+            exit_with_failure()
     else:
         print("No sitemaps to submit. Skipping...")
 
-    urls = parse_string_or_list_input(input.urls)
     if urls:
-        submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
+        status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
+        if not is_successful_response(status_code):
+            print(f"Failed to submit URLs. Status code response from {endpoint.name.title()}: {status_code}")
+            exit_with_failure()
     else:
         print("No URLs to submit. Skipping...")
+
+    exit_with_success()

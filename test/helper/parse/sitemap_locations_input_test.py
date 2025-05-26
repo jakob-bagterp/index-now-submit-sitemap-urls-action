@@ -1,6 +1,6 @@
 import pytest
 
-from helper.submit_sitemap import parse_string_or_list_input
+from helper.submit import parse_string_or_list_input
 
 EXPECTED_SITEMAP_LOCATION = ["https://example.com/sitemap.xml"]
 EXPECTED_SITEMAP_LOCATIONS = ["https://example.com/sitemap1.xml", "https://example.com/sitemap2.xml"]

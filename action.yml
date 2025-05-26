@@ -46,7 +46,7 @@ runs:
     - name: Submit sitemap to IndexNow
       shell: bash
       run: >
-        python ${{ github.action_path }}/src/helper/submit_sitemap.py
+        python ${{ github.action_path }}/src/helper/submit.py
         ${{ inputs.host }}
         ${{ inputs.api_key }}
         ${{ inputs.api_key_location }}
