@@ -17,7 +17,7 @@ SITEMAP_LOCATIONS = ["https://jakob-bagterp.github.io/sitemap.xml"]
 URLS = ["https://jakob-bagterp.github.io"]
 
 
-def test_submit_sitemaps_from_terminal_failure() -> None:
+def test_submit_sitemaps_from_terminal_failure(capfd: object) -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_sitemaps_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, SITEMAP_LOCATIONS, endpoint=SearchEngineEndpoint.BING)
     assert status_code not in SUCCESS_STATUS_CODES
@@ -32,9 +32,11 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
                                  "--urls", "",
                                  ])
     assert exit_code == FAILURE_EXIT_CODE
+    terminal_output, _ = capfd.readouterr()
+    assert "Failed to submit sitemaps. Status code response from Bing:" in terminal_output
 
 
-def test_submit_urls_from_terminal_failure() -> None:
+def test_submit_urls_from_terminal_failure(capfd: object) -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_urls_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, URLS, endpoint=SearchEngineEndpoint.BING)
     assert status_code not in SUCCESS_STATUS_CODES
@@ -49,3 +51,5 @@ def test_submit_urls_from_terminal_failure() -> None:
                                  "--urls", URLS[0],
                                  ])
     assert exit_code == FAILURE_EXIT_CODE
+    terminal_output, _ = capfd.readouterr()
+    assert "Failed to submit sitemaps. Status code response from Bing:" in terminal_output
