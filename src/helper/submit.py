@@ -98,6 +98,12 @@ if __name__ == "__main__":
     endpoint = get_endpoint_from_input(input.endpoint)
 
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
+    urls = parse_string_or_list_input(input.urls)
+
+    if not all([sitemap_locations, urls]):
+        print("No sitemaps or URLs to submit. Aborting...")
+        exit_with_failure()
+
     if sitemap_locations:
         status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
         if not is_successful_response(status_code):
@@ -106,7 +112,6 @@ if __name__ == "__main__":
     else:
         print("No sitemaps to submit. Skipping...")
 
-    urls = parse_string_or_list_input(input.urls)
     if urls:
         status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
         if not is_successful_response(status_code):

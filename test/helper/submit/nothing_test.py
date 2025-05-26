@@ -1,6 +1,6 @@
 import subprocess
 
-from constant import (SUCCESS_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION,
+from constant import (FAILURE_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION,
                       VALID_HOST)
 
 
@@ -13,7 +13,6 @@ def test_submit_nothing_from_terminal(capfd: object) -> None:
                                    "--sitemap-locations", "",
                                    "--urls", "",
                                    ])
-    assert status_code == SUCCESS_EXIT_CODE
+    assert status_code == FAILURE_EXIT_CODE
     terminal_output, _ = capfd.readouterr()
-    assert "No sitemaps to submit. Skipping..." in terminal_output
-    assert "No URLs to submit. Skipping..." in terminal_output
+    assert "No sitemaps or URLs to submit. Aborting..." in terminal_output
