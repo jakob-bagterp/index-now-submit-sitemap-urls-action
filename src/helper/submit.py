@@ -17,7 +17,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
         SearchEngineEndpoint: Search engine endpoint. Fallback is Microsoft Bing.
     """
 
-    match endpoint:
+    match str(endpoint).lower():
         case "indexnow":
             return SearchEngineEndpoint.INDEXNOW
         case "bing":
