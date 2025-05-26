@@ -1,6 +1,6 @@
 import subprocess
 
-from constant import EXIT_CODE_FAILURE
+from constant import FAILURE_EXIT_CODE
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
@@ -33,7 +33,7 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
                                  "--sitemap-locations", SITEMAP_LOCATIONS[0],
                                  "--urls", "",
                                  ])
-    assert exit_code == EXIT_CODE_FAILURE
+    assert exit_code == FAILURE_EXIT_CODE
 
 
 def test_submit_urls_from_terminal_failure() -> None:
@@ -49,4 +49,4 @@ def test_submit_urls_from_terminal_failure() -> None:
                                  "--sitemap-locations", "",
                                  "--urls", URLS[0],
                                  ])
-    assert exit_code == EXIT_CODE_FAILURE
+    assert exit_code == FAILURE_EXIT_CODE
