@@ -52,4 +52,4 @@ def test_submit_urls_from_terminal_failure(capfd: object) -> None:
                                  ])
     assert exit_code == FAILURE_EXIT_CODE
     terminal_output, _ = capfd.readouterr()
-    assert "Failed to submit sitemaps. Status code response from Bing:" in terminal_output
+    assert "Failed to submit URls. Status code response from Bing:" in terminal_output
