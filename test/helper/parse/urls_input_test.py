@@ -1,6 +1,6 @@
 import pytest
 
-from helper.submit_sitemap import parse_string_or_list_input
+from helper.submit import parse_string_or_list_input
 
 EXPECTED_URL = ["https://example.com"]
 EXPECTED_URLS = ["https://example.com/page1", "https://example.com/page2"]

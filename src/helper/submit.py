@@ -71,7 +71,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit_sitemap.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
+            python submit.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
 
         The parameters are:
 

@@ -4,7 +4,7 @@ from constant import EXIT_CODE_FAILURE
 
 
 def test_submit_sitemaps_from_terminal_failure() -> None:
-    exit_code = subprocess.call(["python3", "./src/helper/submit_sitemap.py",
+    exit_code = subprocess.call(["python3", "./src/helper/submit.py",
                                  "jakob-bagterp.github.io",
                                  "invalid",
                                  "https://jakob-bagterp.github.io/invalid.txt",
@@ -16,7 +16,7 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
 
 
 def test_submit_urls_from_terminal_failure() -> None:
-    exit_code = subprocess.call(["python3", "./src/helper/submit_sitemap.py",
+    exit_code = subprocess.call(["python3", "./src/helper/submit.py",
                                  "jakob-bagterp.github.io",
                                  "invalid",
                                  "https://jakob-bagterp.github.io/invalid.txt",
