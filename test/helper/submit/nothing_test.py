@@ -1,13 +1,14 @@
 import subprocess
 
-from constant import SUCCESS_EXIT_CODE
+from constant import (SUCCESS_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION,
+                      VALID_HOST)
 
 
 def test_submit_nothing_from_terminal(capfd: object) -> None:
     status_code = subprocess.call(["python3", "./src/helper/submit.py",
-                                   "jakob-bagterp.github.io",
-                                   "6d71a14ac15c4c41a0c19e641f659208",
-                                   "https://jakob-bagterp.github.io/index-now-api-key.txt",
+                                   VALID_HOST,
+                                   VALID_API_KEY,
+                                   VALID_API_KEY_LOCATION,
                                    "yandex",
                                    "--sitemap-locations", "",
                                    "--urls", "",
