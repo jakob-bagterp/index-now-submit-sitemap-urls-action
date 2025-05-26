@@ -112,7 +112,7 @@ if __name__ == "__main__":
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
     urls = parse_string_or_list_input(input.urls)
 
-    if not all([sitemap_locations, urls]):
+    if not sitemap_locations and not urls:
         print("No sitemaps or URLs to submit. Aborting...")
         exit_with_failure()
 
