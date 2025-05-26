@@ -1,14 +1,11 @@
 import subprocess
 
-from constant import FAILURE_EXIT_CODE
+from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY,
+                      INVALID_API_KEY_LOCATION, VALID_HOST)
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
 from helper.result import SUCCESS_STATUS_CODES
-
-VALID_HOST = "jakob-bagterp.github.io"
-INVALID_API_KEY = "invalid"
-INVALID_API_KEY_LOCATION = "https://jakob-bagterp.github.io/invalid.txt"
 
 AUTHENTICATION = IndexNowAuthentication(
     host=VALID_HOST,
