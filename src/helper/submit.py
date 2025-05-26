@@ -119,7 +119,7 @@ if __name__ == "__main__":
     if sitemap_locations:
         status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
         if not is_successful_response(status_code):
-            print(f"Failed to submit sitemaps. Status code response from {str(endpoint).title()}: {status_code}")
+            print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
             exit_with_failure()
     else:
         print("No sitemaps to submit. Skipping...")
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     if urls:
         status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
         if not is_successful_response(status_code):
-            print(f"Failed to submit URLs. Status code response from {str(endpoint).title()}: {status_code}")
+            print(f"Failed to submit URLs. Status code response from {endpoint.name.title()}: {status_code}")
             exit_with_failure()
     else:
         print("No URLs to submit. Skipping...")
