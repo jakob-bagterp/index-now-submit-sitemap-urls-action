@@ -50,4 +50,4 @@ def test_submit_urls_from_terminal_failure() -> None:
                              "--urls", URLS[0],
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
-    assert "Failed to submit URls. Status code response from Bing:" in result.stdout
+    assert "Failed to submit URLs. Status code response from Bing:" in result.stdout
