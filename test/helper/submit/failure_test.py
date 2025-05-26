@@ -5,7 +5,7 @@ from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY,
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
-from helper.result import SUCCESS_STATUS_CODES
+from helper.submit import SUCCESS_STATUS_CODES
 
 AUTHENTICATION_WITH_INVALID_API_KEY = IndexNowAuthentication(
     host=VALID_HOST,

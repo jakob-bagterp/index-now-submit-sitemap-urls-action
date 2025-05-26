@@ -1,8 +1,22 @@
 import argparse
+import sys
 
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
-from result import exit_with_failure, exit_with_success, is_successful_response
+
+SUCCESS_STATUS_CODES = [200, 202]
+
+
+def is_successful_response(status_code: int) -> bool:
+    return status_code in SUCCESS_STATUS_CODES
+
+
+def exit_with_success() -> None:
+    sys.exit(0)
+
+
+def exit_with_failure() -> None:
+    sys.exit(1)
 
 
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
