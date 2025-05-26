@@ -3,6 +3,9 @@ import argparse
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
+from .result import (exit_with_failure, exit_with_success,
+                     is_successful_response)
+
 
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
     """Get a search engine endpoint from text input.
@@ -96,12 +99,20 @@ if __name__ == "__main__":
 
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
     if sitemap_locations:
-        submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
+        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
+        if not is_successful_response(status_code):
+            print(f"Failed to submit sitemaps with status code: {status_code}")
+            exit_with_failure()
     else:
         print("No sitemaps to submit. Skipping...")
 
     urls = parse_string_or_list_input(input.urls)
     if urls:
-        submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
+        status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
+        if not is_successful_response(status_code):
+            print(f"Failed to submit URLs with status code: {status_code}")
+            exit_with_failure()
     else:
         print("No URLs to submit. Skipping...")
+
+    exit_with_success()
