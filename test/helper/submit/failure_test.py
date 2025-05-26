@@ -17,39 +17,37 @@ SITEMAP_LOCATIONS = ["https://jakob-bagterp.github.io/sitemap.xml"]
 URLS = ["https://jakob-bagterp.github.io"]
 
 
-def test_submit_sitemaps_from_terminal_failure(capfd: object) -> None:
+def test_submit_sitemaps_from_terminal_failure() -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_sitemaps_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, SITEMAP_LOCATIONS, endpoint=SearchEngineEndpoint.BING)
     assert status_code not in SUCCESS_STATUS_CODES
     assert str(status_code).startswith("4") or str(status_code).startswith("5")
 
-    exit_code = subprocess.call(["python3", "./src/helper/submit.py",
-                                 VALID_HOST,
-                                 INVALID_API_KEY,
-                                 INVALID_API_KEY_LOCATION,
-                                 "bing",
-                                 "--sitemap-locations", SITEMAP_LOCATIONS[0],
-                                 "--urls", "",
-                                 ])
-    assert exit_code == FAILURE_EXIT_CODE
-    terminal_output, _ = capfd.readouterr()
-    assert "Failed to submit sitemaps. Status code response from Bing:" in terminal_output
+    result = subprocess.run(["python3", "./src/helper/submit.py",
+                             VALID_HOST,
+                             INVALID_API_KEY,
+                             INVALID_API_KEY_LOCATION,
+                             "bing",
+                             "--sitemap-locations", SITEMAP_LOCATIONS[0],
+                             "--urls", "",
+                             ], capture_output=True, text=True)
+    assert result.returncode == FAILURE_EXIT_CODE
+    assert "Failed to submit sitemaps. Status code response from Bing:" in result.stderr
 
 
-def test_submit_urls_from_terminal_failure(capfd: object) -> None:
+def test_submit_urls_from_terminal_failure() -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_urls_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, URLS, endpoint=SearchEngineEndpoint.BING)
     assert status_code not in SUCCESS_STATUS_CODES
     assert str(status_code).startswith("4") or str(status_code).startswith("5")
 
-    exit_code = subprocess.call(["python3", "./src/helper/submit.py",
-                                 VALID_HOST,
-                                 INVALID_API_KEY,
-                                 INVALID_API_KEY_LOCATION,
-                                 "bing",
-                                 "--sitemap-locations", "",
-                                 "--urls", URLS[0],
-                                 ])
-    assert exit_code == FAILURE_EXIT_CODE
-    terminal_output, _ = capfd.readouterr()
-    assert "Failed to submit URls. Status code response from Bing:" in terminal_output
+    result = subprocess.run(["python3", "./src/helper/submit.py",
+                             VALID_HOST,
+                             INVALID_API_KEY,
+                             INVALID_API_KEY_LOCATION,
+                             "bing",
+                             "--sitemap-locations", "",
+                             "--urls", URLS[0],
+                             ], capture_output=True, text=True)
+    assert result.returncode == FAILURE_EXIT_CODE
+    assert "Failed to submit URls. Status code response from Bing:" in result.stdout
