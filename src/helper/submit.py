@@ -3,8 +3,8 @@ import argparse
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
-from helper.result import (exit_with_failure, exit_with_success,
-                           is_successful_response)
+from src.helper.result import (exit_with_failure, exit_with_success,
+                               is_successful_response)
 
 
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
