@@ -100,6 +100,12 @@ if __name__ == "__main__":
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
     if sitemap_locations:
         status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
+
+        # TODO: Debugging output, remove later.
+        print(f"{status_code=}")
+        print(f"{is_successful_response(status_code)=}")
+        print(f"{IndexNowAuthentication=}")
+
         if not is_successful_response(status_code):
             print(f"Failed to submit sitemaps with status code: {status_code}")
             exit_with_failure()
@@ -109,6 +115,12 @@ if __name__ == "__main__":
     urls = parse_string_or_list_input(input.urls)
     if urls:
         status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
+
+        # TODO: Debugging output, remove later.
+        print(f"{status_code=}")
+        print(f"{is_successful_response(status_code)=}")
+        print(f"{IndexNowAuthentication=}")
+
         if not is_successful_response(status_code):
             print(f"Failed to submit URLs with status code: {status_code}")
             exit_with_failure()
