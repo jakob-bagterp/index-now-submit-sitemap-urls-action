@@ -3,7 +3,7 @@ import subprocess
 import pytest
 
 
-def test_submit_sitemap_failure_from_terminal() -> None:
+def test_submit_sitemaps_from_terminal_failure() -> None:
     with pytest.raises(SystemExit) as pytest_wrapped_exit:
         subprocess.call(["python3", "./src/helper/submit_sitemap.py",
                         "jakob-bagterp.github.io",
@@ -17,7 +17,7 @@ def test_submit_sitemap_failure_from_terminal() -> None:
     assert pytest_wrapped_exit.value.code == 1
 
 
-def test_submit_urls_failure_from_terminal() -> None:
+def test_submit_urls_from_terminal_failure() -> None:
     with pytest.raises(SystemExit) as pytest_wrapped_exit:
         subprocess.call(["python3", "./src/helper/submit_sitemap.py",
                         "jakob-bagterp.github.io",
