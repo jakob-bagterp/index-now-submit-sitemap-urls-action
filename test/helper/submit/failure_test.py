@@ -17,11 +17,16 @@ URLS = ["https://jakob-bagterp.github.io"]
 SITEMAP_LOCATIONS = ["https://jakob-bagterp.github.io/sitemap.xml"]
 
 
+def is_error_response(status_code: int) -> bool:
+    status_code_string = str(status_code)
+    return status_code_string.startswith("4") or status_code_string.startswith("5")
+
+
 def test_submit_urls_from_terminal_failure() -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_urls_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, URLS, endpoint=SearchEngineEndpoint.BING)
     assert status_code not in SUCCESS_STATUS_CODES
-    assert str(status_code).startswith("4") or str(status_code).startswith("5")
+    assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
                              VALID_HOST,
@@ -39,7 +44,7 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_sitemaps_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, SITEMAP_LOCATIONS, endpoint=SearchEngineEndpoint.BING)
     assert status_code not in SUCCESS_STATUS_CODES
-    assert str(status_code).startswith("4") or str(status_code).startswith("5")
+    assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
                              VALID_HOST,
