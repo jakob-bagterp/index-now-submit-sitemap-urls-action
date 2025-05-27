@@ -46,6 +46,12 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
             return SearchEngineEndpoint.BING
 
 
+def normalise_string(input: str) -> str:
+    """Normalize the input string by removing quotes and whitespace."""
+
+    return input.replace('"', "").replace("'", "").strip()
+
+
 def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     """Parse the sitemap locations into and array from a string input.
 
@@ -66,24 +72,42 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
 
         return input.replace("[", "").replace("]", "")
 
-    def normalize(input: str) -> str:
-        """Normalize the input string by removing quotes and whitespace."""
-
-        return input.replace('"', "").replace("'", "").strip()
-
     if not string_or_list_input:
         return []
     if is_list(string_or_list_input):
         string_or_list_input = remove_list_brackets(string_or_list_input)
-        return [normalize(item) for item in string_or_list_input.split(",") if item.strip()]
-    return [normalize(string_or_list_input)]
+        return [normalise_string(item) for item in string_or_list_input.split(",") if item.strip()]
+    return [normalise_string(string_or_list_input)]
+
+
+def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
+    """Parse the input of the sitemap filter and check if whether we need to create a regular expression from it.
+
+    Args:
+        sitemap_filter (str): Input from CLI parameter, e.g. contains `"section1"` or a regular expression `"r'(section1|section2)'"`.
+
+    Returns:
+        str | None: The filter or None if the input is empty.
+    """
+
+    def is_regex(input: str) -> bool:
+        """Check if the input is a regular expression."""
+
+        return input.startswith("r\"") or input.startswith("r\'")
+
+    if not sitemap_filter:
+        return None
+    if is_regex(sitemap_filter):  # Then recreate the regular expression from the input.
+        sitemap_filter = normalise_string(sitemap_filter.replace("r\"", "").replace("r\'", ""))
+        return rf"{sitemap_filter}"
+    return normalise_string(sitemap_filter)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --sitemap-locations https://example.com/sitemap.xml --urls https://example.com
+            python submit.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1
 
         The parameters are:
 
@@ -91,15 +115,17 @@ if __name__ == "__main__":
             "a1b2c3d4": The API key for IndexNow.
             "https://example.com/a1b2c3d4.txt": The location of the API key.
             "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
-            "https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "https://example.com": The URL(s) to be submitted. Optional.
+            "https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
+            "section1": Only submit sitemap URLs that contain "section1" or matches a regular expression "r'(section1)|(section2)'". Optional.
         """)
     parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
     parser.add_argument("api_key_location", type=str, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
     parser.add_argument("endpoint", type=str, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
-    parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
     parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
+    parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
+    parser.add_argument("--sitemap-filter", nargs="?", type=str, default=None, help="Only submit sitemap URLs that contain the filter string, e.g. \"section1\". Optional.")
     input = parser.parse_args()
 
     authentication = IndexNowAuthentication(
@@ -109,20 +135,12 @@ if __name__ == "__main__":
     )
     endpoint = get_endpoint_from_input(input.endpoint)
 
-    sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
     urls = parse_string_or_list_input(input.urls)
+    sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
 
-    if not any([sitemap_locations, urls]):
+    if not any([urls, sitemap_locations]):
         print("No sitemaps or URLs to submit. Aborting...")
         exit_with_failure()
-
-    if sitemap_locations:
-        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, endpoint=endpoint)
-        if not is_successful_response(status_code):
-            print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
-            exit_with_failure()
-    else:
-        print("No sitemaps to submit. Skipping...")
 
     if urls:
         status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
@@ -131,5 +149,14 @@ if __name__ == "__main__":
             exit_with_failure()
     else:
         print("No URLs to submit. Skipping...")
+
+    if sitemap_locations:
+        contains = parse_sitemap_filter_input(input.sitemap_filter)
+        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, contains=contains, endpoint=endpoint)
+        if not is_successful_response(status_code):
+            print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
+            exit_with_failure()
+    else:
+        print("No sitemaps to submit. Skipping...")
 
     exit_with_success()

@@ -16,18 +16,22 @@ inputs:
   api_key_location:
     description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
     required: true
-  sitemap_locations:
-    description: "Location of one or more sitemaps to be submitted. For example a single sitemap https://example.com/sitemap.xml or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\"."
-    required: false
-    default: ""
-  urls:
-    description: "One or more URLs to be submitted. For example a single URL https://example.com or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\"."
-    required: false
-    default: ""
   endpoint:
     description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
     required: false
     default: bing
+  urls:
+    description: "One or more URLs to be submitted. For example a single URL https://example.com or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\"."
+    required: false
+    default: ""
+  sitemap_locations:
+    description: "Location of one or more sitemaps to be submitted. For example a single sitemap https://example.com/sitemap.xml or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\"."
+    required: false
+    default: ""
+  sitemap_filter:
+    description: "Filter the sitemap URLs that contains (for example \"section1\") or matches a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -51,5 +55,6 @@ runs:
         ${{ inputs.api_key }}
         ${{ inputs.api_key_location }}
         ${{ inputs.endpoint }}
-        --sitemap-locations "${{ inputs.sitemap_locations }}"
         --urls "${{ inputs.urls }}"
+        --sitemap-locations "${{ inputs.sitemap_locations }}"
+        --sitemap-filter "${{ inputs.sitemap_filter }}"
