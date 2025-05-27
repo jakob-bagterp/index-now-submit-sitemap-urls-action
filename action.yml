@@ -28,6 +28,10 @@ inputs:
     description: "Location of one or more sitemaps to be submitted. For example a single sitemap https://example.com/sitemap.xml or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\"."
     required: false
     default: ""
+  sitemap_filter:
+    description: "Filter the sitemap URLs that contains a specific text. For example, if you want to filter all URLs that contains the \"section1\" in the sitemap, this will yield https://example.com/section1/page1, https://example.com/section1/page2, etc, and exclude URLs that don't contain \"section1\"."
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -53,3 +57,4 @@ runs:
         ${{ inputs.endpoint }}
         --urls "${{ inputs.urls }}"
         --sitemap-locations "${{ inputs.sitemap_locations }}"
+        --sitemap-filter "${{ inputs.sitemap_filter }}"
