@@ -29,7 +29,7 @@ inputs:
     required: false
     default: ""
   sitemap_filter:
-    description: "Filter the sitemap URLs that contains a specific text. For example, if you want to filter all URLs that contains the \"section1\" in the sitemap, this will yield https://example.com/section1/page1, https://example.com/section1/page2, etc, and exclude URLs that don't contain \"section1\"."
+    description: "Filter the sitemap URLs that contains (for example \"section1\") or matches a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
     required: false
     default: ""
 
