@@ -80,6 +80,29 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     return [normalise_string(string_or_list_input)]
 
 
+def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
+    """Parse the input of the sitemap filter and check if it's a regular expression.
+
+    Args:
+        sitemap_filter (str): Input from CLI parameter, e.g. `"section1"` or `r"(section1)|(section2)"`.
+
+    Returns:
+        str | None: The filter or None if the input is empty.
+    """
+
+    def is_regex(input: str) -> bool:
+        """Check if the input is a regular expression."""
+
+        return input.startswith("r\"") or input.startswith("r\'")
+
+    if not sitemap_filter:
+        return None
+    if is_regex(sitemap_filter):  # Then recreate the regular expression from the input.
+        sitemap_filter = normalise_string(sitemap_filter.replace("r\"", "").replace("r\'", ""))
+        return rf"{sitemap_filter}"
+    return normalise_string(sitemap_filter)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
@@ -128,7 +151,7 @@ if __name__ == "__main__":
         print("No URLs to submit. Skipping...")
 
     if sitemap_locations:
-        contains = input.sitemap_filter if input.sitemap_filter else None
+        contains = parse_sitemap_filter_input(input.sitemap_filter)
         status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, contains=contains, endpoint=endpoint)
         if not is_successful_response(status_code):
             print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
