@@ -47,7 +47,7 @@ runs:
       run: |
         pip install --upgrade pip
         pip install -r ${{ github.action_path }}/requirements.txt
-    - name: Submit sitemap to IndexNow
+    - name: Submit sitemap and/or URLs to IndexNow
       shell: bash
       run: >
         python ${{ github.action_path }}/src/helper/submit.py
