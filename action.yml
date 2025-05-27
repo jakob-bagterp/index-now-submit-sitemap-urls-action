@@ -29,7 +29,7 @@ inputs:
     required: false
     default: ""
   sitemap_filter:
-    description: "Filter the sitemap URLs that contains (for example \"section1\") or matches a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
+    description: "Filter the sitemap URLs that contain (for example \"section1\") or match a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
     required: false
     default: ""
 

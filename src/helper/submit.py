@@ -117,7 +117,7 @@ if __name__ == "__main__":
             "yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep").
             "https://example.com": The URL(s) to be submitted. Optional.
             "https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
-            "section1": Only submit sitemap URLs that contain "section1" or matches a regular expression "r'(section1)|(section2)'". Optional.
+            "section1": Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'". Optional.
         """)
     parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
