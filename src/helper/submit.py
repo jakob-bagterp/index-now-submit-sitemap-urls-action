@@ -46,6 +46,12 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
             return SearchEngineEndpoint.BING
 
 
+def normalise_string(input: str) -> str:
+    """Normalize the input string by removing quotes and whitespace."""
+
+    return input.replace('"', "").replace("'", "").strip()
+
+
 def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     """Parse the sitemap locations into and array from a string input.
 
@@ -66,17 +72,12 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
 
         return input.replace("[", "").replace("]", "")
 
-    def normalize(input: str) -> str:
-        """Normalize the input string by removing quotes and whitespace."""
-
-        return input.replace('"', "").replace("'", "").strip()
-
     if not string_or_list_input:
         return []
     if is_list(string_or_list_input):
         string_or_list_input = remove_list_brackets(string_or_list_input)
-        return [normalize(item) for item in string_or_list_input.split(",") if item.strip()]
-    return [normalize(string_or_list_input)]
+        return [normalise_string(item) for item in string_or_list_input.split(",") if item.strip()]
+    return [normalise_string(string_or_list_input)]
 
 
 if __name__ == "__main__":
