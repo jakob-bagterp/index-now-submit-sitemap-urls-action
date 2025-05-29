@@ -104,6 +104,24 @@ def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
     return normalise_string(sitemap_filter)
 
 
+def parse_sitemap_days_ago_input(sitemap_days_ago: int | str) -> DaysAgo | None:
+    """Parse the sitemap days ago input and return a DaysAgo object or None if the input is empty.
+
+    Args:
+        sitemap_days_ago (int | str): Input from CLI parameter, e.g. 1, 2, or more days ago.
+
+    Returns:
+        DaysAgo | None: The sitemap days ago object or None if the input is empty.
+    """
+
+    if isinstance(sitemap_days_ago, str) and not sitemap_days_ago.isdigit():
+        return None
+    if not isinstance(sitemap_days_ago, int):
+        days_ago = int(sitemap_days_ago, base=10)
+        return DaysAgo(days_ago)
+    return DaysAgo(sitemap_days_ago)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
@@ -154,7 +172,7 @@ if __name__ == "__main__":
 
     if sitemap_locations:
         contains = parse_sitemap_filter_input(input.sitemap_filter)
-        days_ago = DaysAgo(input.sitemap_days_ago) if input.sitemap_days_ago else None
+        days_ago = parse_sitemap_days_ago_input(input.sitemap_days_ago)
         filter = SitemapFilter(contains=contains, date_range=days_ago)
         status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, filter=filter, endpoint=endpoint)
         if not is_successful_response(status_code):
