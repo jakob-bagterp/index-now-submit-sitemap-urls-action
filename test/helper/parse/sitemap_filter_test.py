@@ -1,4 +1,5 @@
 import pytest
+from _mock_data.sitemap import SITEMAP_URLS, URLS
 from index_now.sitemap.filter.sitemap import SitemapFilter, filter_sitemap_urls
 from index_now.sitemap.parse import SitemapUrl
 
@@ -19,15 +20,6 @@ from helper.submit import parse_sitemap_filter_input
 def test_parse_sitemap_filter_input(sitemap_filter_input: str, expected: str | None) -> None:
     result = parse_sitemap_filter_input(sitemap_filter_input)
     assert result == expected
-
-
-URLS = [
-    "https://example.com/section1/page1",
-    "https://example.com/section2/page1",
-    "https://example.com/section2/page2",
-]
-
-SITEMAP_URLS = [SitemapUrl(url) for url in URLS]
 
 
 @pytest.mark.parametrize("sitemap_urls, sitemap_filter_input, expected", [
