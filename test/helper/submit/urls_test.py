@@ -18,6 +18,8 @@ def test_submit_urls_from_terminal(urls: str) -> None:
                              "yandex",
                              "--urls", urls,
                              "--sitemap-locations", "",
+                             "--sitemap-filter", "",
+                             "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == SUCCESS_EXIT_CODE
     assert f"URL(s) submitted successfully to the IndexNow API:{Color.OFF}" in result.stdout
