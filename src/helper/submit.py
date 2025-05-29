@@ -2,7 +2,8 @@ import argparse
 import sys
 
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
-                       submit_sitemaps_to_index_now, submit_urls_to_index_now)
+                       SitemapFilter, submit_sitemaps_to_index_now,
+                       submit_urls_to_index_now)
 
 SUCCESS_STATUS_CODES = [200, 202]
 
@@ -152,7 +153,8 @@ if __name__ == "__main__":
 
     if sitemap_locations:
         contains = parse_sitemap_filter_input(input.sitemap_filter)
-        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, contains=contains, endpoint=endpoint)
+        filter = SitemapFilter(contains=contains)
+        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, filter=filter, endpoint=endpoint)
         if not is_successful_response(status_code):
             print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
             exit_with_failure()
