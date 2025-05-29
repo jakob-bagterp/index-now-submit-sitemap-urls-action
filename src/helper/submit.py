@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
+from index_now import (DaysAgo, IndexNowAuthentication, SearchEngineEndpoint,
                        SitemapFilter, submit_sitemaps_to_index_now,
                        submit_urls_to_index_now)
 
@@ -127,6 +127,7 @@ if __name__ == "__main__":
     parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
     parser.add_argument("--sitemap-filter", nargs="?", type=str, default=None, help="Only submit sitemap URLs that contain the filter string, e.g. \"section1\". Optional.")
+    parser.add_argument("--sitemap-days-ago", nargs="?", type=int, default=None, help="Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago. Optional.")
     input = parser.parse_args()
 
     authentication = IndexNowAuthentication(
@@ -153,7 +154,8 @@ if __name__ == "__main__":
 
     if sitemap_locations:
         contains = parse_sitemap_filter_input(input.sitemap_filter)
-        filter = SitemapFilter(contains=contains)
+        days_ago = DaysAgo(input.sitemap_days_ago) if input.sitemap_days_ago else None
+        filter = SitemapFilter(contains=contains, date_range=days_ago)
         status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, filter=filter, endpoint=endpoint)
         if not is_successful_response(status_code):
             print(f"Failed to submit sitemaps. Status code response from {endpoint.name.title()}: {status_code}")
