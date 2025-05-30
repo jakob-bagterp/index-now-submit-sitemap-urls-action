@@ -31,6 +31,7 @@ jobs:
           api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key
           api_key_location: https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt  # Replace with your IndexNow API key location
           sitemap_locations: https://example.com/sitemap.xml  # Replace with your sitemap location
+          sitemap_days_ago: 2  # Optional. Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago.
           endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
 ```
 
