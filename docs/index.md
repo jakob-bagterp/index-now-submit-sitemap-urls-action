@@ -51,10 +51,10 @@ jobs:
           host: example.com  # Replace with your website's host
           api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key
           api_key_location: https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt  # Replace with your IndexNow API key location
+          endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
           sitemap_locations: https://example.com/sitemap.xml  # Replace with your sitemap location
           sitemap_filter: section1  # Optional. Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'".
           sitemap_days_ago: 2  # Optional. Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago.
-          endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
 ```
 
 If you're using GitHub Pages, you can use this action to automatically submit your sitemap to IndexNow. Simply adjust the `on` trigger so that it runs after your website has been successfully deployed:
