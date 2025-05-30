@@ -1,5 +1,7 @@
 import pytest
-from index_now.sitemap import filter_urls
+from _mock_data.sitemap import SITEMAP_URLS, URLS
+from index_now.sitemap.filter.sitemap import SitemapFilter, filter_sitemap_urls
+from index_now.sitemap.parse import SitemapUrl
 
 from helper.submit import parse_sitemap_filter_input
 
@@ -13,36 +15,28 @@ from helper.submit import parse_sitemap_filter_input
     ('\"section1\"', "section1"),
     ("r'(section1|section2)'", r"(section1|section2)"),
     ('r"(section1|section2)"', r"(section1|section2)"),
-]
-)
+])
 def test_parse_sitemap_filter_input(sitemap_filter_input: str, expected: str | None) -> None:
     result = parse_sitemap_filter_input(sitemap_filter_input)
     assert result == expected
 
 
-URLS = [
-    "https://example.com/section1/page1",
-    "https://example.com/section2/page1",
-    "https://example.com/section2/page2",
-]
-
-
 @pytest.mark.parametrize("sitemap_urls, sitemap_filter_input, expected", [
-    (URLS, "", URLS),
-    (URLS, '', URLS),
-    (URLS, "section1", ["https://example.com/section1/page1"]),
-    (URLS, 'section1', ["https://example.com/section1/page1"]),
-    (URLS, "\'section1\'", ["https://example.com/section1/page1"]),
-    (URLS, '\"section1\"', ["https://example.com/section1/page1"]),
-    (URLS, "section2", ["https://example.com/section2/page1", "https://example.com/section2/page2"]),
-    (URLS, "section3", []),
-    (URLS, r"(section1|section2)", URLS),
-    (URLS, r"(section1|section3)", ["https://example.com/section1/page1"]),
-    (URLS, "r'(section1|section2)'", URLS),
-    (URLS, 'r"(section1|section2)"', URLS),
-]
-)
-def test_filter_urls(sitemap_urls: list[str], sitemap_filter_input: str, expected: list[str]) -> None:
+    (SITEMAP_URLS, "", URLS),
+    (SITEMAP_URLS, '', URLS),
+    (SITEMAP_URLS, "section1", ["https://example.com/section1/page1"]),
+    (SITEMAP_URLS, 'section1', ["https://example.com/section1/page1"]),
+    (SITEMAP_URLS, "\'section1\'", ["https://example.com/section1/page1"]),
+    (SITEMAP_URLS, '\"section1\"', ["https://example.com/section1/page1"]),
+    (SITEMAP_URLS, "section2", ["https://example.com/section2/page1", "https://example.com/section2/page2"]),
+    (SITEMAP_URLS, "section3", []),
+    (SITEMAP_URLS, r"(section1|section2)", URLS),
+    (SITEMAP_URLS, r"(section1|section3)", ["https://example.com/section1/page1"]),
+    (SITEMAP_URLS, "r'(section1|section2)'", URLS),
+    (SITEMAP_URLS, 'r"(section1|section2)"', URLS),
+])
+def test_filter_urls(sitemap_urls: list[SitemapUrl], sitemap_filter_input: str, expected: list[str]) -> None:
     contains = parse_sitemap_filter_input(sitemap_filter_input)
-    result = filter_urls(sitemap_urls, contains)
+    filter = SitemapFilter(contains=contains)
+    result = filter_sitemap_urls(sitemap_urls, filter)
     assert result == expected

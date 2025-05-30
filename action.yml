@@ -29,7 +29,11 @@ inputs:
     required: false
     default: ""
   sitemap_filter:
-    description: "Filter the sitemap URLs that contains (for example \"section1\") or matches a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
+    description: "Filter the sitemap URLs that contain (for example \"section1\") or match a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
+    required: false
+    default: ""
+  sitemap_days_ago:
+    description: "Filter the sitemap URLs that have been modified recently as defined by the <lastmod> element in the sitemap. For example 1, 2, or more days ago. Optional."
     required: false
     default: ""
 
@@ -58,3 +62,4 @@ runs:
         --urls "${{ inputs.urls }}"
         --sitemap-locations "${{ inputs.sitemap_locations }}"
         --sitemap-filter "${{ inputs.sitemap_filter }}"
+        --sitemap-days-ago "${{ inputs.sitemap_days_ago }}"

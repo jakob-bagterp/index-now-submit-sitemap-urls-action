@@ -53,6 +53,8 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
                              "bing",
                              "--urls", "",
                              "--sitemap-locations", SITEMAP_LOCATIONS[0],
+                             "--sitemap-filter", "",
+                             "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
     assert "Failed to submit sitemaps. Status code response from Bing:" in result.stdout

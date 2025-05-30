@@ -12,6 +12,8 @@ def test_submit_nothing_from_terminal() -> None:
                              "yandex",
                              "--urls", "",
                              "--sitemap-locations", "",
+                             "--sitemap-filter", "",
+                             "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
     assert "No sitemaps or URLs to submit. Aborting..." in result.stdout
