@@ -29,7 +29,42 @@ Imagine submitting all your sitemap URLs to IndexNow when your website is update
 ## How to Automatically Submit Sitemap and URLs to IndexNow
 This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 
-If you're already using GitHub Actions, simply add this action to your workflow. It can automatically submit your sitemap to IndexNow whenever you deploy changes to your site.
+If you're already using GitHub Actions, simply add this action to your workflow. It can automatically submit your sitemap to IndexNow whenever you deploy changes to your site or at a specific time.
+
+### How to Use
+Example workflow:
+
+```yaml linenums="1" title=".github/workflows/submit_sitemap_to_index_now.yml"
+name: Submit Sitemap URLs to IndexNow
+
+on:
+  schedule:
+    - cron: 0 0 1 * *  # Run at midnight UTC on the 1st day of each month.
+
+jobs:
+  submit-sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@v1
+        with:
+          host: example.com  # Replace with your website's host
+          api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key
+          api_key_location: https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt  # Replace with your IndexNow API key location
+          sitemap_locations: https://example.com/sitemap.xml  # Replace with your sitemap location
+          sitemap_filter: section1  # Optional. Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'".
+          sitemap_days_ago: 2  # Optional. Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago.
+          endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
+```
+
+If you're using GitHub Pages, you can use this action to automatically submit your sitemap to IndexNow. Simply adjust the `on` trigger so that it runs after your website has been successfully deployed:
+
+```yaml linenums="3" title=".github/workflows/submit_sitemap_to_index_now.yml"
+on:
+  workflow_run:
+    workflows: [pages-build-deployment]
+    types: [completed]
+```
 
 !!! abstract "How to Keep Your API Key Secure"
     IndexNow requires an API key stored on your website, but how do you keep it secret and secure?

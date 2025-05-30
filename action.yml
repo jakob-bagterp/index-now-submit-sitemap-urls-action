@@ -29,7 +29,7 @@ inputs:
     required: false
     default: ""
   sitemap_filter:
-    description: "Filter the sitemap URLs that contains (for example \"section1\") or matches a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
+    description: "Filter the sitemap URLs that contain (for example \"section1\") or match a regular expression (for example \"r'(section1)|(section2)'\"). Optional."
     required: false
     default: ""
   sitemap_days_ago:
@@ -51,7 +51,7 @@ runs:
       run: |
         pip install --upgrade pip
         pip install -r ${{ github.action_path }}/requirements.txt
-    - name: Submit sitemap to IndexNow
+    - name: Submit sitemap and/or URLs to IndexNow
       shell: bash
       run: >
         python ${{ github.action_path }}/src/helper/submit.py
