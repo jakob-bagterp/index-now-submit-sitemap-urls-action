@@ -145,7 +145,7 @@ if __name__ == "__main__":
     parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
     parser.add_argument("--sitemap-filter", nargs="?", type=str, default=None, help="Only submit sitemap URLs that contain the filter string, e.g. \"section1\". Optional.")
-    parser.add_argument("--sitemap-days-ago", nargs="?", type=int, default=None, help="Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago. Optional.")
+    parser.add_argument("--sitemap-days-ago", nargs="?", type=str, default=None, help="Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago. Optional.")
     input = parser.parse_args()
 
     authentication = IndexNowAuthentication(
