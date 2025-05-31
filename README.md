@@ -1,4 +1,4 @@
-[![Latest version](https://img.shields.io/static/v1?label=version&message=1.0.7&color=yellowgreen)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases/latest)
+[![Latest version](https://img.shields.io/static/v1?label=version&message=1.0.10&color=yellowgreen)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases/latest)
 [![MIT license](https://img.shields.io/static/v1?label=license&message=MIT&color=blue)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/blob/master/LICENSE.md)
 [![Codecov](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-urls-action/branch/master/graph/badge.svg?token=PEGUV7IL8T)](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-urls-action)
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/actions/workflows/codeql.yml)
@@ -7,7 +7,7 @@
 # 🔍 Automatically Submit Sitemap URLs to IndexNow 🔎
 Are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
 
-This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
+This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines.
 
 ## How to Use
 Example workflow:
@@ -16,9 +16,8 @@ Example workflow:
 name: Submit Sitemap URLs to IndexNow
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: 0 0 1 * *  # Run at midnight UTC on the 1st day of each month.
 
 jobs:
   submit-sitemap:
@@ -27,20 +26,22 @@ jobs:
       - name: Submit sitemap URLs to IndexNow
         uses: jakob-bagterp/index-now-submit-sitemap-urls-action@v1
         with:
-          host: example.com  # Replace with your website's host
-          api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key
-          api_key_location: https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt  # Replace with your IndexNow API key location
+          host: example.com  # Replace with your website's host.
+          api_key: ${{ secrets.INDEX_NOW_API_KEY }}  # Replace with your IndexNow API key.
+          api_key_location: https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt  # Replace with your IndexNow API key location.
+          endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is Bing.
           sitemap_locations: https://example.com/sitemap.xml  # Replace with your sitemap location
-          endpoint: yandex  # Optional. Other options: bing, indexnow, naver, seznam, yandex, yep. Default is bing.
+          sitemap_filter: section1  # Optional. Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'".
+          sitemap_days_ago: 2  # Optional. Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago.
 ```
 
-> [!TIP]
-> IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
+> [!IMPORTANT]
+> Before running the workflow, make sure you have done the following:
 >
-> For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.
->
-> However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
-
+> * Added the API key `INDEX_NOW_API_KEY` as a [secret to your repository](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
+> * Uploaded the API key to the location specified in the `api_key_location` parameter.
+> * Updated the URL of the sitemap in the `sitemap_location` parameter.
+> * Adjusted the `host`, `endpoint`, and other parameters to suit your needs.
 
 Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-urls-action).
 

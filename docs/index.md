@@ -5,9 +5,10 @@ tags:
     - SEO
     - IndexNow
     - Automation
+    - GitHub Actions
 ---
 
-[![Latest version](https://img.shields.io/static/v1?label=version&message=1.0.7&color=yellowgreen)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases/latest)
+[![Latest version](https://img.shields.io/static/v1?label=version&message=1.0.10&color=yellowgreen)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases/latest)
 [![MIT license](https://img.shields.io/static/v1?label=license&message=MIT&color=blue)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/blob/master/LICENSE.md)
 [![Codecov](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-urls-action/branch/master/graph/badge.svg?token=PEGUV7IL8T)](https://codecov.io/gh/jakob-bagterp/index-now-submit-sitemap-urls-action)
 [![CodeQL](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/actions/workflows/codeql.yml)
@@ -15,7 +16,7 @@ tags:
 
 # Automate Sitemap and URL Submission to IndexNow 🔎
 ## Why Use IndexNow?
-Are you concerned about search engine optimisation (SEO)? And do you want to make sure that your website is frequently indexed by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/) and other search engines that support [IndexNow](https://www.indexnow.org/)?
+Are you concerned about search engine optimization (SEO)? Do you want to make sure your website is indexed frequently by [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/), and other search engines?
 
 Imagine submitting all your sitemap URLs to IndexNow when your website is updated, so that search engines know when to crawl your site again. This is what this action does.
 
@@ -27,16 +28,47 @@ Imagine submitting all your sitemap URLs to IndexNow when your website is update
     Search engines such as [Bing](https://www.bing.com/indexnow), [Yandex](https://yandex.com/indexnow), [DuckDuckGo](https://duckduckgo.com/) (via Bing's index) and others already support IndexNow, but not all search engines. For example, Google is not on board, but this may change in the future.
 
 ## How to Automatically Submit Sitemap and URLs to IndexNow
-This workflow for GitHub Actions will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
+This workflow for [GitHub Actions](https://github.com/features/actions) will automatically submit your sitemap to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 
-If you're already using GitHub Actions, simply add this action to your workflow. It can automatically submit your sitemap to IndexNow whenever you deploy changes to your site.
+If you're already using GitHub Actions, simply add this action to your workflow. It can automatically submit your sitemap to IndexNow whenever you deploy changes to your site or at a specific time.
 
-!!! abstract "How to Keep Your API Key Secure"
-    IndexNow requires an API key stored on your website, but how do you keep it secret and secure?
+### How to Use
+Example workflow that you can adjust to your needs:
 
-    For public repositories, you normally can't hide your IndexNow API key and its location – the file is visible in the repository code and the API key is exposed.
+```yaml linenums="1" title=".github/workflows/submit_sitemap_to_index_now.yml"
+name: Submit Sitemap URLs to IndexNow
 
-    However, with this action, the API key is generated on the fly and cached until the sitemap is successfully submitted and accepted by IndexNow. After that, the file will be removed from the repository.
+on:
+  schedule:
+    - cron: 0 0 1 * *  # Run at midnight UTC on the 1st day of each month.
+
+jobs:
+  submit-sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@v1
+        with:
+          host: example.com
+          api_key: ${{ secrets.INDEX_NOW_API_KEY }}
+          api_key_location: https://example.com/${{ secrets.INDEX_NOW_API_KEY }}.txt
+          endpoint: yandex
+          sitemap_locations: https://example.com/sitemap.xml
+```
+
+Learn more in the [user guide](user-guide/getting-started.md) and find [more parameters](user-guide/parameters.md) to customise the workflow.
+
+## Workflow Triggers
+If you're using [GitHub Pages](https://pages.github.com) to deploy your website, you can also use this action to automatically submit the URLs of your sitemap to IndexNow. Simply adjust the `on` trigger so that it runs after your website has been successfully deployed:
+
+```yaml linenums="3" title=".github/workflows/submit_sitemap_to_index_now.yml"
+on:
+  workflow_run:
+    workflows: [pages-build-deployment]
+    types: [completed]
+```
+
+There are many more [workflow trigger variations](user-guide/workflow-triggers.md) to cover your needs.
 
 ## Next Steps
 Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-action).

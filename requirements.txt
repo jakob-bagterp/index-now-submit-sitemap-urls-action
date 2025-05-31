@@ -1,1 +1,1 @@
-index-now-for-python==0.1.6
+index-now-for-python==1.0.2
