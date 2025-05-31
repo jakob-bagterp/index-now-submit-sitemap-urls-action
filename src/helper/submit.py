@@ -126,7 +126,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1
+            python submit.py example.com a1b2c3d4 https://example.com/a1b2c3d4.txt yandex --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1 --sitemap-days-ago 1
 
         The parameters are:
 
@@ -137,6 +137,7 @@ if __name__ == "__main__":
             "https://example.com": The URL(s) to be submitted. Optional.
             "https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "section1": Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'". Optional.
+            "1": Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.
         """)
     parser.add_argument("host", type=str, help="The host name of the website, e.g. \"example.com\".")
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
@@ -145,7 +146,7 @@ if __name__ == "__main__":
     parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
     parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
     parser.add_argument("--sitemap-filter", nargs="?", type=str, default=None, help="Only submit sitemap URLs that contain the filter string, e.g. \"section1\". Optional.")
-    parser.add_argument("--sitemap-days-ago", nargs="?", type=str, default=None, help="Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago. Optional.")
+    parser.add_argument("--sitemap-days-ago", nargs="?", type=str, default=None, help="Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.")
     input = parser.parse_args()
 
     authentication = IndexNowAuthentication(

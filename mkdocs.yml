@@ -16,6 +16,10 @@ nav:
       - Source Code 🔗: https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action
     - Index:
       - Tags: index/tags.md
+  - User Guide:
+    - Getting Started: user-guide/getting-started.md
+    - Parameters: user-guide/parameters.md
+    - Workflow Triggers: user-guide/workflow-triggers.md
 
 theme:
   name: material
