@@ -43,7 +43,7 @@ jobs:
 > * Updated the URL of the sitemap in the `sitemap_location` parameter.
 > * Adjusted the `host`, `endpoint`, and other parameters to suit your needs.
 
-Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-urls-action).
+Ready to try? [Let's get started](https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/).
 
 ## Become a Sponsor 🏅
 If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
