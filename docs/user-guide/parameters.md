@@ -100,7 +100,7 @@ Optional. The search engine endpoint, e.g. `indexnow`, `bing`, `naver`, `seznam`
     It is not recommended to submit the same URLs to multiple endpoints. Once you have successfully submitted to one [IndexNow](https://www.indexnow.org) endpoint, the IndexNow service is designed to propagate your URLs to other search engines, so you do not need to submit to multiple times.
 
 ### `urls`
-Optional. The URL(s) to be submitted. Can be an individual URL, e.g. `https://example.com`:
+Optional. The URL(s) to be submitted to IndexNow. Can be an individual URL, e.g. `https://example.com`:
 
 ```yaml linenums="18" title=".github/workflows/submit_sitemap_to_index_now.yml"
           urls: https://example.com
@@ -113,7 +113,7 @@ Or multiple URLs as comma separated list:
 ```
 
 ### `sitemap_locations`
-Optional. The location of the sitemap(s) to be submitted. Can be an individual sitemap, e.g. `https://example.com/sitemap.xml`:
+Optional. The location of the sitemap(s) from which the URLs will be submitted to IndexNow. Can be an individual sitemap, e.g. `https://example.com/sitemap.xml`:
 
 ```yaml linenums="19" title=".github/workflows/submit_sitemap_to_index_now.yml"
           sitemap_locations: https://example.com/sitemap.xml
