@@ -1,5 +1,5 @@
 ---
-title: Automatically Submit Sitemap and URLs to IndexNow 🔎
+title: Automatically Submit Sitemap and URLs
 description: This workflow with GitHub Actions will automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines.
 tags:
     - SEO
