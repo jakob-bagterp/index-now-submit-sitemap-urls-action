@@ -1,6 +1,6 @@
 ---
 title: Customise Your Workflow Parameters
-description: Improve your SEO and learn how to automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines. Includes code examples for both beginners and advanced users.
+description: Improve your SEO and learn how to automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines. Includes code examples for beginners and advanced users.
 tags:
     - SEO
     - IndexNow

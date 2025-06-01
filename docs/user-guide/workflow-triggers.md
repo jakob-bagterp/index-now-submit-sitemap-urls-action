@@ -1,6 +1,6 @@
 ---
 title: How to Trigger Worflows in GitHub Actions
-description: If you're using GitHub Actions to deploy your website learn how to trigger workflows to automate the submission of your sitemap to the IndexNow API. Includes code examples for both beginners and advanced users.
+description: If you're using GitHub Actions to deploy your website learn how to trigger workflows to automate the submission of your sitemap to the IndexNow API. Includes code examples for beginners and advanced users.
 tags:
     - Automation
     - GitHub Actions
