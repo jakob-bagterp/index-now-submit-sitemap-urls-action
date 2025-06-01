@@ -71,7 +71,11 @@ on:
 There are many more [workflow trigger variations](user-guide/workflow-triggers.md) to cover your needs.
 
 ## Next Steps
-Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-action).
+Ready to try? [Let's get started](user-guide/getting-started.md).
+
+Or find more information on GitHub Marketplace:
+
+[View on GitHub Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-urls-action){ .md-button .md-button--secondary }
 
 !!! tip "Become a Sponsor"
     If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
