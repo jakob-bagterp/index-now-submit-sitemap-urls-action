@@ -7,6 +7,8 @@ tags:
     - Automation
     - GitHub Actions
     - Tutorial
+    - Submit Sitemap
+    - Submit URL
 ---
 
 # User Guide to Workflow Automation 👨‍🔧

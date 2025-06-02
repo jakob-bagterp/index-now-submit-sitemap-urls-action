@@ -6,6 +6,8 @@ tags:
     - IndexNow
     - Automation
     - GitHub Actions
+    - Submit Sitemap
+    - Submit URL
 ---
 
 [![Latest version](https://img.shields.io/static/v1?label=version&message=1.0.10&color=yellowgreen)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases/latest)

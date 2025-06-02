@@ -7,6 +7,8 @@ tags:
     - Tutorial
     - Workflow Dependency
     - Workflow Schedule
+    - Submit Sitemap
+    - Submit URL
 ---
 
 # How to Trigger Workflows in GitHub Actions

@@ -14,6 +14,8 @@ tags:
     - Seznam
     - Yandex
     - Yep
+    - Submit Sitemap
+    - Submit URL
 ---
 
 # How to Customise Your Workflow Parameters
