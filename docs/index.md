@@ -77,6 +77,9 @@ Or find more information on GitHub Marketplace:
 
 [View on GitHub Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-urls-action){ .md-button .md-button--secondary }
 
+## Support the Project
+If you have already downloaded and tried the package, perhaps you would like to support its development?
+
 !!! tip "Become a Sponsor"
     If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
 
