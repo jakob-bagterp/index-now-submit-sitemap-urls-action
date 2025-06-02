@@ -5,6 +5,8 @@ tags:
     - Automation
     - GitHub Actions
     - Tutorial
+    - Workflow Dependency
+    - Workflow Schedule
 ---
 
 # How to Trigger Workflows in GitHub Actions

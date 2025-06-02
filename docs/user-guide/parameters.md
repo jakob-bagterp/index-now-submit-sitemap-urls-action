@@ -6,7 +6,14 @@ tags:
     - IndexNow
     - Automation
     - GitHub Actions
+    - API Key
     - Tutorial
+    - API Endpoint
+    - Bing
+    - Naver
+    - Seznam
+    - Yandex
+    - Yep
 ---
 
 # How to Customise Your Workflow Parameters
