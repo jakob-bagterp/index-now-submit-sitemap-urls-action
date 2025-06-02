@@ -106,6 +106,7 @@ extra:
 plugins:
   - search:
       lang: en
+  - tags
   - minify:
       minify_html: true
       minify_js: true
