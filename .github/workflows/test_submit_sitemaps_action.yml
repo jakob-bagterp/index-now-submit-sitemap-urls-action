@@ -18,11 +18,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Get branch name whether it's a pull request or the master branch
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            REF_NAME="${GITHUB_HEAD_REF}"
+          else
+            REF_NAME="${GITHUB_REF_NAME}"
+          fi
       - name: Submit URLs from single sitemap to IndexNow
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          gh workflow run test_submit_sitemaps_action.yml --ref ${{ github.ref_name }}
+          gh workflow run test_submit_sitemaps_action.yml --ref "${REF_NAME}"
           -f host=jakob-bagterp.github.io
           -f api_key=6d71a14ac15c4c41a0c19e641f659208
           -f api_key_location=https://jakob-bagterp.github.io/index-now-api-key.txt
@@ -32,7 +39,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          gh workflow run test_submit_sitemaps_action.yml --ref ${{ github.ref_name }}
+          gh workflow run test_submit_sitemaps_action.yml --ref "$REF_NAME"
           -f host=jakob-bagterp.github.io
           -f api_key=6d71a14ac15c4c41a0c19e641f659208
           -f api_key_location=https://jakob-bagterp.github.io/index-now-api-key.txt
