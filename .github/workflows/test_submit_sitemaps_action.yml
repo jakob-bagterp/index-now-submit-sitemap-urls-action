@@ -37,7 +37,7 @@ jobs:
           6d71a14ac15c4c41a0c19e641f659208
           https://jakob-bagterp.github.io/index-now-api-key.txt
           yandex
-          --urls https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/
+          --sitemap-locations https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
       - name: Submit multiple URLs to IndexNow
         run: >
           python src/helper/submit.py
@@ -45,6 +45,6 @@ jobs:
           6d71a14ac15c4c41a0c19e641f659208
           https://jakob-bagterp.github.io/index-now-api-key.txt
           yandex
-          --urls "
-            https://jakob-bagterp.github.io,
-            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/"
+          --sitemap-locations "
+            https://jakob-bagterp.github.io/sitemap.xml,
+            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
