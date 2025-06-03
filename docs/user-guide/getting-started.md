@@ -1,5 +1,5 @@
 ---
-title: How to Automatically Submit Your Sitemap and URLs to IndexNow
+title: How to Automatically Submit Sitemap and URLs
 description: Improve your SEO and learn how to automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines. Includes code examples for beginners and advanced users.
 tags:
     - SEO
@@ -7,6 +7,8 @@ tags:
     - Automation
     - GitHub Actions
     - Tutorial
+    - Submit Sitemap
+    - Submit URL
 ---
 
 # User Guide to Workflow Automation 👨‍🔧

@@ -1,6 +1,6 @@
-site_name: Automatically Submit Sitemap to IndexNow 🔎
+site_name: IndexNow Automation 🔎
 site_url: https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/
-site_description: Automatically submit your sitemap to IndexNow with this action for faster indexing by Bing, Yandex, DuckDuckGo and other search engines
+site_description: Automatically submit your sitemap to IndexNow with this action for GitHub Actions for faster indexing by Bing, Yandex, DuckDuckGo and other search engines.
 site_author: Jakob Bagterp
 copyright: Copyright © 2025 – present, Jakob Bagterp. All Rights Reserved.
 repo_url: https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action
@@ -64,7 +64,7 @@ markdown_extensions:
   - toc:
       permalink: "#"
   - pymdownx.highlight:
-      anchor_linenums: true
+      anchor_linenums: false
       line_spans: __span
       use_pygments: true
       pygments_lang_class: true
@@ -94,7 +94,7 @@ extra:
       link: https://www.instagram.com/bagterp_photography/
   analytics:
     provider: google
-    property: G-5R2186TFM5
+    property: G-0BNHYMBHHK
   consent:
     title: Cookie consent
     description: >-
@@ -106,6 +106,7 @@ extra:
 plugins:
   - search:
       lang: en
+  - tags
   - minify:
       minify_html: true
       minify_js: true

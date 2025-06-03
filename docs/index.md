@@ -1,11 +1,13 @@
 ---
-title: Automatically Submit Sitemap and URLs to IndexNow 🔎
+title: Automatically Submit Sitemap and URLs
 description: This workflow with GitHub Actions will automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines.
 tags:
     - SEO
     - IndexNow
     - Automation
     - GitHub Actions
+    - Submit Sitemap
+    - Submit URL
 ---
 
 [![Latest version](https://img.shields.io/static/v1?label=version&message=1.0.10&color=yellowgreen)](https://github.com/jakob-bagterp/index-now-submit-sitemap-urls-action/releases/latest)
@@ -71,7 +73,14 @@ on:
 There are many more [workflow trigger variations](user-guide/workflow-triggers.md) to cover your needs.
 
 ## Next Steps
-Ready to try? Find more information on [GitHub's Marketplace](https://github.com/marketplace/actions/index-now-submit-action).
+Ready to try? [Let's get started](user-guide/getting-started.md).
+
+Or find more information on GitHub Marketplace:
+
+[View on GitHub Marketplace](https://github.com/marketplace/actions/index-now-submit-sitemap-urls-action){ .md-button .md-button--secondary }
+
+## Support the Project
+If you have already downloaded and tried the package – maybe even used it in a production environment – perhaps you would like to support its development?
 
 !!! tip "Become a Sponsor"
     If you find this project helpful, please consider supporting its development. Your donations will help keep it alive and growing. Every contribution, no matter the size, makes a difference.
