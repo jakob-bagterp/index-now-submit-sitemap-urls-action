@@ -8,6 +8,8 @@ on:
     branches:
       - master
 
+permissions: read-all
+
 jobs:
   test-submit-urls-action:
     runs-on: ubuntu-latest
