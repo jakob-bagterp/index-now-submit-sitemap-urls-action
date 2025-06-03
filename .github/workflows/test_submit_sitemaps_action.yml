@@ -29,24 +29,20 @@ jobs:
             REF_NAME="${GITHUB_REF_NAME}"
           fi
       - name: Submit URLs from single sitemap to IndexNow
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          gh workflow run test_submit_sitemaps_action.yml --ref "${REF_NAME}"
-          -f host=jakob-bagterp.github.io
-          -f api_key=6d71a14ac15c4c41a0c19e641f659208
-          -f api_key_location=https://jakob-bagterp.github.io/index-now-api-key.txt
-          -f sitemap_locations="https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
-          -f endpoint=yandex
-      - name: Submit URLs from multiple sitemaps to IndexNow
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          python jakob-bagterp/index-now-submit-sitemap-urls-action/$REF_NAME/src/helper/submit.py
+          jakob-bagterp.github.io
+          6d71a14ac15c4c41a0c19e641f659208
+          https://jakob-bagterp.github.io/index-now-api-key.txt
+          yandex
+          --urls https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/
+      - name: Submit multiple URLs to IndexNow
         run: >
-          gh workflow run test_submit_sitemaps_action.yml --ref "$REF_NAME"
-          -f host=jakob-bagterp.github.io
-          -f api_key=6d71a14ac15c4c41a0c19e641f659208
-          -f api_key_location=https://jakob-bagterp.github.io/index-now-api-key.txt
-          -f sitemap_locations="
-            https://jakob-bagterp.github.io/sitemap.xml,
-            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
-          -f endpoint=yandex
+          python jakob-bagterp/index-now-submit-sitemap-urls-action/$REF_NAME/src/helper/submit.py
+          jakob-bagterp.github.io
+          6d71a14ac15c4c41a0c19e641f659208
+          https://jakob-bagterp.github.io/index-now-api-key.txt
+          yandex
+          --urls "
+            https://jakob-bagterp.github.io,
+            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/"
