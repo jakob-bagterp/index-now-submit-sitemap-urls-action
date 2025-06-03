@@ -8,6 +8,7 @@ from helper.submit import parse_sitemap_days_ago_input
 
 
 @pytest.mark.parametrize("sitemap_days_ago_input, expected", [
+    (None, None),
     ("", None),
     ('', None),
     (1, DaysAgo(1)),
@@ -24,6 +25,7 @@ def test_parse_sitemap_days_ago_input(sitemap_days_ago_input: int | str, expecte
 
 
 @pytest.mark.parametrize("sitemap_urls, sitemap_days_ago_input, expected", [
+    (SITEMAP_URLS, None, URLS),
     (SITEMAP_URLS, "", URLS),
     (SITEMAP_URLS, '', URLS),
     (SITEMAP_URLS, 0, URLS[:1]),

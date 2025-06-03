@@ -114,6 +114,8 @@ def parse_sitemap_days_ago_input(sitemap_days_ago: int | str) -> DaysAgo | None:
         DaysAgo | None: The sitemap days ago object or None if the input is empty.
     """
 
+    if not sitemap_days_ago and not str(sitemap_days_ago) == "0":
+        return None
     if isinstance(sitemap_days_ago, str) and not sitemap_days_ago.isdigit():
         return None
     if not isinstance(sitemap_days_ago, int):
