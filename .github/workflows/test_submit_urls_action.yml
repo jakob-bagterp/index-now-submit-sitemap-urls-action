@@ -15,9 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Submit single URL to IndexNow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           gh workflow run test_submit_urls_action.yml --ref ${{ github.ref_name }}
           -f host=jakob-bagterp.github.io
@@ -26,6 +29,8 @@ jobs:
           -f urls="https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/"
           -f endpoint=yandex
       - name: Submit multiple URLs to IndexNow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           gh workflow run test_submit_urls_action.yml --ref ${{ github.ref_name }}
           -f host=jakob-bagterp.github.io

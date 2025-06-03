@@ -18,6 +18,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Submit URLs from single sitemap to IndexNow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           gh workflow run test_submit_sitemaps_action.yml --ref ${{ github.ref_name }}
           -f host=jakob-bagterp.github.io
@@ -26,6 +28,8 @@ jobs:
           -f sitemap_locations="https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
           -f endpoint=yandex
       - name: Submit URLs from multiple sitemaps to IndexNow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           gh workflow run test_submit_sitemaps_action.yml --ref ${{ github.ref_name }}
           -f host=jakob-bagterp.github.io
