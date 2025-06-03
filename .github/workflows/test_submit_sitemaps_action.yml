@@ -21,13 +21,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Get branch name whether it's a pull request or the master branch
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        shell: bash
         run: |
-          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            REF_NAME="${GITHUB_HEAD_REF}"
-          else
-            REF_NAME="${GITHUB_REF_NAME}"
-          fi
+          pip install --upgrade pip
+          pip install -r ${{ github.action_path }}/requirements.txt
       - name: Submit URLs from single sitemap to IndexNow
         run: >
           python src/helper/submit.py
