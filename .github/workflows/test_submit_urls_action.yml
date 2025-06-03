@@ -30,7 +30,7 @@ jobs:
           fi
       - name: Submit single URL to IndexNow
         run: >
-          python $REF_NAME/src/helper/submit.py
+          python src/helper/submit.py
           jakob-bagterp.github.io
           6d71a14ac15c4c41a0c19e641f659208
           https://jakob-bagterp.github.io/index-now-api-key.txt
@@ -38,7 +38,7 @@ jobs:
           --sitemap-locations https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
       - name: Submit multiple URLs to IndexNow
         run: >
-          python $REF_NAME/src/helper/submit.py
+          python src/helper/submit.py
           jakob-bagterp.github.io
           6d71a14ac15c4c41a0c19e641f659208
           https://jakob-bagterp.github.io/index-now-api-key.txt
