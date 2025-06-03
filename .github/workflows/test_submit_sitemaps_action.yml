@@ -18,20 +18,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Submit URLs from single sitemap to IndexNow
-        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@${{ github.sha }}
-        with:
-          host: jakob-bagterp.github.io
-          api_key: 6d71a14ac15c4c41a0c19e641f659208
-          api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
-          sitemap_locations: https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
-          endpoint: yandex
+        run: >
+          gh workflow run test_submit_sitemaps_action.yml --ref ${{ github.ref_name }}
+          -f host=jakob-bagterp.github.io
+          -f api_key=6d71a14ac15c4c41a0c19e641f659208
+          -f api_key_location=https://jakob-bagterp.github.io/index-now-api-key.txt
+          -f sitemap_locations="https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
+          -f endpoint=yandex
       - name: Submit URLs from multiple sitemaps to IndexNow
-        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@${{ github.sha }}
-        with:
-          host: jakob-bagterp.github.io
-          api_key: 6d71a14ac15c4c41a0c19e641f659208
-          api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
-          sitemap_locations: >
+        run: >
+          gh workflow run test_submit_sitemaps_action.yml --ref ${{ github.ref_name }}
+          -f host=jakob-bagterp.github.io
+          -f api_key=6d71a14ac15c4c41a0c19e641f659208
+          -f api_key_location=https://jakob-bagterp.github.io/index-now-api-key.txt
+          -f sitemap_locations="
             https://jakob-bagterp.github.io/sitemap.xml,
-            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
-          endpoint: yandex
+            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
+          -f endpoint=yandex
