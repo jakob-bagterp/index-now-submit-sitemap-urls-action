@@ -1,11 +1,18 @@
 name: Test Submit Sitemaps Action
 
 on:
+  pull_request:
+    branches:
+      - "**"
   push:
     branches:
       - master
+  workflow_dispatch:
 
-permissions: read-all
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
 
 jobs:
   test-submit-sitemaps-action:
@@ -14,21 +21,30 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        shell: bash
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Submit URLs from single sitemap to IndexNow
-        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@master
-        with:
-          host: jakob-bagterp.github.io
-          api_key: 6d71a14ac15c4c41a0c19e641f659208
-          api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
-          sitemap_locations: https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
-          endpoint: yandex
-      - name: Submit URLs from multiple sitemaps to IndexNow
-        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@master
-        with:
-          host: jakob-bagterp.github.io
-          api_key: 6d71a14ac15c4c41a0c19e641f659208
-          api_key_location: https://jakob-bagterp.github.io/index-now-api-key.txt
-          sitemap_locations: >
+        run: >
+          python src/helper/submit.py
+          jakob-bagterp.github.io
+          6d71a14ac15c4c41a0c19e641f659208
+          https://jakob-bagterp.github.io/index-now-api-key.txt
+          yandex
+          --sitemap-locations https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
+      - name: Submit multiple URLs to IndexNow
+        run: >
+          python src/helper/submit.py
+          jakob-bagterp.github.io
+          6d71a14ac15c4c41a0c19e641f659208
+          https://jakob-bagterp.github.io/index-now-api-key.txt
+          yandex
+          --sitemap-locations "
             https://jakob-bagterp.github.io/sitemap.xml,
-            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
-          endpoint: yandex
+            https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"
