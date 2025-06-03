@@ -7,12 +7,8 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
-permissions:
-  actions: write
-  contents: write
-  pull-requests: write
+permissions: read-all
 
 jobs:
   test-submit-sitemaps-action:
