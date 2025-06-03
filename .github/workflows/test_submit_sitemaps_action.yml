@@ -8,7 +8,8 @@ on:
     branches:
       - master
 
-permissions: read-all
+permissions:
+  actions: write
 
 jobs:
   test-submit-sitemaps-action:
