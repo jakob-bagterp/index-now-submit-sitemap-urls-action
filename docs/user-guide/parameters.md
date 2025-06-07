@@ -147,6 +147,12 @@ Or filter the sitemap URLs for both `section1` and `section2` using a regular ex
           sitemap_filter: "r'(section1)|(section2)'"
 ```
 
+Alternatively, imagine that you want to prevent a whole section from being submitted. This can be achieved using a negative regular expression. This will match any URL that does not include the string `/section1/`:
+
+```yaml linenums="20" title=".github/workflows/submit_sitemap_to_index_now.yml"
+          sitemap_filter: "r'^((?!/section1/).)*$'"
+```
+
 ### `sitemap_days_ago`
 Optional. Only submit sitemap URLs that have been modified recently based on the `<lastmod>` tag, e.g. `1`, `2`, or more days ago.
 
