@@ -21,11 +21,11 @@ inputs:
     required: false
     default: bing
   urls:
-    description: "One or more URLs to be submitted. For example a single URL https://example.com or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\"."
+    description: "One or more URLs to be submitted. For example a single URL https://example.com or multiple URLs as list \"https://example.com/page1 https://example.com/page2\"."
     required: false
     default: ""
   sitemap_locations:
-    description: "Location of one or more sitemaps to be submitted. For example a single sitemap https://example.com/sitemap.xml or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\"."
+    description: "Location of one or more sitemaps to be submitted. For example a single sitemap https://example.com/sitemap.xml or multiple sitemaps as list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\"."
     required: false
     default: ""
   sitemap_filter:
