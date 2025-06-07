@@ -68,16 +68,19 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
 
         return any([input.startswith("["), input.endswith("]"), "," in input, " " in input.strip()])
 
-    def normalise_list_string_to_comma_separated_items(input: str) -> str:
-        """Remove square brackets and commas from the input string and return a list of comma separated items."""
+    def parse_list_input(input: str) -> list[str]:
+        def normalise_list_string_to_comma_separated_items(input: str) -> str:
+            """Remove square brackets and commas from the input string and return a list of comma separated items."""
 
-        return input.strip().replace("[", "").replace("]", "").replace("  ", " ").replace(" ", ",")
+            return input.strip().replace("[", "").replace("]", "").replace("  ", " ").replace(" ", ",")
+
+        normalised_list_string = normalise_list_string_to_comma_separated_items(input)
+        return [normalise_string(item) for item in normalised_list_string.split(",") if normalise_string(item)]
 
     if not string_or_list_input:
         return []
     if is_list(string_or_list_input):
-        normalised_list_string = normalise_list_string_to_comma_separated_items(string_or_list_input)
-        return [normalise_string(item) for item in normalised_list_string.split(",") if normalise_string(item)]
+        return parse_list_input(string_or_list_input)
     return [normalise_string(string_or_list_input)]
 
 
