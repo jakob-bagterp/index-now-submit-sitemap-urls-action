@@ -64,20 +64,20 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     """
 
     def is_list(input: str) -> bool:
-        """Check if the input is a list by checking for square brackets and commas."""
+        """Check if the input is a list by checking for square brackets, commas, or spaces."""
 
-        return any([input.startswith("["), input.endswith("]"), "," in input])
+        return any([input.startswith("["), input.endswith("]"), "," in input, " " in input.strip()])
 
-    def remove_list_brackets(input: str) -> str:
-        """Remove square brackets from the input string."""
+    def normalise_list_string_to_comma_separated_items(input: str) -> str:
+        """Remove square brackets and commas from the input string and return a list of comma separated items."""
 
-        return input.replace("[", "").replace("]", "")
+        return input.strip().replace("[", "").replace("]", "").replace("  ", " ").replace(" ", ",")
 
     if not string_or_list_input:
         return []
     if is_list(string_or_list_input):
-        string_or_list_input = remove_list_brackets(string_or_list_input)
-        return [normalise_string(item) for item in string_or_list_input.split(",") if item.strip()]
+        normalised_list_string = normalise_list_string_to_comma_separated_items(string_or_list_input)
+        return [normalise_string(item) for item in normalised_list_string.split(",") if normalise_string(item)]
     return [normalise_string(string_or_list_input)]
 
 
