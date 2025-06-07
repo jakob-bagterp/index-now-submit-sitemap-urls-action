@@ -42,5 +42,5 @@ jobs:
           https://jakob-bagterp.github.io/index-now-api-key.txt
           yandex
           --sitemap-locations "
-            https://jakob-bagterp.github.io/sitemap.xml,
+            https://jakob-bagterp.github.io/sitemap.xml
             https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml"

@@ -64,20 +64,23 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     """
 
     def is_list(input: str) -> bool:
-        """Check if the input is a list by checking for square brackets and commas."""
+        """Check if the input is a list by checking for square brackets, commas, or spaces."""
 
-        return any([input.startswith("["), input.endswith("]"), "," in input])
+        return any([input.startswith("["), input.endswith("]"), "," in input, " " in input.strip()])
 
-    def remove_list_brackets(input: str) -> str:
-        """Remove square brackets from the input string."""
+    def parse_list_input(input: str) -> list[str]:
+        def normalise_list_string_to_comma_separated_items(input: str) -> str:
+            """Remove square brackets and commas from the input string and return a list of comma separated items."""
 
-        return input.replace("[", "").replace("]", "")
+            return input.strip().replace("[", "").replace("]", "").replace("  ", " ").replace(" ", ",")
+
+        normalised_list_string = normalise_list_string_to_comma_separated_items(input)
+        return [normalise_string(item) for item in normalised_list_string.split(",") if normalise_string(item)]
 
     if not string_or_list_input:
         return []
     if is_list(string_or_list_input):
-        string_or_list_input = remove_list_brackets(string_or_list_input)
-        return [normalise_string(item) for item in string_or_list_input.split(",") if item.strip()]
+        return parse_list_input(string_or_list_input)
     return [normalise_string(string_or_list_input)]
 
 
@@ -145,8 +148,8 @@ if __name__ == "__main__":
     parser.add_argument("api_key", type=str, help="The API key for IndexNow, e.g. \"a1b2c3d4\".")
     parser.add_argument("api_key_location", type=str, help="The location of the API key, e.g. \"https://example.com/a1b2c3d4.txt\".")
     parser.add_argument("endpoint", type=str, help="The search engine endpoint (e.g. \"indexnow\", \"bing\", \"naver\", \"seznam\", \"yandex\", \"yep\").")
-    parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as comma separated list \"https://example.com/page1, https://example.com/page2\".")
-    parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as comma separated list \"https://example.com/sitemap1.xml, https://example.com/sitemap2.xml\".")
+    parser.add_argument("--urls", nargs="?", type=str, default=None, help="The URLs to be submitted, e.g. a single URL \"https://example.com\" or multiple URLs as list \"https://example.com/page1 https://example.com/page2\".")
+    parser.add_argument("--sitemap-locations", nargs="?", type=str, default=None, help="The locations of the sitemaps to be submitted, e.g. a single sitemap \"https://example.com/sitemap.xml\" or multiple sitemaps as list \"https://example.com/sitemap1.xml https://example.com/sitemap2.xml\".")
     parser.add_argument("--sitemap-filter", nargs="?", type=str, default=None, help="Only submit sitemap URLs that contain the filter string, e.g. \"section1\". Optional.")
     parser.add_argument("--sitemap-days-ago", nargs="?", type=str, default=None, help="Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.")
     input = parser.parse_args()

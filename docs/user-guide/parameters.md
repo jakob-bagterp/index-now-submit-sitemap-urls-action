@@ -115,10 +115,18 @@ Optional. The URL(s) to be submitted to IndexNow. Can be an individual URL, e.g.
           urls: https://example.com
 ```
 
-Or multiple URLs as comma separated list:
+Or multiple URLs as list:
 
 ```yaml linenums="18" title=".github/workflows/submit_sitemap_to_index_now.yml"
-          urls: https://example.com/page1, https://example.com/page2
+          urls: https://example.com/page1 https://example.com/page2
+```
+
+Alternatively over multiple lines, if that's easier to read:
+
+```yaml linenums="18" title=".github/workflows/submit_sitemap_to_index_now.yml"
+          urls: >
+            https://example.com/page1
+            https://example.com/page2
 ```
 
 ### `sitemap_locations`
@@ -128,10 +136,18 @@ Optional. The location of the sitemap(s) from which the URLs will be submitted t
           sitemap_locations: https://example.com/sitemap.xml
 ```
 
-Or multiple sitemaps as comma separated list:
+Or multiple sitemaps as list:
 
 ```yaml linenums="19" title=".github/workflows/submit_sitemap_to_index_now.yml"
-          sitemap_locations: https://example.com/sitemap1.xml, https://example.com/sitemap2.xml
+          sitemap_locations: https://example.com/sitemap1.xml https://example.com/sitemap2.xml
+```
+
+Alternatively over multiple lines, if that's easier to read:
+
+```yaml linenums="19" title=".github/workflows/submit_sitemap_to_index_now.yml"
+          sitemap_locations: >
+            https://example.com/sitemap1.xml
+            https://example.com/sitemap2.xml
 ```
 
 ### `sitemap_filter`
