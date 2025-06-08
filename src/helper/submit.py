@@ -154,6 +154,10 @@ if __name__ == "__main__":
     parser.add_argument("--sitemap-days-ago", nargs="?", type=str, default=None, help="Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.")
     input = parser.parse_args()
 
+    if not all([input.host, input.api_key, input.api_key_location, input.endpoint]):
+        print("Some or all mandatory arguments for host, API key, API key location, and endpoint are missing. Aborting...")
+        exit_with_failure()
+
     authentication = IndexNowAuthentication(
         host=input.host,
         api_key=input.api_key,
