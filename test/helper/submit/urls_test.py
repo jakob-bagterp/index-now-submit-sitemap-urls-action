@@ -22,5 +22,5 @@ def test_submit_urls_from_terminal(urls: str) -> None:
                              "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == SUCCESS_EXIT_CODE
-    assert f"URL(s) submitted successfully to the IndexNow API:{Color.OFF}" in result.stdout
+    assert f"URL(s) were submitted successfully to this IndexNow API endpoint:{Color.OFF}" in result.stdout
     assert f"Status code: {Color.GREEN}200{Color.OFF}" or f"Status code: {Color.GREEN}202{Color.OFF}" in result.stdout
