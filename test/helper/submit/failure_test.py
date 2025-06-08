@@ -29,10 +29,10 @@ def test_submit_urls_from_terminal_failure() -> None:
     assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
-                             VALID_HOST,
-                             INVALID_API_KEY,
-                             INVALID_API_KEY_LOCATION,
-                             "bing",
+                             "--host", VALID_HOST,
+                             "--api-key", INVALID_API_KEY,
+                             "--api-key-location", INVALID_API_KEY_LOCATION,
+                             "--endpoint", "bing",
                              "--urls", URLS[0],
                              "--sitemap-locations", "",
                              ], capture_output=True, text=True)
@@ -47,10 +47,10 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
     assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
-                             VALID_HOST,
-                             INVALID_API_KEY,
-                             INVALID_API_KEY_LOCATION,
-                             "bing",
+                             "--host", VALID_HOST,
+                             "--api-key", INVALID_API_KEY,
+                             "--api-key-location", INVALID_API_KEY_LOCATION,
+                             "--endpoint", "bing",
                              "--urls", "",
                              "--sitemap-locations", SITEMAP_LOCATIONS[0],
                              "--sitemap-filter", "",

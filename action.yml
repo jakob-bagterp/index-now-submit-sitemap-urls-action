@@ -55,10 +55,10 @@ runs:
       shell: bash
       run: >
         python ${{ github.action_path }}/src/helper/submit.py
-        ${{ inputs.host }}
-        ${{ inputs.api_key }}
-        ${{ inputs.api_key_location }}
-        ${{ inputs.endpoint }}
+        --host ${{ inputs.host }}
+        --api-key ${{ inputs.api_key }}
+        --api-key-location ${{ inputs.api_key_location }}
+        --endpoint ${{ inputs.endpoint }}
         --urls "${{ inputs.urls }}"
         --sitemap-locations "${{ inputs.sitemap_locations }}"
         --sitemap-filter "${{ inputs.sitemap_filter }}"
