@@ -37,7 +37,7 @@ def test_submit_urls_from_terminal_failure() -> None:
                              "--sitemap-locations", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
-    assert "Failed to submit URLs. Status code response from Bing:" in result.stdout
+    assert "Failure. No URL(s) were submitted to this IndexNow API endpoint: https://www.bing.com/indexnow" in result.stdout
 
 
 def test_submit_sitemaps_from_terminal_failure() -> None:
@@ -57,4 +57,4 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
                              "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
-    assert "Failed to submit sitemaps. Status code response from Bing:" in result.stdout
+    assert "Failure. No URL(s) were submitted to this IndexNow API endpoint: https://www.bing.com/indexnow" in result.stdout
