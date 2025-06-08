@@ -1,7 +1,9 @@
 import subprocess
 
+import pytest
 from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY,
-                      INVALID_API_KEY_LOCATION, VALID_HOST)
+                      INVALID_API_KEY_LOCATION, VALID_API_KEY,
+                      VALID_API_KEY_LOCATION, VALID_HOST)
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
                        submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
@@ -29,10 +31,10 @@ def test_submit_urls_from_terminal_failure() -> None:
     assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
-                             VALID_HOST,
-                             INVALID_API_KEY,
-                             INVALID_API_KEY_LOCATION,
-                             "bing",
+                             "--host", VALID_HOST,
+                             "--api-key", INVALID_API_KEY,
+                             "--api-key-location", INVALID_API_KEY_LOCATION,
+                             "--endpoint", "bing",
                              "--urls", URLS[0],
                              "--sitemap-locations", "",
                              ], capture_output=True, text=True)
@@ -47,10 +49,10 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
     assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
-                             VALID_HOST,
-                             INVALID_API_KEY,
-                             INVALID_API_KEY_LOCATION,
-                             "bing",
+                             "--host", VALID_HOST,
+                             "--api-key", INVALID_API_KEY,
+                             "--api-key-location", INVALID_API_KEY_LOCATION,
+                             "--endpoint", "bing",
                              "--urls", "",
                              "--sitemap-locations", SITEMAP_LOCATIONS[0],
                              "--sitemap-filter", "",
@@ -58,3 +60,25 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
     assert "Failed to submit sitemaps. Status code response from Bing:" in result.stdout
+
+
+@pytest.mark.parametrize("host, api_key, api_key_location, endpoint", [
+    ("", VALID_API_KEY, VALID_API_KEY_LOCATION, "bing"),
+    (VALID_HOST, "", VALID_API_KEY_LOCATION, "bing"),
+    (VALID_HOST, INVALID_API_KEY, "", "bing"),
+    (VALID_HOST, INVALID_API_KEY, VALID_API_KEY_LOCATION, ""),
+    ("", "", "", ""),
+])
+def test_submit_missing_mandatory_arguments_from_terminal_failure(host: str, api_key: str, api_key_location: str, endpoint: str) -> None:
+    result = subprocess.run(["python3", "./src/helper/submit.py",
+                             "--host", host,
+                             "--api-key", api_key,
+                             "--api-key-location", api_key_location,
+                             "--endpoint", endpoint,
+                             "--urls", URLS[0],
+                             "--sitemap-locations", ""
+                             "--sitemap-filter", "",
+                             "--sitemap-days-ago", "",
+                             ], capture_output=True, text=True)
+    assert result.returncode == FAILURE_EXIT_CODE
+    assert "Some or all mandatory arguments for host, API key, API key location, and endpoint are missing. Aborting..." in result.stdout
