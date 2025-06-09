@@ -104,7 +104,7 @@ def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
     if not sitemap_filter:
         return None
     if is_regex(sitemap_filter):
-        recreate_regex_from_input(sitemap_filter)
+        return recreate_regex_from_input(sitemap_filter)
     return normalise_string(sitemap_filter)
 
 
