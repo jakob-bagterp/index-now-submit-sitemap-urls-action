@@ -97,11 +97,14 @@ def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
     def is_regex(input: str) -> bool:
         return input.startswith("r\"") or input.startswith("r\'")
 
+    def recreate_regex_from_input(input: str) -> str:
+        input_cleaned = normalise_string(input.replace("r\"", "").replace("r\'", ""))
+        return rf"{input_cleaned}"
+
     if not sitemap_filter:
         return None
-    if is_regex(sitemap_filter):  # Then recreate the regular expression from the input.
-        sitemap_filter = normalise_string(sitemap_filter.replace("r\"", "").replace("r\'", ""))
-        return rf"{sitemap_filter}"
+    if is_regex(sitemap_filter):
+        recreate_regex_from_input(sitemap_filter)
     return normalise_string(sitemap_filter)
 
 
