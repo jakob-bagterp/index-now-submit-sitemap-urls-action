@@ -48,7 +48,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
 
 
 def normalise_string(input: str) -> str:
-    """Normalize the input string by removing quotes and whitespace."""
+    """Normalize the input string by removing any single or double quotes and trimming the whitespace."""
 
     return input.replace('"', "").replace("'", "").strip()
 
@@ -95,15 +95,16 @@ def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
     """
 
     def is_regex(input: str) -> bool:
-        """Check if the input is a regular expression."""
-
         return input.startswith("r\"") or input.startswith("r\'")
+
+    def recreate_regex_from_input(input: str) -> str:
+        input_cleaned = normalise_string(input.replace("r\"", "").replace("r\'", ""))
+        return rf"{input_cleaned}"
 
     if not sitemap_filter:
         return None
-    if is_regex(sitemap_filter):  # Then recreate the regular expression from the input.
-        sitemap_filter = normalise_string(sitemap_filter.replace("r\"", "").replace("r\'", ""))
-        return rf"{sitemap_filter}"
+    if is_regex(sitemap_filter):
+        return recreate_regex_from_input(sitemap_filter)
     return normalise_string(sitemap_filter)
 
 
