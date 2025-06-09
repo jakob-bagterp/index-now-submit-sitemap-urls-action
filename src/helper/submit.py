@@ -48,7 +48,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
 
 
 def normalise_string(input: str) -> str:
-    """Normalize the input string by removing quotes and whitespace."""
+    """Normalize the input string by removing any single or double quotes and trimming the whitespace."""
 
     return input.replace('"', "").replace("'", "").strip()
 
