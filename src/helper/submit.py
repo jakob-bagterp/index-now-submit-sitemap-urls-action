@@ -95,8 +95,6 @@ def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
     """
 
     def is_regex(input: str) -> bool:
-        """Check if the input is a regular expression."""
-
         return input.startswith("r\"") or input.startswith("r\'")
 
     if not sitemap_filter:
