@@ -1,6 +1,7 @@
 import subprocess
 
 import pytest
+from colorist import Color
 from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY,
                       INVALID_API_KEY_LOCATION, VALID_API_KEY,
                       VALID_API_KEY_LOCATION, VALID_HOST)
@@ -39,7 +40,7 @@ def test_submit_urls_from_terminal_failure() -> None:
                              "--sitemap-locations", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
-    assert "Failed to submit URLs. Status code response from Bing:" in result.stdout
+    assert f"Failed to submit URLs. Status code from Bing: {Color.RED}" in result.stdout
 
 
 def test_submit_sitemaps_from_terminal_failure() -> None:
@@ -59,7 +60,7 @@ def test_submit_sitemaps_from_terminal_failure() -> None:
                              "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
-    assert "Failed to submit sitemaps. Status code response from Bing:" in result.stdout
+    assert f"Failed to submit sitemaps. Status code from Bing: {Color.RED}" in result.stdout
 
 
 @pytest.mark.parametrize("host, api_key, api_key_location, endpoint", [
@@ -81,4 +82,4 @@ def test_submit_missing_mandatory_arguments_from_terminal_failure(host: str, api
                              "--sitemap-days-ago", "",
                              ], capture_output=True, text=True)
     assert result.returncode == FAILURE_EXIT_CODE
-    assert "Some or all mandatory arguments for host, API key, API key location, and endpoint are missing. Aborting..." in result.stdout
+    assert f"{Color.YELLOW}Some or all mandatory arguments for host, API key, API key location, and endpoint are missing. Aborting...{Color.OFF}" in result.stdout
