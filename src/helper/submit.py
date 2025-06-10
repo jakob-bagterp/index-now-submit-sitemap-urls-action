@@ -85,7 +85,7 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
 
 
 def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
-    """Parse the input of the sitemap filter and check whether we need to create a regular expression from it.
+    """Parse the input of the `sitemap_filter` argument and check whether a regular expression needs to be created from it.
 
     Args:
         sitemap_filter (str): Input from CLI parameter, e.g. contains `"section1"` or a regular expression `"r'(section1|section2)'"`.
@@ -109,13 +109,13 @@ def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
 
 
 def parse_sitemap_days_ago_input(sitemap_days_ago: int | str) -> DaysAgo | None:
-    """Parse the sitemap days ago input and return a DaysAgo object or None if the input is empty.
+    """Parse the input of the `sitemap_days_ago` argument and return a DaysAgo class or None if the input is empty.
 
     Args:
         sitemap_days_ago (int | str): Input from CLI parameter, e.g. 1, 2, or more days ago.
 
     Returns:
-        DaysAgo | None: The sitemap days ago object or None if the input is empty.
+        DaysAgo | None: The sitemap DaysAgo class or None if the input is empty.
     """
 
     if not sitemap_days_ago and not str(sitemap_days_ago) == "0":
