@@ -85,7 +85,7 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
 
 
 def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
-    """Parse the input of the sitemap filter and check if whether we need to create a regular expression from it.
+    """Parse the input of the sitemap filter and check whether we need to create a regular expression from it.
 
     Args:
         sitemap_filter (str): Input from CLI parameter, e.g. contains `"section1"` or a regular expression `"r'(section1|section2)'"`.
