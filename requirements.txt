@@ -1,2 +1,2 @@
 colorist==1.8.3
-index-now-for-python==1.0.4
+index-now-for-python==1.0.5
