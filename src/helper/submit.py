@@ -6,7 +6,7 @@ from index_now import (DaysAgo, IndexNowAuthentication, SearchEngineEndpoint,
                        SitemapFilter, submit_sitemaps_to_index_now,
                        submit_urls_to_index_now)
 
-SUCCESS_STATUS_CODES = [200, 202]
+SUCCESS_STATUS_CODES = [200, 202, 204]
 
 
 def is_successful_response(status_code: int) -> bool:
