@@ -1,7 +1,7 @@
 colorist==1.8.3
 coverage==7.10.7
 flake8==7.3.0
-mypy==1.17.1
+mypy==1.18.2
 pre-commit==4.3.0
 pytest==8.4.2
 pytest-cov==7.0.0
