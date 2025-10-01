@@ -1,5 +1,5 @@
 colorist==1.8.3
-coverage==7.10.6
+coverage==7.10.7
 flake8==7.3.0
 mypy==1.17.1
 pre-commit==4.3.0
