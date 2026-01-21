@@ -53,3 +53,26 @@ Want to know more about the parameters? Learn how to [customise your workflow pa
     - Uploaded the API key to the location specified in the `api_key_location` parameter.
     - Updated the URL of the sitemap in the `sitemap_location` parameter.
     - Adjusted the `host`, `endpoint`, and other parameters to suit your needs.
+
+## Nested Sitemaps
+If you have a sitemap index that links to other sitemaps, you only need to submit that in the `sitemap_locations` parameter. Both the index and the nested sitemaps will be included in the submission to the IndexNow API.
+
+### Example
+If you have a sitemap index that links to two other sitemaps, for example, URLs from all three sitemaps will be included in the submission to the IndexNow API.
+
+```xml linenums="1" title="sitemap_index.xml" hl_lines="4 7"
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://example.com/sitemap1.xml</loc>
+    </sitemap>
+    <sitemap>
+        <loc>https://example.com/sitemap2.xml</loc>
+    </sitemap>
+</urlset>
+```
+
+In this case, you only need to submit a single sitemap with a link to `sitemap_index.xml` as the location.
+
+!!! info
+    Only sitemaps on levels 1 and 2 are supported. Nested sitemaps on level 3 and beyond will be ignored.
