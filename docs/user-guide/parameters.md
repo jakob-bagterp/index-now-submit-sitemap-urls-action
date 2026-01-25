@@ -150,6 +150,27 @@ Alternatively over multiple lines, if that's easier to read:
             https://example.com/sitemap2.xml
 ```
 
+!!! info "Nested Sitemaps"
+    Whether you submit one sitemap or multiple, this service will automatically detect any nested sitemaps and include their URLs in the submission.
+
+    For example, if you have a sitemap index that links to two other sitemaps, the URLs from all three sitemaps will be included in the submission to the IndexNow API:
+
+    ```xml linenums="1" title="sitemap_index.xml" hl_lines="4 7"
+    <?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <sitemap>
+            <loc>https://example.com/sitemap1.xml</loc>
+        </sitemap>
+        <sitemap>
+            <loc>https://example.com/sitemap2.xml</loc>
+        </sitemap>
+    </urlset>
+    ```
+
+    In this case, you only need to submit a single-sitemap with a link to `sitemap_index.xml` as the location.
+
+    Note that only sitemaps on levels 1 and 2 are supported. Nested sitemaps on level 3 and beyond will be ignored.
+
 ### `sitemap_filter`
 Optional. Only submit sitemap URLs that contain the filter string, e.g. `section1`. Optional.
 
