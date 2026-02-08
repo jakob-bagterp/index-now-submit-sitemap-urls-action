@@ -2,8 +2,7 @@ import subprocess
 
 import pytest
 from colorist import Color
-from constant import (SUCCESS_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION,
-                      VALID_HOST)
+from constant import SUCCESS_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION, VALID_HOST
 
 
 @pytest.mark.parametrize("sitemap_locations", [

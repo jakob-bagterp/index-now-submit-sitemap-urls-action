@@ -2,9 +2,8 @@ import argparse
 import sys
 
 from colorist import Color
-from index_now import (DaysAgo, IndexNowAuthentication, SearchEngineEndpoint,
-                       SitemapFilter, submit_sitemaps_to_index_now,
-                       submit_urls_to_index_now)
+from index_now import (DaysAgo, IndexNowAuthentication, SearchEngineEndpoint, SitemapFilter,
+                       submit_sitemaps_to_index_now, submit_urls_to_index_now)
 
 SUCCESS_STATUS_CODES = [200, 202, 204]
 

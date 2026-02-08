@@ -2,11 +2,10 @@ import subprocess
 
 import pytest
 from colorist import Color
-from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY,
-                      INVALID_API_KEY_LOCATION, VALID_API_KEY,
+from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY, INVALID_API_KEY_LOCATION, VALID_API_KEY,
                       VALID_API_KEY_LOCATION, VALID_HOST)
-from index_now import (IndexNowAuthentication, SearchEngineEndpoint,
-                       submit_sitemaps_to_index_now, submit_urls_to_index_now)
+from index_now import (IndexNowAuthentication, SearchEngineEndpoint, submit_sitemaps_to_index_now,
+                       submit_urls_to_index_now)
 
 from helper.submit import SUCCESS_STATUS_CODES
 

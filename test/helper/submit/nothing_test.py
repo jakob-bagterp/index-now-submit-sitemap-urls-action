@@ -1,8 +1,7 @@
 import subprocess
 
 from colorist import Color
-from constant import (FAILURE_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION,
-                      VALID_HOST)
+from constant import FAILURE_EXIT_CODE, VALID_API_KEY, VALID_API_KEY_LOCATION, VALID_HOST
 
 
 def test_submit_nothing_from_terminal() -> None:
