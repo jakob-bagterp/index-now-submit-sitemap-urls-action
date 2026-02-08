@@ -19,8 +19,7 @@ SITEMAP_LOCATIONS = ["https://jakob-bagterp.github.io/sitemap.xml"]
 
 
 def is_error_response(status_code: int) -> bool:
-    status_code_string = str(status_code)
-    return status_code_string.startswith("4") or status_code_string.startswith("5")
+    return 400 <= status_code <= 599 if isinstance(status_code, int) else False
 
 
 def test_submit_urls_from_terminal_failure() -> None:
