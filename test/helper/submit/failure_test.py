@@ -6,8 +6,7 @@ from constant import (FAILURE_EXIT_CODE, INVALID_API_KEY, INVALID_API_KEY_LOCATI
                       VALID_API_KEY_LOCATION, VALID_HOST)
 from index_now import (IndexNowAuthentication, SearchEngineEndpoint, submit_sitemaps_to_index_now,
                        submit_urls_to_index_now)
-
-from helper.submit import SUCCESS_STATUS_CODES
+from index_now.status_code import SUCCESS_STATUS_CODES_COLLECTION
 
 AUTHENTICATION_WITH_INVALID_API_KEY = IndexNowAuthentication(
     host=VALID_HOST,
@@ -27,7 +26,7 @@ def is_error_response(status_code: int) -> bool:
 def test_submit_urls_from_terminal_failure() -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_urls_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, URLS, endpoint=SearchEngineEndpoint.BING)
-    assert status_code not in SUCCESS_STATUS_CODES
+    assert status_code not in SUCCESS_STATUS_CODES_COLLECTION
     assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
