@@ -44,7 +44,7 @@ def test_submit_urls_from_terminal_failure() -> None:
 def test_submit_sitemaps_from_terminal_failure() -> None:
     # Ensure that we also receive an error message when using the same submit method and parameters:
     status_code = submit_sitemaps_to_index_now(AUTHENTICATION_WITH_INVALID_API_KEY, SITEMAP_LOCATIONS, endpoint=SearchEngineEndpoint.BING)
-    assert status_code not in SUCCESS_STATUS_CODES
+    assert status_code not in SUCCESS_STATUS_CODES_COLLECTION
     assert is_error_response(status_code)
 
     result = subprocess.run(["python3", "./src/helper/submit.py",
