@@ -1,0 +1,16 @@
+[project]
+name = "index-now-submit-sitemap-urls-action"
+version = "0.1.0"
+description = "Workflow to automatically submit your website's sitemap and URLs to IndexNow for faster indexing by Bing, Yandex, DuckDuckGo, and other search engines"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "colorist~=1.8.11",
+    "coverage==7.13.2",
+    "flake8==7.3.0",
+    "index-now-for-python==1.0.18",
+    "mypy==1.19.1",
+    "pre-commit==4.5.1",
+    "pytest==9.0.2",
+    "pytest-cov==7.0.0",
+]
