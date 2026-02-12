@@ -32,7 +32,7 @@ jobs:
         run: uv run ruff check src test
 
       - name: Run tests with mypy
-        run: mypy src --ignore-missing-imports --follow-imports=skip --strict
+        run: uv run mypy src --ignore-missing-imports --follow-imports=skip --strict
 
       - name: Run tests with pytest
         run: pytest --numprocesses auto -vv -rA
