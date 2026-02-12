@@ -1,2 +1,0 @@
-colorist~=1.8.11
-index-now-for-python==1.0.19

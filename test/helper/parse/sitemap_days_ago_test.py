@@ -7,37 +7,43 @@ from index_now.sitemap.parse import SitemapUrl
 from helper.submit import parse_sitemap_days_ago_input
 
 
-@pytest.mark.parametrize("sitemap_days_ago_input, expected", [
-    (None, None),
-    ("", None),
-    ('', None),
-    (1, DaysAgo(1)),
-    ("1", DaysAgo(1)),
-    (2, DaysAgo(2)),
-    ("2", DaysAgo(2)),
-    (3, DaysAgo(3)),
-    ("3", DaysAgo(3)),
-    ("not valid", None),
-])
+@pytest.mark.parametrize(
+    "sitemap_days_ago_input, expected",
+    [
+        (None, None),
+        ("", None),
+        ("", None),
+        (1, DaysAgo(1)),
+        ("1", DaysAgo(1)),
+        (2, DaysAgo(2)),
+        ("2", DaysAgo(2)),
+        (3, DaysAgo(3)),
+        ("3", DaysAgo(3)),
+        ("not valid", None),
+    ],
+)
 def test_parse_sitemap_days_ago_input(sitemap_days_ago_input: int | str, expected: DaysAgo | None) -> None:
     result = parse_sitemap_days_ago_input(sitemap_days_ago_input)
     assert result == expected
 
 
-@pytest.mark.parametrize("sitemap_urls, sitemap_days_ago_input, expected", [
-    (SITEMAP_URLS, None, URLS),
-    (SITEMAP_URLS, "", URLS),
-    (SITEMAP_URLS, '', URLS),
-    (SITEMAP_URLS, 0, URLS[:1]),
-    (SITEMAP_URLS, "0", URLS[:1]),
-    (SITEMAP_URLS, 1, URLS[:2]),
-    (SITEMAP_URLS, "1", URLS[:2]),
-    (SITEMAP_URLS, 2, URLS),
-    (SITEMAP_URLS, "2", URLS),
-    (SITEMAP_URLS, 3, URLS),
-    (SITEMAP_URLS, "3", URLS),
-    (SITEMAP_URLS, "not valid", URLS),
-])
+@pytest.mark.parametrize(
+    "sitemap_urls, sitemap_days_ago_input, expected",
+    [
+        (SITEMAP_URLS, None, URLS),
+        (SITEMAP_URLS, "", URLS),
+        (SITEMAP_URLS, "", URLS),
+        (SITEMAP_URLS, 0, URLS[:1]),
+        (SITEMAP_URLS, "0", URLS[:1]),
+        (SITEMAP_URLS, 1, URLS[:2]),
+        (SITEMAP_URLS, "1", URLS[:2]),
+        (SITEMAP_URLS, 2, URLS),
+        (SITEMAP_URLS, "2", URLS),
+        (SITEMAP_URLS, 3, URLS),
+        (SITEMAP_URLS, "3", URLS),
+        (SITEMAP_URLS, "not valid", URLS),
+    ],
+)
 def test_days_ago_urls(sitemap_urls: list[SitemapUrl], sitemap_days_ago_input: int | str, expected: list[str]) -> None:
     days_ago = parse_sitemap_days_ago_input(sitemap_days_ago_input)
     filter = SitemapFilter(date_range=days_ago)
