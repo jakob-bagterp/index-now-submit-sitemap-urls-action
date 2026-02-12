@@ -17,15 +17,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
       - name: Install dependencies
-        shell: bash
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+        run: uv sync --frozen
+
       - name: Submit URLs from single sitemap to IndexNow
         run: >
           python src/helper/submit.py
@@ -34,6 +37,7 @@ jobs:
           --api-key-location https://jakob-bagterp.github.io/index-now-api-key.txt
           --endpoint yandex
           --sitemap-locations https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/sitemap.xml
+
       - name: Submit multiple URLs to IndexNow
         run: >
           python src/helper/submit.py
