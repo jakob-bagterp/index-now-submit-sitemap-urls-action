@@ -24,7 +24,7 @@ classifiers = [
 
 dependencies = [
     "colorist~=1.8.11",
-    "index-now-for-python==1.0.20",
+    "index-now-for-python==1.0.22",
 ]
 
 [project.urls]
