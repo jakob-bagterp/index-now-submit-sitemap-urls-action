@@ -25,6 +25,9 @@ def exit_with_failure() -> None:
     sys.exit(1)
 
 
+ENDPOINT_OPTIONS = ("indexnow", "bing", "naver", "seznam", "yandex", "yep")
+
+
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
     """Get a search engine endpoint from text input.
 
@@ -32,10 +35,13 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
         endpoint (str): Input from CLI parameter, e.g `"indexnow"`, `"bing"`, `"naver"`, `"seznam"`, `"yandex"`, `"yep"`.
 
     Returns:
-        SearchEngineEndpoint: Search engine endpoint. Fallback is Microsoft Bing.
+        SearchEngineEndpoint: Search engine endpoint.
+
+    Raises:
+        ValueError: If the input isn't one of the supported endpoints.
     """
 
-    match str(endpoint).lower():
+    match str(endpoint).strip().lower():
         case "indexnow":
             return SearchEngineEndpoint.INDEXNOW
         case "bing":
@@ -49,7 +55,7 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
         case "yep":
             return SearchEngineEndpoint.YEP
         case _:
-            return SearchEngineEndpoint.BING
+            raise ValueError(f"Unknown endpoint: {endpoint}. Options: {', '.join(ENDPOINT_OPTIONS)}.")
 
 
 def normalise_string(input: str) -> str:
@@ -202,7 +208,11 @@ if __name__ == "__main__":
     authentication = IndexNowAuthentication(
         host=input.host, api_key=input.api_key, api_key_location=input.api_key_location
     )
-    endpoint = get_endpoint_from_input(input.endpoint)
+    try:
+        endpoint = get_endpoint_from_input(input.endpoint)
+    except ValueError as error:
+        print(f"{Color.YELLOW}{error} Aborting...{Color.OFF}")
+        exit_with_failure()
 
     urls = parse_string_or_list_input(input.urls)
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)

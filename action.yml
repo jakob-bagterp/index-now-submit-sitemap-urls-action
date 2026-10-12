@@ -17,7 +17,7 @@ inputs:
     description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
     required: true
   endpoint:
-    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep"
+    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep. Other values make the workflow fail."
     required: false
     default: bing
   urls:

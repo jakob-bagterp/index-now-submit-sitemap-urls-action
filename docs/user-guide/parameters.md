@@ -99,7 +99,7 @@ Similar to the `api_key`, the location of your API key should be kept secret:
 ```
 
 ### `endpoint`
-Optional. The search engine endpoint, e.g. `indexnow`, `bing`, `naver`, `seznam`, `yandex`, `yep`. If not specified, Bing is used as the default endpoint.
+Optional. The search engine endpoint, e.g. `indexnow`, `bing`, `naver`, `seznam`, `yandex`, `yep`. If not specified, Bing is used as the default endpoint. Any other value makes the workflow fail before anything is submitted, so a typo doesn't go unnoticed.
 
 ```yaml linenums="17" title=".github/workflows/submit_sitemap_to_index_now.yml"
           endpoint: yandex
