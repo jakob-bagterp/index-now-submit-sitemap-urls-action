@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Submit sitemap URLs to IndexNow
-        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@v1
+        uses: jakob-bagterp/index-now-submit-sitemap-urls-action@v2
         with:
           host: example.com
           api_key: ${{ secrets.INDEX_NOW_API_KEY }}
