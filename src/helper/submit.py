@@ -102,6 +102,25 @@ def parse_string_or_list_input(string_or_list_input: str) -> list[str]:
     return [normalise_string(string_or_list_input)]
 
 
+def get_endpoints_from_input(endpoints: str) -> list[SearchEngineEndpoint]:
+    """Get one or more search engine endpoints from text input. The endpoints are tried in order until one accepts the submission.
+
+    Args:
+        endpoints (str): Input from CLI parameter, e.g. a single endpoint `"seznam"` or multiple endpoints `"naver, seznam, yep"`.
+
+    Returns:
+        list[SearchEngineEndpoint]: Search engine endpoints in the given order, without duplicates.
+
+    Raises:
+        ValueError: If no endpoint is given or one of the endpoints isn't supported.
+    """
+
+    names = parse_string_or_list_input(str(endpoints))
+    if not names:
+        raise ValueError("No endpoint given.")
+    return list(dict.fromkeys(get_endpoint_from_input(name) for name in names))
+
+
 def parse_sitemap_filter_input(sitemap_filter: str) -> str | None:
     """Parse the input of the `sitemap_filter` argument and check whether a regular expression needs to be created from it.
 
@@ -150,14 +169,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit.py --host example.com --api-key a1b2c3d4 --api-key-location https://example.com/a1b2c3d4.txt --endpoint yandex --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1 --sitemap-days-ago 1
+            python submit.py --host example.com --api-key a1b2c3d4 --api-key-location https://example.com/a1b2c3d4.txt --endpoint seznam --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1 --sitemap-days-ago 1
 
         The parameters are:
 
             "--host example.com": The host name of the website. Mandatory.
             "--api-key a1b2c3d4": The API key for IndexNow. Mandatory.
             "--api-key-location https://example.com/a1b2c3d4.txt": The location of the API key. Mandatory.
-            "--endpoint yandex": The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep"). Mandatory.
+            "--endpoint seznam": One or more search engine endpoints (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep"). Multiple endpoints, e.g. "naver, seznam, yep", are tried in order until one accepts the submission. Mandatory.
             "--urls https://example.com": The URL(s) to be submitted. Optional.
             "--sitemap-locations https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "--sitemap-filter section1": Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'". Optional.
@@ -174,7 +193,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--endpoint",
         type=str,
-        help='The search engine endpoint (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep"). Mandatory.',
+        help='One or more search engine endpoints (e.g. "indexnow", "bing", "naver", "seznam", "yandex", "yep"). Multiple endpoints, e.g. "naver, seznam, yep", are tried in order until one accepts the submission. Mandatory.',
     )
     parser.add_argument(
         "--urls",
@@ -216,10 +235,13 @@ if __name__ == "__main__":
         host=input.host, api_key=input.api_key, api_key_location=input.api_key_location
     )
     try:
-        endpoint = get_endpoint_from_input(input.endpoint)
+        endpoints = get_endpoints_from_input(input.endpoint)
     except ValueError as error:
         print(f"{Color.YELLOW}{error} Aborting...{Color.OFF}")
         exit_with_failure()
+
+    # With multiple endpoints, the output of the submission shows which endpoint responded with which status code:
+    status_code_source = f" from {endpoints[0].name.title()}" if len(endpoints) == 1 else ""
 
     urls = parse_string_or_list_input(input.urls)
     sitemap_locations = parse_string_or_list_input(input.sitemap_locations)
@@ -229,11 +251,9 @@ if __name__ == "__main__":
         exit_with_failure()
 
     if urls:
-        status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoint)
+        status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoints)
         if not is_successful_response(status_code):
-            print(
-                f"Failed to submit URLs. Status code from {endpoint.name.title()}: {Color.RED}{status_code}{Color.OFF}"
-            )
+            print(f"Failed to submit URLs. Status code{status_code_source}: {Color.RED}{status_code}{Color.OFF}")
             exit_with_failure()
     else:
         print(f"{Color.YELLOW}No URLs to submit. Skipping...{Color.OFF}")
@@ -242,11 +262,9 @@ if __name__ == "__main__":
         contains = parse_sitemap_filter_input(input.sitemap_filter)
         days_ago = parse_sitemap_days_ago_input(input.sitemap_days_ago)
         filter = SitemapFilter(contains=contains, date_range=days_ago)
-        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, filter=filter, endpoint=endpoint)
+        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, filter=filter, endpoint=endpoints)
         if not is_successful_response(status_code):
-            print(
-                f"Failed to submit sitemaps. Status code from {endpoint.name.title()}: {Color.RED}{status_code}{Color.OFF}"
-            )
+            print(f"Failed to submit sitemaps. Status code{status_code_source}: {Color.RED}{status_code}{Color.OFF}")
             exit_with_failure()
     else:
         print(f"{Color.YELLOW}No sitemaps to submit. Skipping...{Color.OFF}")

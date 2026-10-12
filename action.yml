@@ -17,7 +17,7 @@ inputs:
     description: "The location of the API key. For example: https://example.com/a1b2c3d4.txt"
     required: true
   endpoint:
-    description: "The IndexNow search engine endpoint to submit the sitemap to. If not specified, Bing is used as the default endpoint. And not so important, as the receiving endpoint will propagate the URLs to other IndexNow endpoints, which will then notify the participating search engines). Options: bing, indexnow, naver, seznam, yandex, yep. Other values make the workflow fail."
+    description: "One or more IndexNow search engine endpoints to submit to. Multiple endpoints, e.g. \"naver, seznam, yep\", are tried in order until one accepts the submission, so the submission falls back to the next endpoint if one is unavailable. If not specified, Bing is used. The receiving endpoint propagates the URLs to the other IndexNow search engines. Options: bing, indexnow, naver, seznam, yandex, yep. Other values make the workflow fail."
     required: false
     default: bing
   urls:
@@ -72,7 +72,7 @@ runs:
         --host ${{ inputs.host }}
         --api-key ${{ inputs.api_key }}
         --api-key-location ${{ inputs.api_key_location }}
-        --endpoint ${{ inputs.endpoint }}
+        --endpoint "${{ inputs.endpoint }}"
         --urls "${{ inputs.urls }}"
         --sitemap-locations "${{ inputs.sitemap_locations }}"
         --sitemap-filter "${{ inputs.sitemap_filter }}"

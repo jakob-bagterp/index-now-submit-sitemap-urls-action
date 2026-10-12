@@ -1,7 +1,7 @@
 import pytest
 from index_now import SearchEngineEndpoint
 
-from helper.submit import get_endpoint_from_input
+from helper.submit import get_endpoint_from_input, get_endpoints_from_input
 
 
 @pytest.mark.parametrize(
@@ -30,3 +30,24 @@ def test_get_endpoint_from_input(input: str, expected_endpoint: SearchEngineEndp
 def test_get_endpoint_from_input_raises_error_for_unknown_endpoint(input: str) -> None:
     with pytest.raises(ValueError, match="Unknown endpoint"):
         get_endpoint_from_input(input)
+
+
+@pytest.mark.parametrize(
+    "input, expected_endpoints",
+    [
+        ("seznam", [SearchEngineEndpoint.SEZNAM]),
+        ("naver, seznam, yep", [SearchEngineEndpoint.NAVER, SearchEngineEndpoint.SEZNAM, SearchEngineEndpoint.YEP]),
+        ("naver seznam yep", [SearchEngineEndpoint.NAVER, SearchEngineEndpoint.SEZNAM, SearchEngineEndpoint.YEP]),
+        ("[naver, seznam]", [SearchEngineEndpoint.NAVER, SearchEngineEndpoint.SEZNAM]),
+        ("Yandex, Seznam", [SearchEngineEndpoint.YANDEX, SearchEngineEndpoint.SEZNAM]),
+        ("seznam, naver, seznam", [SearchEngineEndpoint.SEZNAM, SearchEngineEndpoint.NAVER]),
+    ],
+)
+def test_get_endpoints_from_input(input: str, expected_endpoints: list[SearchEngineEndpoint]) -> None:
+    assert get_endpoints_from_input(input) == expected_endpoints
+
+
+@pytest.mark.parametrize("input", ["naver, seznm", "invalid", "", " , "])
+def test_get_endpoints_from_input_raises_error(input: str) -> None:
+    with pytest.raises(ValueError):
+        get_endpoints_from_input(input)

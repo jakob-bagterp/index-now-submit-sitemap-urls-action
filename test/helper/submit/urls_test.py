@@ -40,3 +40,26 @@ def test_submit_urls_from_terminal(urls: str) -> None:
     assert result.returncode == SUCCESS_EXIT_CODE
     assert f"URL(s) were submitted successfully to this IndexNow API endpoint:{Color.OFF}" in result.stdout
     assert f"Status code: {Color.GREEN}200{Color.OFF}" or f"Status code: {Color.GREEN}202{Color.OFF}" in result.stdout
+
+
+def test_submit_urls_with_fallback_endpoints_from_terminal() -> None:
+    result = subprocess.run(
+        [
+            "python3",
+            "./src/helper/submit.py",
+            "--host",
+            VALID_HOST,
+            "--api-key",
+            VALID_API_KEY,
+            "--api-key-location",
+            VALID_API_KEY_LOCATION,
+            "--endpoint",
+            "yandex, seznam",
+            "--urls",
+            "https://jakob-bagterp.github.io/index-now-submit-sitemap-urls-action/",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == SUCCESS_EXIT_CODE
+    assert f"URL(s) were submitted successfully to this IndexNow API endpoint:{Color.OFF}" in result.stdout
