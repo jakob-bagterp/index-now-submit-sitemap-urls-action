@@ -42,18 +42,32 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@v7
-    - name: Setup Python
+
+    - name: Set up Python
+      id: setup-python
       uses: actions/setup-python@v7
       with:
         python-version: "3.14"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+      with:
+        working-directory: ${{ github.action_path }}
+
     - name: Install dependencies
       shell: bash
-      run: |
-        pip install --upgrade pip
-        pip install -r ${{ github.action_path }}/requirements.txt
+      env:
+        # Let uv use Python 3.14 from setup-python instead of 3.11 from the .python-version file:
+        UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
+      run: uv sync --frozen --no-dev --project "${{ github.action_path }}"
+
     - name: Submit sitemap and/or URLs to IndexNow
       shell: bash
+      env:
+        # Let uv use Python 3.14 from setup-python instead of 3.11 from the .python-version file:
+        UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       run: >
+        uv run --frozen --no-dev --project "${{ github.action_path }}"
         python ${{ github.action_path }}/src/helper/submit.py
         --host ${{ inputs.host }}
         --api-key ${{ inputs.api_key }}
