@@ -165,11 +165,35 @@ def parse_sitemap_days_ago_input(sitemap_days_ago: int | str) -> DaysAgo | None:
     return DaysAgo(sitemap_days_ago)
 
 
+DEFAULT_RETRIES = 3
+
+
+def parse_retries_input(retries: str | None) -> int:
+    """Parse the input of the `retries` argument.
+
+    Args:
+        retries (str | None): Input from CLI parameter, e.g. `"3"`. Empty input uses the default.
+
+    Returns:
+        int: Number of times to retry a failed request.
+
+    Raises:
+        ValueError: If the input isn't a whole number of 0 or more.
+    """
+
+    retries_cleaned = normalise_string(str(retries)) if retries is not None else ""
+    if not retries_cleaned:
+        return DEFAULT_RETRIES
+    if not retries_cleaned.isdigit():
+        raise ValueError(f"Invalid number of retries: {retries}. Use a whole number of 0 or more.")
+    return int(retries_cleaned, base=10)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Submit a sitemap to IndexNow. How to run the script:
 
-            python submit.py --host example.com --api-key a1b2c3d4 --api-key-location https://example.com/a1b2c3d4.txt --endpoint seznam --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1 --sitemap-days-ago 1
+            python submit.py --host example.com --api-key a1b2c3d4 --api-key-location https://example.com/a1b2c3d4.txt --endpoint seznam --urls https://example.com --sitemap-locations https://example.com/sitemap.xml --sitemap-filter section1 --sitemap-days-ago 1 --retries 3
 
         The parameters are:
 
@@ -181,6 +205,7 @@ if __name__ == "__main__":
             "--sitemap-locations https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "--sitemap-filter section1": Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'". Optional.
             "--sitemap-days-ago 1": Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.
+            "--retries 3": Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. Use 0 to disable. Optional. Default is 3.
         """
     )
     parser.add_argument("--host", type=str, help='The host name of the website, e.g. "example.com". Mandatory.')
@@ -223,6 +248,13 @@ if __name__ == "__main__":
         default=None,
         help="Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.",
     )
+    parser.add_argument(
+        "--retries",
+        nargs="?",
+        type=str,
+        default=None,
+        help=f"Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. Use 0 to disable. Optional. Default is {DEFAULT_RETRIES}.",
+    )
     input = parser.parse_args()
 
     if not all([input.host, input.api_key, input.api_key_location, input.endpoint]):
@@ -236,6 +268,7 @@ if __name__ == "__main__":
     )
     try:
         endpoints = get_endpoints_from_input(input.endpoint)
+        retries = parse_retries_input(input.retries)
     except ValueError as error:
         print(f"{Color.YELLOW}{error} Aborting...{Color.OFF}")
         exit_with_failure()
@@ -251,7 +284,7 @@ if __name__ == "__main__":
         exit_with_failure()
 
     if urls:
-        status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoints)
+        status_code = submit_urls_to_index_now(authentication, urls, endpoint=endpoints, retries=retries)
         if not is_successful_response(status_code):
             print(f"Failed to submit URLs. Status code{status_code_source}: {Color.RED}{status_code}{Color.OFF}")
             exit_with_failure()
@@ -262,7 +295,9 @@ if __name__ == "__main__":
         contains = parse_sitemap_filter_input(input.sitemap_filter)
         days_ago = parse_sitemap_days_ago_input(input.sitemap_days_ago)
         filter = SitemapFilter(contains=contains, date_range=days_ago)
-        status_code = submit_sitemaps_to_index_now(authentication, sitemap_locations, filter=filter, endpoint=endpoints)
+        status_code = submit_sitemaps_to_index_now(
+            authentication, sitemap_locations, filter=filter, endpoint=endpoints, retries=retries
+        )
         if not is_successful_response(status_code):
             print(f"Failed to submit sitemaps. Status code{status_code_source}: {Color.RED}{status_code}{Color.OFF}")
             exit_with_failure()
