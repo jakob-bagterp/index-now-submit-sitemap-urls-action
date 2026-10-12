@@ -57,12 +57,14 @@ runs:
     - name: Install dependencies
       shell: bash
       env:
+        # Let uv use Python 3.14 from setup-python instead of 3.11 from the .python-version file:
         UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       run: uv sync --frozen --no-dev --project "${{ github.action_path }}"
 
     - name: Submit sitemap and/or URLs to IndexNow
       shell: bash
       env:
+        # Let uv use Python 3.14 from setup-python instead of 3.11 from the .python-version file:
         UV_PYTHON: ${{ steps.setup-python.outputs.python-path }}
       run: >
         uv run --frozen --no-dev --project "${{ github.action_path }}"
