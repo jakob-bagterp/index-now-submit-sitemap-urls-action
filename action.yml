@@ -36,6 +36,10 @@ inputs:
     description: "Filter the sitemap URLs that have been modified recently as defined by the <lastmod> element in the sitemap. For example 1, 2, or more days ago. Optional."
     required: false
     default: ""
+  retries:
+    description: "Number of times to retry a request on temporary errors, e.g. dropped connections, timeouts or server errors, with exponential backoff. With multiple endpoints, each endpoint is retried before falling back to the next one. Optional. Default is 0, i.e. no retries."
+    required: false
+    default: "0"
 
 runs:
   using: composite
@@ -77,3 +81,4 @@ runs:
         --sitemap-locations "${{ inputs.sitemap_locations }}"
         --sitemap-filter "${{ inputs.sitemap_filter }}"
         --sitemap-days-ago "${{ inputs.sitemap_days_ago }}"
+        --retries "${{ inputs.retries }}"
