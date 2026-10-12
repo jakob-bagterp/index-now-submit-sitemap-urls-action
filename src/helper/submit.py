@@ -1,5 +1,6 @@
 import argparse
 import sys
+from enum import StrEnum
 
 from colorist import Color
 from index_now import (
@@ -25,7 +26,13 @@ def exit_with_failure() -> None:
     sys.exit(1)
 
 
-ENDPOINT_OPTIONS = ("indexnow", "bing", "naver", "seznam", "yandex", "yep")
+class EndpointOptions(StrEnum):
+    INDEXNOW = "indexnow"
+    BING = "bing"
+    NAVER = "naver"
+    SEZNAM = "seznam"
+    YANDEX = "yandex"
+    YEP = "yep"
 
 
 def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
@@ -42,20 +49,20 @@ def get_endpoint_from_input(endpoint: str) -> SearchEngineEndpoint:
     """
 
     match str(endpoint).strip().lower():
-        case "indexnow":
+        case EndpointOptions.INDEXNOW:
             return SearchEngineEndpoint.INDEXNOW
-        case "bing":
+        case EndpointOptions.BING:
             return SearchEngineEndpoint.BING
-        case "naver":
+        case EndpointOptions.NAVER:
             return SearchEngineEndpoint.NAVER
-        case "seznam":
+        case EndpointOptions.SEZNAM:
             return SearchEngineEndpoint.SEZNAM
-        case "yandex":
+        case EndpointOptions.YANDEX:
             return SearchEngineEndpoint.YANDEX
-        case "yep":
+        case EndpointOptions.YEP:
             return SearchEngineEndpoint.YEP
         case _:
-            raise ValueError(f"Unknown endpoint: {endpoint}. Options: {', '.join(ENDPOINT_OPTIONS)}.")
+            raise ValueError(f"Unknown endpoint: {endpoint}. Options: {', '.join(EndpointOptions)}.")
 
 
 def normalise_string(input: str) -> str:
