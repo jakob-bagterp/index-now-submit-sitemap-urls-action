@@ -24,7 +24,7 @@ def test_submit_urls_from_terminal(urls: str) -> None:
             "--api-key-location",
             VALID_API_KEY_LOCATION,
             "--endpoint",
-            "yandex",
+            "seznam",
             "--urls",
             urls,
             "--sitemap-locations",
