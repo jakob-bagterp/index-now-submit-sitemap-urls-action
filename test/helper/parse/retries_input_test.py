@@ -18,4 +18,4 @@ def test_parse_retries_input_raises_error_for_invalid_input(input: str) -> None:
 
 
 def test_default_retries() -> None:
-    assert DEFAULT_RETRIES == 3
+    assert DEFAULT_RETRIES == 0

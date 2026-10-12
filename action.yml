@@ -37,9 +37,9 @@ inputs:
     required: false
     default: ""
   retries:
-    description: "Number of times to retry a request on temporary errors, e.g. dropped connections, timeouts or server errors, with exponential backoff. With multiple endpoints, each endpoint is retried before falling back to the next one. Use 0 to disable. Optional."
+    description: "Number of times to retry a request on temporary errors, e.g. dropped connections, timeouts or server errors, with exponential backoff. With multiple endpoints, each endpoint is retried before falling back to the next one. Optional. Default is 0, i.e. no retries."
     required: false
-    default: "3"
+    default: "0"
 
 runs:
   using: composite

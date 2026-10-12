@@ -57,7 +57,7 @@ jobs:
 | `sitemap_locations` | Optional | The location of the sitemap(s), e.g. `https://example.com/sitemap.xml`.                                                  | `None`  |
 | `sitemap_filter`    | Optional | Only submit sitemap URLs that contain the filter string, e.g. `section1`.                                                | `None`  |
 | `sitemap_days_ago`  | Optional | Only submit sitemap URLs that have been modified recently based on the `<lastmod>` tag, e.g. `1`, `2`, or more days ago. | `None`  |
-| `retries`           | Optional | Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. `0` disables retries. | `3`     |
+| `retries`           | Optional | Number of times to retry a request on temporary errors, e.g. dropped connections or server errors.                        | `0`     |
 
 ## Parameters
 ### `host`
@@ -234,7 +234,7 @@ Or only submit sitemap URLs that have been modified today:
 ```
 
 ### `retries`
-Optional. Number of times to retry a request on temporary errors, such as dropped connections, timeouts, `429 Too Many Requests` or server errors like `503 Service Unavailable`. The default is `3`, so a short glitch at the search engine doesn't make your workflow fail:
+Optional. Number of times to retry a request on temporary errors, such as dropped connections, timeouts, `429 Too Many Requests` or server errors like `503 Service Unavailable`. By default, it's set to `0`, which means that requests are not retried. Enable retries, so a short glitch at the search engine doesn't make your workflow fail:
 
 ```yaml linenums="22" title=".github/workflows/submit_sitemap_to_index_now.yml"
           retries: 3
@@ -243,11 +243,5 @@ Optional. Number of times to retry a request on temporary errors, such as droppe
 Between retries, the wait time increases exponentially (0, 2, 4 seconds, etc.). Other errors, such as `400 Bad Request` or `403 Forbidden`, aren't retried, as sending the same request again gives the same result.
 
 If you have provided [multiple endpoints](#fall-back-to-other-endpoints), each endpoint is retried before the submission falls back to the next one.
-
-To disable retries, set the value to `0`:
-
-```yaml linenums="22" title=".github/workflows/submit_sitemap_to_index_now.yml"
-          retries: 0
-```
 
 Learn more about [retries and timeouts](https://jakob-bagterp.github.io/index-now-for-python/user-guide/error-handling/retries-and-timeouts/) in the IndexNow for Python documentation.

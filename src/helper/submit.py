@@ -165,7 +165,7 @@ def parse_sitemap_days_ago_input(sitemap_days_ago: int | str) -> DaysAgo | None:
     return DaysAgo(sitemap_days_ago)
 
 
-DEFAULT_RETRIES = 3
+DEFAULT_RETRIES = 0
 
 
 def parse_retries_input(retries: str | None) -> int:
@@ -205,7 +205,7 @@ if __name__ == "__main__":
             "--sitemap-locations https://example.com/sitemap.xml": The location of the sitemap(s) to be submitted. Optional.
             "--sitemap-filter section1": Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'". Optional.
             "--sitemap-days-ago 1": Only submit sitemap URLs that have been modified recently based on the <lastmod> tag, e.g. 1, 2, or more days ago. Optional.
-            "--retries 3": Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. Use 0 to disable. Optional. Default is 3.
+            "--retries 3": Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. Optional. Default is 0, i.e. no retries.
         """
     )
     parser.add_argument("--host", type=str, help='The host name of the website, e.g. "example.com". Mandatory.')
@@ -253,7 +253,7 @@ if __name__ == "__main__":
         nargs="?",
         type=str,
         default=None,
-        help=f"Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. Use 0 to disable. Optional. Default is {DEFAULT_RETRIES}.",
+        help=f"Number of times to retry a request on temporary errors, e.g. dropped connections or server errors. Optional. Default is {DEFAULT_RETRIES}, i.e. no retries.",
     )
     input = parser.parse_args()
 

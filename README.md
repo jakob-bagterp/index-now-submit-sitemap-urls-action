@@ -33,7 +33,7 @@ jobs:
           sitemap_locations: https://example.com/sitemap.xml  # Replace with your sitemap location
           sitemap_filter: section1  # Optional. Only submit sitemap URLs that contain "section1" or match a regular expression "r'(section1)|(section2)'".
           sitemap_days_ago: 2  # Optional. Only submit sitemap URLs that have been modified recently, e.g. 1, 2, or more days ago.
-          retries: 3  # Optional. Number of times to retry a request on temporary errors. Use 0 to disable. Default is 3.
+          retries: 3  # Optional. Number of times to retry a request on temporary errors. Default is 0, i.e. no retries.
 ```
 
 > [!IMPORTANT]
