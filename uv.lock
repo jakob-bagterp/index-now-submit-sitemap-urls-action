@@ -380,7 +380,7 @@ wheels = [
 
 [[package]]
 name = "index-now-for-python"
-version = "1.1.0"
+version = "1.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorist" },
@@ -389,9 +389,9 @@ dependencies = [
     { name = "requests" },
     { name = "types-requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6f/58/8dedccbb16b092d9d9dfdd51d3ad686bf364843c199fc2f506a63536a5fe/index_now_for_python-1.1.0.tar.gz", hash = "sha256:9d84b2f8545a94f79f008fa9701347341fa9d8d051e522812be511ca116b1fee", size = 16428, upload-time = "2026-10-12T06:39:21.121Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0e/21/fb38529a38db5bf62a806ec70b647bca62c66d3f8abcb41e55b630754376/index_now_for_python-1.1.1.tar.gz", hash = "sha256:202b56d5cd32f05635951d1341b6deabb056a0e1f94ead4f53cf326f6ab772fe", size = 16595, upload-time = "2026-10-13T09:49:45.49Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fd/ea/0c1b31cf0410615d1d8adcd6b295229650749e4c19b0fe04a7f33f6a81cc/index_now_for_python-1.1.0-py3-none-any.whl", hash = "sha256:3d52e3ade039095d324b1acb4b64cfa7b8c443cb410b8d14ce513aedf42902b2", size = 22326, upload-time = "2026-10-12T06:39:19.85Z" },
+    { url = "https://files.pythonhosted.org/packages/55/31/86adbdf701fb929d2e1e5c5054a4b26ee609b58e9e3f6e41c01e44310d09/index_now_for_python-1.1.1-py3-none-any.whl", hash = "sha256:301e05a3d2d0469127b95b1f13ba1a79a90954de65e996c579876ff1e1923d2f", size = 22574, upload-time = "2026-10-13T09:49:44.231Z" },
 ]
 
 [[package]]
@@ -425,7 +425,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "colorist", specifier = "~=1.8.11" },
-    { name = "index-now-for-python", specifier = "==1.1.0" },
+    { name = "index-now-for-python", specifier = "==1.1.1" },
 ]
 
 [package.metadata.requires-dev]
