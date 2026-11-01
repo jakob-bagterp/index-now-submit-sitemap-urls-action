@@ -1,8 +1,8 @@
 import pytest
 from _mock_data.sitemap import SITEMAP_URLS, URLS
 from index_now import DaysAgo
-from index_now.sitemap.filter.sitemap import SitemapFilter, filter_sitemap_urls
-from index_now.sitemap.parse import SitemapUrl
+from index_now.submit.sitemap.filter.sitemap import SitemapFilter, filter_sitemap_urls
+from index_now.submit.sitemap.parse import SitemapUrl
 
 from helper.submit import parse_sitemap_days_ago_input
 

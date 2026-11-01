@@ -11,7 +11,7 @@ from index_now import (
     submit_sitemaps_to_index_now,
     submit_urls_to_index_now,
 )
-from index_now.status_code import SUCCESS_STATUS_CODES_COLLECTION
+from index_now.constant.status_code import SUCCESS_STATUS_CODES_COLLECTION
 
 
 def is_successful_response(status_code: int) -> bool:
