@@ -16,7 +16,7 @@ from index_now import (
     submit_sitemaps_to_index_now,
     submit_urls_to_index_now,
 )
-from index_now.status_code import SUCCESS_STATUS_CODES_COLLECTION
+from index_now.constant.status_code import SUCCESS_STATUS_CODES_COLLECTION
 
 AUTHENTICATION_WITH_INVALID_API_KEY = IndexNowAuthentication(
     host=VALID_HOST, api_key=INVALID_API_KEY, api_key_location=INVALID_API_KEY_LOCATION

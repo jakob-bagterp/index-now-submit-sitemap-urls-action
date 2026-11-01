@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from index_now.sitemap.parse import SitemapUrl
+from index_now.submit.sitemap.parse import SitemapUrl
 
 SITEMAP_URLS = [
     SitemapUrl(loc="https://example.com/section1/page1", lastmod=str(datetime.today().isoformat())),
