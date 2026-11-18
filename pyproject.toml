@@ -18,13 +18,14 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 
 dependencies = [
     "colorist~=1.8.11",
-    "index-now-for-python==1.1.2",
+    "index-now-for-python==1.1.3",
 ]
 
 [project.urls]
